@@ -31,7 +31,7 @@ return [
         'repo'           => 'xxx',
         'owner'          => 'xxx',
         'admin'          => ['xxx'],
-        'language'       => 'zh-CN', // 支持 [en, zh-CN, zh-TW]。
+        'language'       => 'en', // 支持 [en, zh-CN, zh-TW]。
         'perPage'        => 15,
         'pagerDirection' => 'first', // last first
     ],
