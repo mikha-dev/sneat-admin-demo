@@ -1,0 +1,51 @@
+1. separate logo for dark and light modes
+2. rtl support on html tag
+3. set data-bs-theme
+4. all blade link via route()
+5. use __ instaead of trans
+6. add https://github.com/mcamara/laravel-localization
+7. we are using  https://github.com/owen-it/laravel-auditing think about replacement to https://github.com/spatie/laravel-activitylog
+8. think about more faster markdown parser for emails, check: https://github.com/thephpleague/commonmark
+9. add spatie/laravel-ignition to  "require-dev"
+10. crm based on tabler https://github.com/aliqasemzadeh/bap
+11. use vite insteas of webpack. 
+    example:vite.config.js and package4vite.json
+    @vite(['resources/sass/app.scss', 'resources/js/app.js'])
+12. composer 
+    "require-dev": {
+        "fakerphp/faker": "^1.9.1",
+        "laravel/pint": "^1.0", - not sure we need it as this stage
+        "laravel/sail": "^1.18", - dont need. we are not using docker
+        "mockery/mockery": "^1.4.4",
+        "nunomaduro/collision": "^7.0", - use with ignition. console errors with stacktrace
+        "phpunit/phpunit": "^10.1",
+        "spatie/laravel-ignition": "^2.0" - use latest
+    },
+
+    "require": {
+        "php": "^8.1",
+        "guzzlehttp/guzzle": "^7.2",
+        "laravel/framework": "^10.10", - use latest
+        "laravel/sanctum": "^3.3", - used with live chat
+        "laravel/tinker": "^2.8",
+        "laravel/ui": "^4.2" - not sure
+    },
+
+13. fix migrations: 
+    added domain settings and admin settings feature
+    lang db loadining
+
+14. fix fonts in
+    app.scss
+    _variables.scss
+15. 
+    use inside main layout
+    <!-- Fonts -->
+    <link rel="dns-prefetch" href="//fonts.bunny.net">
+    <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
+
+16. add integrated recaptcha for both register and login
+
+17. boxicons and fontawesome icon packs. remove feather
+    check bootstrap icons
+18. think about making live chat as extension

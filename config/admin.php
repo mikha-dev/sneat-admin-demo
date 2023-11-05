@@ -369,24 +369,24 @@ return [
     |
     | This value is the layout of admin pages.
     */
-    'layout' => [
-        // default, blue, blue-light, green
-        'color' => 'default',
+    // 'layout' => [
+    //     // default, blue, blue-light, green
+    //     'color' => 'default',
 
-        // sidebar-separate
-        'body_class' => [''],
-        'horizontal_menu' => false,
+    //     // sidebar-separate
+    //     'body_class' => [''],
+    //     'horizontal_menu' => false,
 
-        'sidebar_collapsed' => false,
+    //     'sidebar_collapsed' => false,
 
-        // light, primary, dark
-        'sidebar_style' => 'light',
+    //     // light, primary, dark
+    //     'sidebar_style' => 'light',
 
-        'dark_mode_switch' => true,
+    //     'dark_mode_switch' => true,
 
-        // bg-primary, bg-info, bg-warning, bg-success, bg-danger, bg-dark
-        'navbar_color' => '',
-    ],
+    //     // bg-primary, bg-info, bg-warning, bg-success, bg-danger, bg-dark
+    //     'navbar_color' => '',
+    // ],
 
     /*
     |--------------------------------------------------------------------------
