@@ -59,6 +59,10 @@
 
 19. add social logins integrated into sneat admin
 
-20. add domain email templates
+!20. add domain email templates
+    -- done
 
 21. add user settings based on spatie data
+
+22.  add basic rest api endoints for auth/register/forgot passowrd
+

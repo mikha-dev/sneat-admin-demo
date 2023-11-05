@@ -2,13 +2,12 @@
 
 namespace App\Admin\Controllers\Movies;
 
-use App\Admin\Controllers\PreviewCode;
-use Dcat\Admin\Controllers\HasResourceActions;
 use Dcat\Admin\Form;
 use Dcat\Admin\Grid;
 use Dcat\Admin\Layout\Content;
 use App\Admin\Repositories\InTheater;
-use Dcat\Admin\Layout\Row;
+use App\Admin\Controllers\PreviewCode;
+use Dcat\Admin\Http\Controllers\HasResourceActions;
 
 class InTheaterController extends ComingSoonController
 {
