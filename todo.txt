@@ -6,11 +6,16 @@
 6. add https://github.com/mcamara/laravel-localization
 7. we are using  https://github.com/owen-it/laravel-auditing think about replacement to https://github.com/spatie/laravel-activitylog
 8. think about more faster markdown parser for emails, check: https://github.com/thephpleague/commonmark
-9. add spatie/laravel-ignition to  "require-dev"
+
+!9. add spatie/laravel-ignition to  "require-dev"
+-- added to demo
+
 10. crm based on tabler https://github.com/aliqasemzadeh/bap
+
 11. use vite insteas of webpack. 
     example:vite.config.js and package4vite.json
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
+
 12. composer 
     "require-dev": {
         "fakerphp/faker": "^1.9.1",
@@ -30,6 +35,7 @@
         "laravel/tinker": "^2.8",
         "laravel/ui": "^4.2" - not sure
     },
+-- done
 
 13. fix migrations: 
     added domain settings and admin settings feature
@@ -48,4 +54,11 @@
 
 17. boxicons and fontawesome icon packs. remove feather
     check bootstrap icons
+
 18. think about making live chat as extension
+
+19. add social logins integrated into sneat admin
+
+20. add domain email templates
+
+21. add user settings based on spatie data
