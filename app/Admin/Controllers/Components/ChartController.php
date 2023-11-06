@@ -2,7 +2,7 @@
 
 namespace App\Admin\Controllers\Components;
 
-use App\Admin\Controllers\PreviewCode;
+use App\Admin\Traits\PreviewCode;
 use Dcat\Admin\Layout\Content;
 use Dcat\Admin\Layout\Row;
 use Dcat\Admin\Widgets\Box;
@@ -15,7 +15,7 @@ class ChartController extends Controller
     public function index(Content $content)
     {
         return $content->header('Charts')
-            ->description("See <a href='https://www.chartjs.org' target='_blank'>https://www.chartjs.org</a>.")
+            ->description("Apexchart")
             ->body($this->buildPreviewButton().$this->newline())
             ->body(function (Row $row) {
             })

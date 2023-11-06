@@ -2,14 +2,14 @@
 
 namespace App\Admin\Controllers\Components;
 
-use App\Admin\Controllers\PreviewCode;
 use Dcat\Admin\Admin;
-use Dcat\Admin\Layout\Content;
 use Dcat\Admin\Layout\Row;
 use Dcat\Admin\Widgets\Box;
 use Dcat\Admin\Widgets\Card;
 use Dcat\Admin\Widgets\Code;
+use Dcat\Admin\Layout\Content;
 use Dcat\Admin\Widgets\Dropdown;
+use App\Admin\Traits\PreviewCode;
 use Illuminate\Routing\Controller;
 
 class LoadingController extends Controller
@@ -73,7 +73,7 @@ HTML;
 function loading_test(opt) {
     // 开始loading效果
     $('#loadingtest').loading(opt);
-    
+
     setTimeout(function () { // 1.2秒后自动移除loading效果
         $('#loadingtest').loading(false);
     }, 2000);
@@ -88,7 +88,7 @@ $('.start_loading').click(function () {
 $('.loading-1,.loading-2').click(function() {
     var _this = $(this);
     _this.buttonLoading();
-  
+
     setTimeout(function() {
         _this.buttonLoading(false);
     }, 2500);
@@ -107,7 +107,7 @@ JS
 <br class="mb-2">
 
 <div>
-<span class="btn btn-primary loading-1"> 按钮loading效果1</span> &nbsp;&nbsp; <a href="#" class="loading-2" onclick="Dcat.NP.done()" > 按钮loading效果2 </a> 
+<span class="btn btn-primary loading-1"> 按钮loading效果1</span> &nbsp;&nbsp; <a href="#" class="loading-2" onclick="Dcat.NP.done()" > 按钮loading效果2 </a>
 </div>
 HTML
 );

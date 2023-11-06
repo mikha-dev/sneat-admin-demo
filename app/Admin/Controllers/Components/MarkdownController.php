@@ -2,10 +2,10 @@
 
 namespace App\Admin\Controllers\Components;
 
-use App\Admin\Controllers\PreviewCode;
 use Dcat\Admin\Layout\Content;
 use Dcat\Admin\Widgets\Markdown;
 use Illuminate\Routing\Controller;
+use App\Admin\Traits\PreviewCode;
 
 class MarkdownController extends Controller
 {

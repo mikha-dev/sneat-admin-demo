@@ -2,11 +2,11 @@
 
 namespace App\Admin\Controllers\Components;
 
-use App\Admin\Controllers\PreviewCode;
-use Dcat\Admin\Layout\Content;
 use Dcat\Admin\Widgets\Card;
-use Dcat\Admin\Widgets\Checkbox;
 use Dcat\Admin\Widgets\Radio;
+use Dcat\Admin\Layout\Content;
+use Dcat\Admin\Widgets\Checkbox;
+use App\Admin\Traits\PreviewCode;
 use Illuminate\Routing\Controller;
 
 class CheckboxController extends Controller

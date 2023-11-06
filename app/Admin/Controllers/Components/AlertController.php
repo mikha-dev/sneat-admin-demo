@@ -2,14 +2,13 @@
 
 namespace App\Admin\Controllers\Components;
 
-use Dcat\Admin\Layout\Content;
-use Dcat\Admin\Layout\Row;
-use Dcat\Admin\Widgets\Alert;
+use Faker\Factory;
 use Dcat\Admin\Widgets\Box;
-use Dcat\Admin\Widgets\Callout;
 use Dcat\Admin\Widgets\Card;
 use Dcat\Admin\Widgets\Code;
-use Faker\Factory;
+use Dcat\Admin\Widgets\Alert;
+use Dcat\Admin\Layout\Content;
+use Dcat\Admin\Widgets\Callout;
 use Illuminate\Routing\Controller;
 
 class AlertController extends Controller
@@ -27,8 +26,8 @@ class AlertController extends Controller
 <p>{$faker->text}</p>
 HTML
         ));
-        $content->row(Callout::make($faker->text, '标题')->removable());
-        $content->row(Callout::make($faker->text, '标题')->primary()->removable());
+        $content->row(Callout::make($faker->text, 'Removable')->removable());
+        $content->row(Callout::make($faker->text, 'Primary')->primary()->removable());
         $content->row(Alert::make($faker->text, 'Danger'));
         $content->row(Alert::make($faker->text, 'Warning')->warning());
         $content->row(Alert::make($faker->text, 'Success')->success());

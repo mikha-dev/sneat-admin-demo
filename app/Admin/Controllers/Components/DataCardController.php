@@ -2,7 +2,7 @@
 
 namespace App\Admin\Controllers\Components;
 
-use App\Admin\Controllers\PreviewCode;
+use App\Admin\Traits\PreviewCode;
 use Dcat\Admin\Layout\Content;
 use Dcat\Admin\Layout\Row;
 use Dcat\Admin\Widgets\Box;
