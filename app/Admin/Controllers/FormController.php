@@ -2,20 +2,21 @@
 
 namespace App\Admin\Controllers;
 
+use Faker\Factory;
+use Dcat\Admin\Admin;
+use Dcat\Admin\Layout\Row;
+use Dcat\Admin\Widgets\Box;
+use Dcat\Admin\Widgets\Tab;
+use Dcat\Admin\Widgets\Form;
+use Dcat\Admin\Layout\Content;
+use Dcat\Admin\Form\NestedForm;
+use App\Admin\Traits\PreviewCode;
 use App\Admin\Renderable\UserTable;
 use App\Http\Controllers\Controller;
-use Dcat\Admin\Admin;
-use Dcat\Admin\Form\NestedForm;
-use Dcat\Admin\Layout\Content;
-use Dcat\Admin\Layout\Row;
 use Dcat\Admin\Models\Administrator;
-use Dcat\Admin\Widgets\Box;
-use Dcat\Admin\Widgets\Form;
-use Dcat\Admin\Widgets\Tab;
-use Faker\Factory;
+use Symfony\Component\VarDumper\VarDumper;
 use Symfony\Component\VarDumper\Cloner\VarCloner;
 use Symfony\Component\VarDumper\Dumper\HtmlDumper;
-use Symfony\Component\VarDumper\VarDumper;
 
 class FormController extends Controller
 {

@@ -2,18 +2,18 @@
 
 namespace App\Admin\Controllers\Movies;
 
-use App\Admin\Controllers\PreviewCode;
-use App\Http\Controllers\Controller;
-use Dcat\Admin\Admin;
 use Dcat\Admin\Grid;
+use Dcat\Admin\Admin;
 use Dcat\Admin\Layout\Content;
+use App\Admin\Traits\PreviewCode;
+use App\Http\Controllers\Controller;
 use App\Admin\Repositories\ComingSoon;
 
 class ComingSoonController extends Controller
 {
     use PreviewCode;
 
-    protected $header = '即将上映';
+    protected $header = 'Soon';
 
     /**
      * Index interface.

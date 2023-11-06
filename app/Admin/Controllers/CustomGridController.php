@@ -2,10 +2,11 @@
 
 namespace App\Admin\Controllers;
 
-use App\Admin\Actions\Grid\SwitchGridView;
-use App\Admin\Repositories\Image;
 use Dcat\Admin\Grid;
 use Dcat\Admin\Layout\Content;
+use App\Admin\Repositories\Image;
+use App\Admin\Traits\PreviewCode;
+use App\Admin\Actions\Grid\SwitchGridViewAction;
 
 class CustomGridController
 {
@@ -14,7 +15,7 @@ class CustomGridController
     public function index(Content $content)
     {
         return $content
-            ->title('自定义视图')
+            ->title('Custom grid')
             ->description('Grid View')
             ->body($this->grid());
     }
@@ -23,7 +24,7 @@ class CustomGridController
     {
         return Grid::make(new Image(), function (Grid $grid) {
             if (request()->get('_view_') !== 'list') {
-                // 设置自定义视图
+
                 $grid->view('admin.grid.custom');
 
                 $grid->setActionClass(Grid\Displayers\Actions::class);
@@ -31,7 +32,7 @@ class CustomGridController
 
             $grid->tools([
                 $this->buildPreviewButton('btn-primary'),
-                new SwitchGridView(),
+                new SwitchGridViewAction(),
             ]);
 
             $grid->disableCreateButton();

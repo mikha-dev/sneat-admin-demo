@@ -8,9 +8,8 @@ use Dcat\Admin\Widgets\Form;
 use Dcat\Admin\Widgets\Alert;
 use Dcat\Admin\Layout\Content;
 use Dcat\Admin\Widgets\Markdown;
-use App\Admin\Renderable\UserTable;
+use App\Admin\Traits\PreviewCode;
 use App\Http\Controllers\Controller;
-use Illuminate\Contracts\Support\Renderable;
 
 class FullPageController extends Controller
 {
@@ -26,16 +25,17 @@ class FullPageController extends Controller
             ->row($alert)
             ->row($this->newline())
             ->row(function (Row $row) {
-                $form = new Form();
+                // $form = new Form();
 
-                $form->disableResetButton();
-                $form->disableSubmitButton();
+                // $form->disableResetButton();
+                // $form->disableSubmitButton();
 
-                // $form->selectTable(UserTable::make())
+                // $form->selectResource('user')
+                //     ->path('users')
                 //     ->multiple(3)
                 //     ->width(9);
 
-                $row->column(4, $form);
+//                $row->column(4, $form);
             })
             ->row($this->newline())
             ->row(Box::make('代码', $this->markdown())->style('default'));
@@ -72,11 +72,11 @@ public function index(Content $content)
         ->row($this->newline())
         ->row(Box::make('代码', $this->markdown())->style('default'));
 }
-```        
-        
-        
->Iframe弹窗页面控制器代码如下：        
-        
+```
+
+
+>Iframe弹窗页面控制器代码如下：
+
 ```php
 class UserController
 {

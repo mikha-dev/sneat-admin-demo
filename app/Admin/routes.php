@@ -9,12 +9,14 @@ Admin::routes();
 Route::group([
     'prefix'        => config('admin.route.prefix'),
     'namespace'     => config('admin.route.namespace'),
-    'middleware'    => config('admin.route.middleware'),
+//    'middleware'    => config('admin.route.middleware'),
 ], function (Router $router) {
 
     $router->get('/', 'HomeController@index');
 
-//    $router->resource('users', 'UserController');
+    $router->resource('example', 'ExampleController');
+
+    $router->resource('clients', 'UserController');
 
     // 布局示例
     $router->get('layout', 'LayoutController@index');
@@ -65,12 +67,14 @@ Route::group([
     $router->get('form/tinymce', 'EditorController@tinymce');
     $router->get('form/tinymce/preview', 'EditorController@preview');
     $router->get('form/markdown', 'EditorController@markdown');
+    $router->get('form/summercode', 'EditorController@summercode');
 
     // 表格
     $router->get('tables/selector', 'SelectorController@index');
     $router->get('tables/selector/preview', 'SelectorController@preview');
 
-    // 其余组件
+
+    $router->get('components/accordion', 'Components\AccordionController@index');
     $router->get('components/charts', 'Components\ChartController@index');
     $router->get('components/charts/preview', 'Components\ChartController@preview');
     $router->get('components/card-box', 'Components\BoxController@index');

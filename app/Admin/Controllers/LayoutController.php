@@ -2,11 +2,12 @@
 
 namespace App\Admin\Controllers;
 
-use App\Http\Controllers\Controller;
-use Dcat\Admin\Layout\Column;
-use Dcat\Admin\Layout\Content;
 use Dcat\Admin\Layout\Row;
 use Dcat\Admin\Widgets\Dump;
+use Dcat\Admin\Layout\Column;
+use Dcat\Admin\Layout\Content;
+use App\Admin\Traits\PreviewCode;
+use App\Http\Controllers\Controller;
 
 class LayoutController extends Controller
 {
@@ -133,7 +134,7 @@ EOF;
 |                 |               |           |           |               |
 ---------------------------------------------------------------------------
 {                ------> col-md-9 <------                }{--> col-md-3 <--}
- 
+
 EOF
         );
 

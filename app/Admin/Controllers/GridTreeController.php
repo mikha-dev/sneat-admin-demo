@@ -6,6 +6,7 @@ use Dcat\Admin\Grid;
 use Dcat\Admin\Admin;
 use Illuminate\Support\Str;
 use Dcat\Admin\Layout\Content;
+use App\Admin\Traits\PreviewCode;
 use App\Http\Controllers\Controller;
 use Dcat\Admin\Http\Repositories\Permission;
 
@@ -28,6 +29,7 @@ class GridTreeController extends Controller
         $grid->column('order')->orderable();
         $grid->column('slug')->label('primary');
         $grid->column('http_path')->display(function ($path) {
+            /** @var mixed $this */
             if (! $path) {
                 return;
             }

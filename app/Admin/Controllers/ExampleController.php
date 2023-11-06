@@ -2,12 +2,13 @@
 
 namespace App\Admin\Controllers;
 
-use App\Http\Controllers\Controller;
-use Dcat\Admin\Http\Controllers\HasResourceActions;
 use Dcat\Admin\Form;
 use Dcat\Admin\Grid;
-use Dcat\Admin\Layout\Content;
 use Dcat\Admin\Show;
+use Dcat\Admin\Models\Tag;
+use Dcat\Admin\Layout\Content;
+use App\Http\Controllers\Controller;
+use Dcat\Admin\Http\Controllers\HasResourceActions;
 
 class ExampleController extends Controller
 {
@@ -78,7 +79,7 @@ class ExampleController extends Controller
      */
     protected function grid()
     {
-        $grid = new Grid(new YourModel);
+        $grid = new Grid(new Tag());
 
         $grid->id('ID')->sortable();
         $grid->created_at('Created at');
@@ -95,7 +96,7 @@ class ExampleController extends Controller
      */
     protected function detail($id)
     {
-        $show = new Show(YourModel::findOrFail($id));
+        $show = new Show(Tag::findOrFail($id));
 
         $show->id('ID');
         $show->created_at('Created at');
@@ -111,7 +112,7 @@ class ExampleController extends Controller
      */
     protected function form()
     {
-        $form = new Form(new YourModel);
+        $form = new Form(new Tag());
 
         $form->display('id', 'ID');
         $form->display('created_at', 'Created At');

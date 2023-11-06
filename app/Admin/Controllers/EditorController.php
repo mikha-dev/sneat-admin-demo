@@ -2,11 +2,12 @@
 
 namespace App\Admin\Controllers;
 
-use App\Http\Controllers\Controller;
-use Dcat\Admin\Layout\Content;
 use Dcat\Admin\Layout\Row;
 use Dcat\Admin\Widgets\Card;
 use Dcat\Admin\Widgets\Form;
+use Dcat\Admin\Layout\Content;
+use App\Admin\Traits\PreviewCode;
+use App\Http\Controllers\Controller;
 
 class EditorController extends Controller
 {
@@ -15,13 +16,13 @@ class EditorController extends Controller
     public function tinymce(Content $content)
     {
         return $content
-            ->title('TinyMCE编辑器')
+            ->title('TinyMCE')
             ->body($this->buildPreviewButton())
             ->body($this->newline())
             ->body(function (Row $row) {
                 $form = Form::make();
 
-                $form->editor('content', '内容');
+                $form->editor('content', 'Test');
 
                 $form->disableSubmitButton();
                 $form->disableResetButton();
@@ -33,13 +34,31 @@ class EditorController extends Controller
     public function markdown(Content $content)
     {
         return $content
-            ->title('Markdown编辑器')
+            ->title('Markdown')
             ->body($this->buildPreviewButton())
             ->body($this->newline())
             ->body(function (Row $row) {
                 $form = Form::make();
 
-                $form->markdown('content', '内容');
+                $form->markdown('content', 'Test');
+
+                $form->disableSubmitButton();
+                $form->disableResetButton();
+
+                $row->column(12, Card::make($form));
+            });
+    }
+
+    public function summercode(Content $content)
+    {
+        return $content
+            ->title('Summercode')
+            ->body($this->buildPreviewButton())
+            ->body($this->newline())
+            ->body(function (Row $row) {
+                $form = Form::make();
+
+                $form->summercode('content', 'Test');
 
                 $form->disableSubmitButton();
                 $form->disableResetButton();

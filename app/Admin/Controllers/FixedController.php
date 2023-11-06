@@ -2,11 +2,11 @@
 
 namespace App\Admin\Controllers;
 
-use App\Admin\Repositories\Report;
-use App\Http\Controllers\Controller;
 use Dcat\Admin\Grid;
 use Dcat\Admin\Layout\Content;
-use Dcat\Admin\Widgets\Callout;
+use App\Admin\Traits\PreviewCode;
+use App\Admin\Repositories\Report;
+use App\Http\Controllers\Controller;
 
 class FixedController extends Controller
 {
@@ -17,7 +17,6 @@ class FixedController extends Controller
         return $content
             ->header('Fixed Column')
             ->description('表格固定列功能示例')
-//            ->body(Callout::make('即将在下个版本发布，敬请期待~'))
             ->body($this->grid());
     }
 
@@ -39,9 +38,6 @@ class FixedController extends Controller
             $grid->column('updated_at');
 
             $grid->tools($this->buildPreviewButton());
-
-            // 启用边框模式
-//            $grid->withBorder();
 
             $grid->fixColumns(2);
 

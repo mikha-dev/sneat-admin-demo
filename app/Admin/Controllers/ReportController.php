@@ -4,11 +4,9 @@ namespace App\Admin\Controllers;
 
 use Dcat\Admin\Grid;
 use Dcat\Admin\Layout\Content;
+use App\Admin\Traits\PreviewCode;
 use App\Admin\Repositories\Report;
 use App\Http\Controllers\Controller;
-use App\Admin\Metrics\Examples\NewUsers;
-use App\Admin\Metrics\Examples\NewDevices;
-use App\Admin\Metrics\Examples\TotalUsers;
 
 class ReportController extends Controller
 {
@@ -19,9 +17,10 @@ class ReportController extends Controller
             ->header('报表')
             ->description('合并表头功能示例')
             ->body(function ($row) {
-                $row->column(4, new TotalUsers());
-                $row->column(4, new NewUsers());
-                $row->column(4, new NewDevices());
+                //todo:: add widgets
+                // $row->column(4, new TotalUsers());
+                // $row->column(4, new NewUsers());
+                // $row->column(4, new NewDevices());
             })
             ->body($this->grid());
     }

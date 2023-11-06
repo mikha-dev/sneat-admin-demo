@@ -5,6 +5,7 @@ use Faker\Factory;
 use Dcat\Admin\Grid;
 use Dcat\Admin\Layout\Row;
 use Dcat\Admin\Layout\Content;
+use App\Admin\Traits\PreviewCode;
 use Illuminate\Routing\Controller;
 use App\Admin\Renderable\PostTable;
 use App\Admin\Renderable\UserTable;
@@ -22,9 +23,10 @@ class GridController extends Controller
             ->header('表格')
             ->description('表格功能展示')
             ->body(function (Row $row) {
-                $row->column(4, new TotalUsers());
-                $row->column(4, new NewUsers());
-                $row->column(4, new NewDevices());
+                //todo:: add widgets
+                // $row->column(4, new TotalUsers());
+                // $row->column(4, new NewUsers());
+                // $row->column(4, new NewDevices());
             })
             ->body($this->grid());
     }
@@ -42,6 +44,7 @@ class GridController extends Controller
             $grid->column('switch')->switch();
             $grid->column('switchGroup', 'Switch Group')
                 ->if(function () {
+                    /** @var mixed $this */
                     return $this->id != mt_rand(3, 5);
                 })
                 ->switchGroup(['is_new', 'is_hot', 'published'])
@@ -50,6 +53,7 @@ class GridController extends Controller
             $grid->column('checkbox')->checkbox(['GET', 'POST', 'PUT', 'DELETE']);
             $grid->column('radio')
                 ->if(function () {
+                    /** @var mixed $this */
                     return $this->id != mt_rand(3, 5);
                 })
                 ->radio(['PHP', 'JAVA', 'GO', 'C'])

@@ -5,15 +5,16 @@ namespace App\Admin\Controllers\Movies;
 use Dcat\Admin\Form;
 use Dcat\Admin\Grid;
 use Dcat\Admin\Layout\Content;
+use App\Admin\Traits\PreviewCode;
 use App\Admin\Repositories\InTheater;
-use App\Admin\Controllers\PreviewCode;
 use Dcat\Admin\Http\Controllers\HasResourceActions;
+use App\Admin\Controllers\Movies\ComingSoonController;
 
 class InTheaterController extends ComingSoonController
 {
     use HasResourceActions, PreviewCode;
 
-    protected $header = '正在上映的电影';
+    protected $header = 'In theatre';
 
     /**
      * Index interface.
