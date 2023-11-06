@@ -2,10 +2,11 @@
 
 namespace App\Admin\Controllers;
 
-use App\Http\Controllers\Controller;
 use Dcat\Admin\Form;
-use Dcat\Admin\Layout\Content;
 use Dcat\Admin\Widgets\Alert;
+use Dcat\Admin\Layout\Content;
+use App\Admin\Traits\PreviewCode;
+use App\Http\Controllers\Controller;
 
 class StepFormController extends Controller
 {

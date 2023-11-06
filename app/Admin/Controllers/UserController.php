@@ -3,16 +3,14 @@
 namespace App\Admin\Controllers;
 
 use Dcat\Admin\Grid;
-use Dcat\Admin\Admin;
+use Dcat\Admin\Http\Controllers\AdminController;
 use Dcat\Admin\Layout\Content;
 use Dcat\Admin\Http\Repositories\Administrator;
 
-class UserController
+class UserController extends AdminController
 {
     public function index(Content $content)
     {
-        Admin::style('#app{padding: 1.2rem}');
-
         return $content->full()->body($this->grid());
     }
 

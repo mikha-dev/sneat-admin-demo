@@ -2,11 +2,12 @@
 
 namespace App\Admin\Controllers;
 
+use Dcat\Admin\Grid;
+use Dcat\Admin\Admin;
+use Dcat\Admin\Layout\Content;
+use App\Admin\Traits\PreviewCode;
 use App\Admin\Repositories\TeaTable;
 use App\Http\Controllers\Controller;
-use Dcat\Admin\Admin;
-use Dcat\Admin\Grid;
-use Dcat\Admin\Layout\Content;
 
 class SelectorController extends Controller
 {
