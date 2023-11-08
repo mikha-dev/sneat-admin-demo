@@ -3,6 +3,7 @@
 use Dcat\Admin\Form;
 use Dcat\Admin\Grid;
 use Dcat\Admin\Admin;
+use Dcat\Admin\Layout\Footer;
 use Dcat\Admin\Layout\Navbar;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Session;
@@ -29,5 +30,14 @@ if(!empty($locale) && !App::isLocale($locale)) {
 
 Admin::navbar(function (Navbar $navbar) {
     if (! Dcat\Admin\Support\Helper::isAjaxRequest()) {
+        $navbar->start('test_start');
+        $navbar->end('test_end');
+    }
+});
+
+Admin::footer(function (Footer $footer) {
+    if (! Dcat\Admin\Support\Helper::isAjaxRequest()) {
+        $footer->start('test_start');
+        $footer->end('test_end');
     }
 });

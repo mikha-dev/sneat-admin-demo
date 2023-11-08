@@ -12,8 +12,9 @@ use Illuminate\Routing\Controller;
 
 class DropdownMenuController extends Controller
 {
-    protected $tian = ['甲', '乙', '丙', '丁', '戊', '己'];
-    protected $di = ['寅', '卯', '辰', '巳', '午', '未', '申'];
+    // $testItems = [
+    //     'Action1'
+    // ];
 
     public function index(Content $content)
     {
@@ -24,7 +25,7 @@ class DropdownMenuController extends Controller
                 $row->column(3, $this->example3());
             })
             ->body(
-                Box::make('代码', new Code(__FILE__, 1, 1000))
+                Box::make('Preview', new Code(__FILE__, 1, 1000))
                     ->style('default')
             );
     }
@@ -34,7 +35,7 @@ class DropdownMenuController extends Controller
         $menu1 = Dropdown::make($this->tian)->button('天干');
 
         $menu2 = Dropdown::make()
-            ->button('使用标题')
+            ->button('test')
             ->buttonClass('btn btn-sm btn-inverse')
             ->options($this->tian, '天干')
             ->options($this->di, '地支');

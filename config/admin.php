@@ -1,8 +1,9 @@
 <?php
 
 use Dcat\Admin\Admin;
-use Dcat\Admin\Enums\LayoutContentType;
+use Dcat\Admin\Enums\LayoutType;
 use Dcat\Admin\Enums\LayoutModeType;
+use Dcat\Admin\Enums\LayoutContentType;
 use Dcat\Admin\Enums\LayoutDirectionType;
 
 return [
@@ -17,10 +18,8 @@ return [
         'pt' => 'Portugal',
     ],
 
-    'footer' => [
-        'powered_by' => env('POWERED_BY', 'Powered by <a class="footer-link fw-medium" target="_blank" href="https://dev4traders.com">dev4taders</a>'),
-        'menu' => '<a href="#" class="footer-link me-4" target="_blank">Documentation</a><a href="#" target="_blank" class="footer-link d-none d-sm-inline-block">Support</a>'
-    ],
+    // bg-light, bg-dark, bg-info... etc
+    'footer_class' => 'bg-footer-theme',
 
     'meta' => [
         'description' => '',
@@ -32,6 +31,8 @@ return [
     'theme' => 'theme-default',
 
     'layout' => [
+        'type' => LayoutType::VERTICAL,
+
         'mode' => LayoutModeType::SYSTEM,
 
         'dir' => LayoutDirectionType::LTR,
@@ -44,7 +45,7 @@ return [
             //Admin::CONTENT_INITIAL_MENU_COLLAPSED,
             Admin::CONTENT_INITIAL_NAV_FIXED,
             Admin::CONTENT_INITIAL_FOOTER_FXED,
-        ]
+        ],
     ],
 
     'auth' => [
@@ -400,6 +401,10 @@ return [
 
         'system_notification_settings_table' => 'admin_system_notification_settings',
         'system_notification_settings_model' => Dcat\Admin\Models\SystemNotificationSetting::class,
+
+        // Tags table and model.
+        'tags_table' => 'admin_roles',
+        'tags_model' => Dcat\Admin\Models\Tag::class,
 
         // Pivot table for table above.
         'role_users_table'       => 'admin_role_users',
