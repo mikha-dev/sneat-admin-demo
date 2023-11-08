@@ -1,6 +1,9 @@
 # sneat-admin-demo
 demo for sneat-admin
 
+    **sneat theme builder
+    https://tools.themeselection.com/generator/sneat/html
+
 > We recommend you use mentioned system configuration
 
 - Node version (^18.0.0 or LTS)

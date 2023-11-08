@@ -4,7 +4,9 @@ use Dcat\Admin\Form;
 use Dcat\Admin\Grid;
 use Dcat\Admin\Admin;
 use Dcat\Admin\Layout\Footer;
+use Dcat\Admin\Layout\LangSelector;
 use Dcat\Admin\Layout\Navbar;
+use Dcat\Admin\Layout\Shortcuts;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Session;
 
@@ -27,17 +29,19 @@ if(empty($locale))
 if(!empty($locale) && !App::isLocale($locale)) {
     App::setLocale($locale);
 }
+if (! Dcat\Admin\Support\Helper::isAjaxRequest()) {
 
-Admin::navbar(function (Navbar $navbar) {
-    if (! Dcat\Admin\Support\Helper::isAjaxRequest()) {
-        $navbar->start('test_start');
-        $navbar->end('test_end');
-    }
-});
+    Admin::navbar(function (Navbar $navbar) {
+        $navbar->start(Admin::langSelector());
+        $navbar->end(Admin::shortcuts());
+    });
 
-Admin::footer(function (Footer $footer) {
-    if (! Dcat\Admin\Support\Helper::isAjaxRequest()) {
+    Admin::footer(function (Footer $footer) {
         $footer->start('test_start');
         $footer->end('test_end');
-    }
-});
+    });
+
+    Admin::shortcuts(function (Shortcuts $shortcuts) {
+        $shortcuts->add('calendar', 'Calendar', 'Appointments', admin_url('/'));
+    });
+}
