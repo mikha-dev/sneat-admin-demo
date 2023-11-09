@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Dcat\Admin\Models\Administrator;
 use OwenIt\Auditing\Contracts\Auditable;
