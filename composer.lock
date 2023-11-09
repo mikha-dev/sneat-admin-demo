@@ -2557,7 +2557,7 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/mikha-dev/sneat-admin.git",
-                "reference": "3a41468d4e4dfc2b10cf012bee262fc417718bc8"
+                "reference": "1ace7ec33639622291ff5eceb30901a50ac4725e"
             },
             "require": {
                 "darkaonline/l5-swagger": "^8.5",
@@ -2625,7 +2625,7 @@
                 "laravel",
                 "laravel admin"
             ],
-            "time": "2023-11-09T06:58:44+00:00"
+            "time": "2023-11-09T07:01:59+00:00"
         },
         {
             "name": "monolog/monolog",
