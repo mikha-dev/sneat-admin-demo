@@ -34,12 +34,13 @@ if(!empty($locale) && !App::isLocale($locale)) {
 if (! Dcat\Admin\Support\Helper::isAjaxRequest()) {
 
     Admin::navbar(function (Navbar $navbar) {
-        $navbar->start(new LangSelectorNav());
-        $navbar->end(new ShortcutsNav( function (ShortcutsNav $shortcuts) {
-            $shortcuts->add('calendar', 'Calendar', 'Appointments', admin_url('/'));
-        }));
-        $navbar->end(new DarkModeSwitcherNav());
-        $navbar->end(new DashboardNotificationNav());
+        //todo::fix
+        // $navbar->start(new LangSelectorNav());
+        // $navbar->end(new ShortcutsNav( function (ShortcutsNav $shortcuts) {
+        //     $shortcuts->add('calendar', 'Calendar', 'Appointments', admin_url('/'));
+        // }));
+        // $navbar->end(new DarkModeSwitcherNav());
+        // $navbar->end(new DashboardNotificationNav());
     });
 
     Admin::footer(function (Footer $footer) {
