@@ -22,8 +22,6 @@ return [
     ],
 
     // bg-light, bg-dark, bg-info... etc
-    'footer_class' => 'bg-footer-theme',
-
     'meta' => [
         'description' => '',
         'keywords' => '',
@@ -51,6 +49,7 @@ return [
             Admin::CONTENT_INITIAL_NAV_FIXED,
             Admin::CONTENT_INITIAL_FOOTER_FXED,
         ],
+        'footer_class' => 'bg-footer-theme',
     ],
 
     'auth' => [
@@ -103,8 +102,8 @@ return [
     |
     */
     'icons' => [
-        'icon-32' => 'vendor/dcat-admin/images/icon-32.png',
-        'icon-192' => 'vendor/dcat-admin/images/icon-192.png'
+        'icon-32' => '/vendor/dcat-admin/images/icon-32.png',
+        'icon-192' => '/vendor/dcat-admin/images/icon-192.png'
     ],
 
         /*
