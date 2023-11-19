@@ -15,7 +15,7 @@ use Dcat\Admin\Layout\UserNavElement;
 use Illuminate\Support\Facades\Session;
 use Dcat\Admin\Widgets\Navs\ShortcutsNav;
 use Dcat\Admin\Widgets\Navs\LangSelectorNav;
-use Dcat\Admin\Widgets\Navs\DarkModeSwitcher;
+use Dcat\Admin\Widgets\DarkModeSwitcher;
 use Dcat\Admin\Widgets\Navs\DarkModeSwitcherNav;
 use Dcat\Admin\Widgets\Navs\DashboardNotificationNav;
 
@@ -41,6 +41,15 @@ if(!empty($locale) && !App::isLocale($locale)) {
 
 if (! Dcat\Admin\Support\Helper::isAjaxRequest()) {
 
+    Admin::footer(function (Footer $footer) {
+        $footer->start('test_start');
+        $footer->end('test_end');
+    });
+
+    Admin::userNav(function (UserNav $userNav) {
+        $userNav->put(new UserNavElement($userNav, admin_route(RouteAuth::SETTINGS()), DcatIcon::HOME(), __('admin.home'), new ColoredBadge(5, StyleClassType::DANGER), true));
+    });
+
     Admin::navbar(function (Navbar $navbar) {
         $navbar->putFree(new DarkModeSwitcher());
 
@@ -50,14 +59,5 @@ if (! Dcat\Admin\Support\Helper::isAjaxRequest()) {
         }));
         $navbar->putNav(new DarkModeSwitcherNav());
         $navbar->putNav(new DashboardNotificationNav());
-    });
-
-    Admin::footer(function (Footer $footer) {
-        $footer->start('test_start');
-        $footer->end('test_end');
-    });
-
-    Admin::userNav(function (UserNav $userNav) {
-        $userNav->put(new UserNavElement($userNav, admin_route(RouteAuth::HOME()), DcatIcon::HOME(), __('admin.home'), new ColoredBadge(5, StyleClassType::DANGER), true));
     });
 }
