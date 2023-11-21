@@ -37,11 +37,11 @@ return [
 
         'type' => LayoutType::VERTICAL,
 
-        'dark_mode' => DarkModeType::SYSTEM,
+        'dark_mode' => DarkModeType::LIGHT,
 
         'dir' => LayoutDirectionType::LTR,
 
-        'content_type' => LayoutContentType::XXL,
+        'content_type' => LayoutContentType::FLUID,
 
         // layout-menu-collapsed & layout-menu-fixed & layout-navbar-fixed & layout-footer-fixed
         'initials' => [

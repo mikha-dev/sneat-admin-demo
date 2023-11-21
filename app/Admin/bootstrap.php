@@ -11,11 +11,13 @@ use Dcat\Admin\Enums\RouteAuth;
 use Dcat\Admin\Layout\ColoredBadge;
 use Illuminate\Support\Facades\App;
 use Dcat\Admin\Enums\StyleClassType;
+use Dcat\Admin\Widgets\Navs\LinkNav;
 use Dcat\Admin\Layout\UserNavElement;
+use Dcat\Admin\Widgets\Navs\ButtonNav;
 use Illuminate\Support\Facades\Session;
+use Dcat\Admin\Widgets\DarkModeSwitcher;
 use Dcat\Admin\Widgets\Navs\ShortcutsNav;
 use Dcat\Admin\Widgets\Navs\LangSelectorNav;
-use Dcat\Admin\Widgets\DarkModeSwitcher;
 use Dcat\Admin\Widgets\Navs\DarkModeSwitcherNav;
 use Dcat\Admin\Widgets\Navs\DashboardNotificationNav;
 
@@ -47,15 +49,22 @@ if (! Dcat\Admin\Support\Helper::isAjaxRequest()) {
     });
 
     Admin::userNav(function (UserNav $userNav) {
-        $userNav->put(new UserNavElement($userNav, admin_route(RouteAuth::SETTINGS()), DcatIcon::HOME(), __('admin.home'), new ColoredBadge(5, StyleClassType::DANGER), true));
+        $userNav->put(new UserNavElement($userNav, admin_route(RouteAuth::SETTINGS()), DcatIcon::SETTINGS(), __('admin.home'), new ColoredBadge(5, StyleClassType::DANGER), true));
     });
 
     Admin::navbar(function (Navbar $navbar) {
         $navbar->putFree(new DarkModeSwitcher());
+        $navbar->putFree(new LinkNav(__('admin.login'), admin_route(RouteAuth::SETTINGS())));
+        $navbar->putFree(new ButtonNav(__('admin.login'), admin_route(RouteAuth::SETTINGS())));
+
 
         $navbar->putNav(new LangSelectorNav());
         $navbar->putNav(new ShortcutsNav( function (ShortcutsNav $shortcuts) {
-            $shortcuts->add(DcatIcon::CALENDAR(), __('admin.calendar'), __('admin.appointments'), admin_route(RouteAuth::HOME()));
+            $shortcuts->add(DcatIcon::CALENDAR, __('admin.calendar'), __('admin.appointments'), admin_route(RouteAuth::SETTINGS()));
+            $shortcuts->add(DcatIcon::CALENDAR, __('admin.calendar'), __('admin.appointments'), admin_route(RouteAuth::SETTINGS()));
+            $shortcuts->add(DcatIcon::CALENDAR, __('admin.calendar'), __('admin.appointments'), admin_route(RouteAuth::SETTINGS()));
+            $shortcuts->add(DcatIcon::CALENDAR, __('admin.calendar'), __('admin.appointments'), admin_route(RouteAuth::SETTINGS()));
+            $shortcuts->add(DcatIcon::CALENDAR, __('admin.calendar'), __('admin.appointments'), admin_route(RouteAuth::SETTINGS()));
         }));
         $navbar->putNav(new DarkModeSwitcherNav());
         $navbar->putNav(new DashboardNotificationNav());
