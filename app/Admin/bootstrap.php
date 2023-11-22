@@ -41,6 +41,8 @@ if(!empty($locale) && !App::isLocale($locale)) {
     App::setLocale($locale);
 }
 
+Admin::menu()->add(include __DIR__.'/menu.php', false);
+
 if (! Dcat\Admin\Support\Helper::isAjaxRequest()) {
 
     Admin::footer(function (Footer $footer) {

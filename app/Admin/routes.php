@@ -1,8 +1,11 @@
 <?php
 
+use Dcat\Admin\Admin;
+use App\Enums\RouteSneat;
+use Dcat\Admin\Layout\Content;
 use Illuminate\Routing\Router;
 use Illuminate\Support\Facades\Route;
-use Dcat\Admin\Admin;
+use App\Admin\Controllers\AnalyticController;
 
 Admin::routes();
 
@@ -13,6 +16,10 @@ Route::group([
 ], function (Router $router) {
 
     $router->get('/', 'HomeController@index');
+
+    $router->get('dashbord-analytic', function (Content $content) {
+	    return (new AnalyticController())->index($content);
+	})->name(RouteSneat::DASHBOARD_ANALYTIC());
 
     // $router->resource('example', 'ExampleController');
 

@@ -1,3 +1,12 @@
+# quick steps
+    ```bash
+    composer install
+    # rename `.env.example` to `.env`
+    php artisan key:generate
+    php artisan admin:publish
+    php artisan admin:minify default --publish
+    ```
+
 # sneat-admin-demo
 demo for sneat-admin
 
