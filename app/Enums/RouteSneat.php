@@ -28,13 +28,20 @@ enum RouteSneat : string implements DcatEnum
 
     case GRIDS_CUSTOM = 'grids.custom';
     case GRIDS_GRID = 'grids.grid';
+    case GRIDS_SELECTOR = 'grids.selector';
+    case GRIDS_REPORT = 'grids.report';
+    case GRIDS_FIXED = 'grids.fixed';
+    case GRIDS_TREE = 'grids.tree';
 
     case FORMS_EDITORS_MARKDOWN = 'formds.editors.markdown';
     case FORMS_EDITORS_SUMMERCODE = 'formds.editors.summercode';
     case FORMS_EDITORS_TINYMCE = 'formds.editors.tinymce';
 
     case FORMS_WHEN = 'fords.when';
+    case FORMS_STEP = 'fords.step';
+    case FORMS_FORM = 'fords.form';
 
     case BASIC = 'basic';
     case CLIENTS = 'clients';
+    case LAYOUT = 'layout';
 }

@@ -1554,12 +1554,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "2967d89906708cc7d619fc130e835c8002b7d3e3"
+                "reference": "60f753f68cdedc223ffae4c46be58fc2f0a03e13"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/2967d89906708cc7d619fc130e835c8002b7d3e3",
-                "reference": "2967d89906708cc7d619fc130e835c8002b7d3e3",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/60f753f68cdedc223ffae4c46be58fc2f0a03e13",
+                "reference": "60f753f68cdedc223ffae4c46be58fc2f0a03e13",
                 "shasum": ""
             },
             "require": {
@@ -1749,7 +1749,7 @@
                 "issues": "https://github.com/laravel/framework/issues",
                 "source": "https://github.com/laravel/framework"
             },
-            "time": "2023-11-21T19:09:37+00:00"
+            "time": "2023-11-22T20:47:06+00:00"
         },
         {
             "name": "laravel/prompts",
@@ -2557,7 +2557,7 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/mikha-dev/sneat-admin.git",
-                "reference": "e862b660fb2d13f09a333b5b17d2990749b98197"
+                "reference": "4ade25bc3d7b642b7b923d8af6cd309b46c47db2"
             },
             "require": {
                 "darkaonline/l5-swagger": "^8.5",
@@ -2625,7 +2625,7 @@
                 "laravel",
                 "laravel admin"
             ],
-            "time": "2023-11-22T12:35:31+00:00"
+            "time": "2023-11-22T21:18:46+00:00"
         },
         {
             "name": "monolog/monolog",
@@ -8431,12 +8431,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/rectorphp/rector.git",
-                "reference": "b8b986a68075ece1f9f6b3441a2ad6a08ed725dd"
+                "reference": "622a13c7e5b6a3b2ce664b316490bfabd47eb4f5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/rectorphp/rector/zipball/b8b986a68075ece1f9f6b3441a2ad6a08ed725dd",
-                "reference": "b8b986a68075ece1f9f6b3441a2ad6a08ed725dd",
+                "url": "https://api.github.com/repos/rectorphp/rector/zipball/622a13c7e5b6a3b2ce664b316490bfabd47eb4f5",
+                "reference": "622a13c7e5b6a3b2ce664b316490bfabd47eb4f5",
                 "shasum": ""
             },
             "require": {
@@ -8480,7 +8480,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2023-11-21T23:36:57+00:00"
+            "time": "2023-11-22T17:40:48+00:00"
         },
         {
             "name": "sebastian/cli-parser",

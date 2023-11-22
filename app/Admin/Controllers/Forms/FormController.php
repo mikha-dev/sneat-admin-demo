@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Admin\Controllers;
+namespace App\Admin\Controllers\Forms;
 
 use Faker\Factory;
 use Dcat\Admin\Admin;
@@ -21,6 +21,8 @@ use Symfony\Component\VarDumper\Dumper\HtmlDumper;
 class FormController extends Controller
 {
     use PreviewCode;
+
+    private array $names = [];
 
     public function index(Content $content)
     {

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Admin\Controllers;
+namespace App\Admin\Controllers\Forms;
 
 use Dcat\Admin\Form;
 use Dcat\Admin\Widgets\Alert;

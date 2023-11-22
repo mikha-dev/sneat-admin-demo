@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Admin\Controllers;
+namespace App\Admin\Controllers\Grids;
 
 use Dcat\Admin\Grid;
 use Dcat\Admin\Layout\Content;
@@ -14,8 +14,8 @@ class ReportController extends Controller
     public function index(Content $content)
     {
         return $content
-            ->header('报表')
-            ->description('合并表头功能示例')
+            ->header('reports')
+            ->description('reports')
             ->body(function ($row) {
                 //todo:: add widgets
                 // $row->column(4, new TotalUsers());
@@ -42,7 +42,6 @@ class ReportController extends Controller
             $grid->column('incrs')->hide();
             $grid->column('avgVists')->hide();
             $grid->column('date')->sortable();
-            // 开启responsive插件
             $grid;
             $grid->disableActions();
             $grid->disableBatchDelete();

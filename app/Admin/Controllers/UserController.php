@@ -3,9 +3,9 @@
 namespace App\Admin\Controllers;
 
 use Dcat\Admin\Grid;
-use Dcat\Admin\Http\Controllers\AdminController;
 use Dcat\Admin\Layout\Content;
 use Dcat\Admin\Http\Repositories\Administrator;
+use Dcat\Admin\Http\Controllers\AdminController;
 
 class UserController extends AdminController
 {
