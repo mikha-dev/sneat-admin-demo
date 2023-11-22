@@ -2,90 +2,365 @@
 
 namespace App\Admin\Controllers\Components;
 
-use Dcat\Admin\Admin;
 use Dcat\Admin\Layout\Content;
-use Dcat\Admin\Layout\Row;
-use Dcat\Admin\Widgets\Box;
-use Dcat\Admin\Widgets\Code;
-use Dcat\Admin\Widgets\Dropdown;
+use App\Admin\Traits\PreviewCode;
 use Illuminate\Routing\Controller;
 
 class DropdownMenuController extends Controller
 {
-    // $testItems = [
-    //     'Action1'
-    // ];
+    use PreviewCode;
 
     public function index(Content $content)
     {
-        return $content->header('Dropdown Menu')
-            ->body(function (Row $row) {
-                $row->column(3, $this->example1());
-                $row->column(3, $this->example2());
-                $row->column(3, $this->example3());
-            })
-            ->body(
-                Box::make('Preview', new Code(__FILE__, 1, 1000))
-                    ->style('default')
-            );
+        return $content->header('Dropdowns')
+            ->body($this->dropdownsBasic());
     }
 
-    protected function example1()
-    {
-        $menu1 = Dropdown::make($this->tian)->button('天干');
+    private function dropdownsBasic() : string {
+        return <<<HTML
+<div class="card mb-4" id="btn-dropdown-demo">
+  <h5 class="card-header">Dropdowns</h5>
 
-        $menu2 = Dropdown::make()
-            ->button('test')
-            ->buttonClass('btn btn-sm btn-inverse')
-            ->options($this->tian, '天干')
-            ->options($this->di, '地支');
+  <!-- Basic Dropdowns -->
+  <div class="card-body">
+    <small class="text-light fw-medium">Basic</small>
+    <div class="demo-inline-spacing">
+      <div class="btn-group">
+        <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">Primary</button>
+        <ul class="dropdown-menu">
+          <li><a class="dropdown-item" href="javascript:void(0);">Action</a></li>
+          <li><a class="dropdown-item" href="javascript:void(0);">Another action</a></li>
+          <li><a class="dropdown-item disabled" href="javascript:void(0);">Something else here</a></li>
+          <li>
+            <hr class="dropdown-divider">
+          </li>
+          <li><a class="dropdown-item" href="javascript:void(0);">Separated link</a></li>
+        </ul>
+      </div>
 
-        $menu3 = Dropdown::make([1, 2, 3, Dropdown::DIVIDER, 4, 5])->button('中间加分隔线');
+      <div class="btn-group">
+        <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">Secondary</button>
+        <ul class="dropdown-menu">
+          <li><a class="dropdown-item" href="javascript:void(0);">Action</a></li>
+          <li><a class="dropdown-item" href="javascript:void(0);">Another action</a></li>
+          <li><a class="dropdown-item" href="javascript:void(0);">Something else here</a></li>
+          <li>
+            <hr class="dropdown-divider">
+          </li>
+          <li><a class="dropdown-item" href="javascript:void(0);">Separated link</a></li>
+        </ul>
+      </div>
 
-        return Box::make(
-            'Example1',
-            $menu1->render().' &nbsp; '.$menu2->render().' &nbsp; '.$menu3->render()
-        );
+      <div class="btn-group">
+        <button type="button" class="btn btn-success dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">Success</button>
+        <ul class="dropdown-menu">
+          <li><a class="dropdown-item" href="javascript:void(0);">Action</a></li>
+          <li><a class="dropdown-item" href="javascript:void(0);">Another action</a></li>
+          <li><a class="dropdown-item" href="javascript:void(0);">Something else here</a></li>
+          <li>
+            <hr class="dropdown-divider">
+          </li>
+          <li><a class="dropdown-item" href="javascript:void(0);">Separated link</a></li>
+        </ul>
+      </div>
+
+      <div class="btn-group">
+        <button type="button" class="btn btn-danger dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">Danger</button>
+        <ul class="dropdown-menu">
+          <li><a class="dropdown-item" href="javascript:void(0);">Action</a></li>
+          <li><a class="dropdown-item" href="javascript:void(0);">Another action</a></li>
+          <li><a class="dropdown-item" href="javascript:void(0);">Something else here</a></li>
+          <li>
+            <hr class="dropdown-divider">
+          </li>
+          <li><a class="dropdown-item" href="javascript:void(0);">Separated link</a></li>
+        </ul>
+      </div>
+
+      <div class="btn-group">
+        <button type="button" class="btn btn-warning dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">Warning</button>
+        <ul class="dropdown-menu">
+          <li><a class="dropdown-item" href="javascript:void(0);">Action</a></li>
+          <li><a class="dropdown-item" href="javascript:void(0);">Another action</a></li>
+          <li><a class="dropdown-item" href="javascript:void(0);">Something else here</a></li>
+          <li>
+            <hr class="dropdown-divider">
+          </li>
+          <li><a class="dropdown-item" href="javascript:void(0);">Separated link</a></li>
+        </ul>
+      </div>
+
+      <div class="btn-group">
+        <button type="button" class="btn btn-info dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">Info</button>
+        <ul class="dropdown-menu">
+          <li><a class="dropdown-item" href="javascript:void(0);">Action</a></li>
+          <li><a class="dropdown-item" href="javascript:void(0);">Another action</a></li>
+          <li><a class="dropdown-item" href="javascript:void(0);">Something else here</a></li>
+          <li>
+            <hr class="dropdown-divider">
+          </li>
+          <li><a class="dropdown-item" href="javascript:void(0);">Separated link</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <!--/ Basic Dropdowns -->
+  <hr class="m-0">
+
+  <!-- Outline Dropdowns -->
+  <div class="card-body">
+    <small class="text-light fw-medium">Outline</small>
+    <div class="demo-inline-spacing">
+      <div class="btn-group">
+        <button type="button" class="btn btn-outline-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">Primary</button>
+        <ul class="dropdown-menu">
+          <li><a class="dropdown-item" href="javascript:void(0);">Action</a></li>
+          <li><a class="dropdown-item" href="javascript:void(0);">Another action</a></li>
+          <li><a class="dropdown-item" href="javascript:void(0);">Something else here</a></li>
+          <li>
+            <hr class="dropdown-divider">
+          </li>
+          <li><a class="dropdown-item" href="javascript:void(0);">Separated link</a></li>
+        </ul>
+      </div>
+
+      <div class="btn-group">
+        <button type="button" class="btn btn-outline-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">Secondary</button>
+        <ul class="dropdown-menu">
+          <li><a class="dropdown-item" href="javascript:void(0);">Action</a></li>
+          <li><a class="dropdown-item" href="javascript:void(0);">Another action</a></li>
+          <li><a class="dropdown-item" href="javascript:void(0);">Something else here</a></li>
+          <li>
+            <hr class="dropdown-divider">
+          </li>
+          <li><a class="dropdown-item" href="javascript:void(0);">Separated link</a></li>
+        </ul>
+      </div>
+
+      <div class="btn-group">
+        <button type="button" class="btn btn-outline-success dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">Success</button>
+        <ul class="dropdown-menu">
+          <li><a class="dropdown-item" href="javascript:void(0);">Action</a></li>
+          <li><a class="dropdown-item" href="javascript:void(0);">Another action</a></li>
+          <li><a class="dropdown-item" href="javascript:void(0);">Something else here</a></li>
+          <li>
+            <hr class="dropdown-divider">
+          </li>
+          <li><a class="dropdown-item" href="javascript:void(0);">Separated link</a></li>
+        </ul>
+      </div>
+
+      <div class="btn-group">
+        <button type="button" class="btn btn-outline-danger dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">Danger</button>
+        <ul class="dropdown-menu">
+          <li><a class="dropdown-item" href="javascript:void(0);">Action</a></li>
+          <li><a class="dropdown-item" href="javascript:void(0);">Another action</a></li>
+          <li><a class="dropdown-item" href="javascript:void(0);">Something else here</a></li>
+          <li>
+            <hr class="dropdown-divider">
+          </li>
+          <li><a class="dropdown-item" href="javascript:void(0);">Separated link</a></li>
+        </ul>
+      </div>
+
+      <div class="btn-group">
+        <button type="button" class="btn btn-outline-warning dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">Warning</button>
+        <ul class="dropdown-menu">
+          <li><a class="dropdown-item" href="javascript:void(0);">Action</a></li>
+          <li><a class="dropdown-item" href="javascript:void(0);">Another action</a></li>
+          <li><a class="dropdown-item" href="javascript:void(0);">Something else here</a></li>
+          <li>
+            <hr class="dropdown-divider">
+          </li>
+          <li><a class="dropdown-item" href="javascript:void(0);">Separated link</a></li>
+        </ul>
+      </div>
+
+      <div class="btn-group">
+        <button type="button" class="btn btn-outline-info dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">Info</button>
+        <ul class="dropdown-menu">
+          <li><a class="dropdown-item" href="javascript:void(0);">Action</a></li>
+          <li><a class="dropdown-item" href="javascript:void(0);">Another action</a></li>
+          <li><a class="dropdown-item" href="javascript:void(0);">Something else here</a></li>
+          <li>
+            <hr class="dropdown-divider">
+          </li>
+          <li><a class="dropdown-item" href="javascript:void(0);">Separated link</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <!--/ Basic Dropdowns -->
+  <hr class="m-0">
+  <!-- Split Dropdowns -->
+  <div class="card-body">
+    <small class="text-light fw-medium">Split</small>
+    <div class="demo-inline-spacing">
+      <div class="btn-group">
+        <button type="button" class="btn btn-primary">Primary</button>
+        <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
+          <span class="visually-hidden">Toggle Dropdown</span>
+        </button>
+        <ul class="dropdown-menu">
+          <li><a class="dropdown-item" href="javascript:void(0);">Action</a></li>
+          <li><a class="dropdown-item" href="javascript:void(0);">Another action</a></li>
+          <li><a class="dropdown-item" href="javascript:void(0);">Something else here</a></li>
+          <li>
+            <hr class="dropdown-divider">
+          </li>
+          <li><a class="dropdown-item" href="javascript:void(0);">Separated link</a></li>
+        </ul>
+      </div>
+
+      <div class="btn-group">
+        <button type="button" class="btn btn-secondary">Secondary</button>
+        <button type="button" class="btn btn-secondary dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
+          <span class="visually-hidden">Toggle Dropdown</span>
+        </button>
+        <ul class="dropdown-menu">
+          <li><a class="dropdown-item" href="javascript:void(0);">Action</a></li>
+          <li><a class="dropdown-item" href="javascript:void(0);">Another action</a></li>
+          <li><a class="dropdown-item" href="javascript:void(0);">Something else here</a></li>
+          <li>
+            <hr class="dropdown-divider">
+          </li>
+          <li><a class="dropdown-item" href="javascript:void(0);">Separated link</a></li>
+        </ul>
+      </div>
+
+      <div class="btn-group">
+        <button type="button" class="btn btn-success">Success</button>
+        <button type="button" class="btn btn-success dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
+          <span class="visually-hidden">Toggle Dropdown</span>
+        </button>
+        <ul class="dropdown-menu">
+          <li><a class="dropdown-item" href="javascript:void(0);">Action</a></li>
+          <li><a class="dropdown-item" href="javascript:void(0);">Another action</a></li>
+          <li><a class="dropdown-item" href="javascript:void(0);">Something else here</a></li>
+          <li>
+            <hr class="dropdown-divider">
+          </li>
+          <li><a class="dropdown-item" href="javascript:void(0);">Separated link</a></li>
+        </ul>
+      </div>
+
+      <div class="btn-group">
+        <button type="button" class="btn btn-danger">Danger</button>
+        <button type="button" class="btn btn-danger dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
+          <span class="visually-hidden">Toggle Dropdown</span>
+        </button>
+        <ul class="dropdown-menu">
+          <li><a class="dropdown-item" href="javascript:void(0);">Action</a></li>
+          <li><a class="dropdown-item" href="javascript:void(0);">Another action</a></li>
+          <li><a class="dropdown-item" href="javascript:void(0);">Something else here</a></li>
+          <li>
+            <hr class="dropdown-divider">
+          </li>
+          <li><a class="dropdown-item" href="javascript:void(0);">Separated link</a></li>
+        </ul>
+      </div>
+
+      <div class="btn-group">
+        <button type="button" class="btn btn-warning">Warning</button>
+        <button type="button" class="btn btn-warning dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
+          <span class="visually-hidden">Toggle Dropdown</span>
+        </button>
+        <ul class="dropdown-menu">
+          <li><a class="dropdown-item" href="javascript:void(0);">Action</a></li>
+          <li><a class="dropdown-item" href="javascript:void(0);">Another action</a></li>
+          <li><a class="dropdown-item" href="javascript:void(0);">Something else here</a></li>
+          <li>
+            <hr class="dropdown-divider">
+          </li>
+          <li><a class="dropdown-item" href="javascript:void(0);">Separated link</a></li>
+        </ul>
+      </div>
+
+      <div class="btn-group">
+        <button type="button" class="btn btn-info">Info</button>
+        <button type="button" class="btn btn-info dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
+          <span class="visually-hidden">Toggle Dropdown</span>
+        </button>
+        <ul class="dropdown-menu" style="">
+          <li><a class="dropdown-item" href="javascript:void(0);">Action</a></li>
+          <li><a class="dropdown-item" href="javascript:void(0);">Another action</a></li>
+          <li><a class="dropdown-item" href="javascript:void(0);">Something else here</a></li>
+          <li>
+            <hr class="dropdown-divider">
+          </li>
+          <li><a class="dropdown-item" href="javascript:void(0);">Separated link</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <!--/ Split Dropdowns -->
+
+  <hr class="m-0">
+
+  <div class="card-body">
+    <div class="row gy-3">
+      <!-- Hidden Arrow Dropdowns -->
+      <div class="col-lg-3 col-sm-6 col-12">
+        <small class="text-light fw-medium">Hidden arrow</small>
+        <div class="demo-inline-spacing">
+          <div class="btn-group">
+            <button type="button" class="btn btn-primary dropdown-toggle hide-arrow" data-bs-toggle="dropdown" aria-expanded="false">Hidden arrow </button>
+            <ul class="dropdown-menu" style="">
+              <li><a class="dropdown-item" href="javascript:void(0);">Action</a></li>
+              <li><a class="dropdown-item" href="javascript:void(0);">Another action</a></li>
+              <li><a class="dropdown-item" href="javascript:void(0);">Something else here</a></li>
+              <li>
+                <hr class="dropdown-divider">
+              </li>
+              <li><a class="dropdown-item" href="javascript:void(0);">Separated link</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <!--/ Hidden Arrow Dropdowns -->
+      <!-- Dropdown with icon -->
+      <div class="col-lg-3 col-sm-6 col-12">
+        <small class="text-light fw-medium">With Icon</small>
+        <div class="demo-inline-spacing">
+          <div class="btn-group" id="dropdown-icon-demo">
+            <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"><i class="bx bx-menu me-1"></i> With Icon</button>
+            <ul class="dropdown-menu" style="">
+              <li><a href="javascript:void(0);" class="dropdown-item d-flex align-items-center"><i class="bx bx-chevron-right scaleX-n1-rtl"></i>Action</a></li>
+              <li><a href="javascript:void(0);" class="dropdown-item d-flex align-items-center"><i class="bx bx-chevron-right scaleX-n1-rtl"></i>Another action</a></li>
+              <li><a href="javascript:void(0);" class="dropdown-item d-flex align-items-center"><i class="bx bx-chevron-right scaleX-n1-rtl"></i>Something else here</a></li>
+              <li>
+                <hr class="dropdown-divider">
+              </li>
+              <li><a href="javascript:void(0);" class="dropdown-item d-flex align-items-center"><i class="bx bx-chevron-right scaleX-n1-rtl"></i>Separated link</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <!--/ Dropdown with icon -->
+      <!-- Icon Dropdown -->
+      <div class="col-lg-3 col-sm-6 col-12">
+        <small class="text-light fw-medium">Icon Dropdown</small>
+        <div class="demo-inline-spacing">
+          <div class="btn-group">
+            <button type="button" class="btn btn-primary btn-icon rounded-pill dropdown-toggle hide-arrow" data-bs-toggle="dropdown" aria-expanded="false"><i class="bx bx-dots-vertical-rounded"></i></button>
+            <ul class="dropdown-menu dropdown-menu-end" style="">
+              <li><a class="dropdown-item" href="javascript:void(0);">Action</a></li>
+              <li><a class="dropdown-item" href="javascript:void(0);">Another action</a></li>
+              <li><a class="dropdown-item" href="javascript:void(0);">Something else here</a></li>
+              <li>
+                <hr class="dropdown-divider">
+              </li>
+              <li><a class="dropdown-item" href="javascript:void(0);">Separated link</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <!--/ Icon Dropdown -->
+    </div>
+  </div>
+
+</div>
+HTML;
     }
 
-    protected function example2()
-    {
-        $menu = Dropdown::make($this->tian);
-
-        $menu->map(function ($v, $k) {
-            if ($k === 7) {
-                $this->divider();
-            }
-            $k++;
-            return "{$k}. $v";
-        });
-
-        return Box::make('Example2', function () use ($menu) {
-            return "<div class='dropdown'><a class='btn no-shadow text-muted' data-toggle='dropdown' href='javascript:void(0)'><i class='ti-email'></i> 自定义按钮 </a>{$menu->render()}</div>";
-        });
-    }
-
-    protected function example3()
-    {
-        $menu1 = Dropdown::make()
-            ->options($this->tian, '天干')
-            ->options($this->di, '地支')
-            ->click()
-            ->buttonClass('btn btn-sm btn-light')
-            ->map(function ($v, $k) {
-                $k++;
-
-                return "<a class='test_item' data-id='$k', data-value='{$v}' data-test='Hello world.' href='javascript:void(0)'>{$k}. $v</a>";
-            });
-
-        Admin::script(
-            <<<SCRIPT
-$('.test_item').click(function () {
-    LA.info("Selected: " + JSON.stringify($(this).data()));
-});
-SCRIPT
-        );
-
-        return Box::make('Example3', $menu1);
-    }
 }
