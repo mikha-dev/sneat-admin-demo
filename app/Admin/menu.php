@@ -132,7 +132,34 @@ return [
         'uri'       => admin_route(App\Enums\RouteSneat::GRIDS_GRID()),
         'parent_id' => 'grids',
     ],
-
+    [
+        'id'        => 'selector',
+        'title'     => __('sneat.selector'),
+        'icon'      => Dcat\Admin\DcatIcon::HOME_CIRCLE(),
+        'uri'       => admin_route(App\Enums\RouteSneat::GRIDS_SELECTOR()),
+        'parent_id' => 'grids',
+    ],
+    [
+        'id'        => 'report',
+        'title'     => __('sneat.report'),
+        'icon'      => Dcat\Admin\DcatIcon::HOME_CIRCLE(),
+        'uri'       => admin_route(App\Enums\RouteSneat::GRIDS_REPORT()),
+        'parent_id' => 'grids',
+    ],
+    [
+        'id'        => 'fixed-columns',
+        'title'     => __('sneat.fixed_columns'),
+        'icon'      => Dcat\Admin\DcatIcon::HOME_CIRCLE(),
+        'uri'       => admin_route(App\Enums\RouteSneat::GRIDS_FIXED()),
+        'parent_id' => 'grids',
+    ],
+    [
+        'id'        => 'fixed-tree',
+        'title'     => __('sneat.tree'),
+        'icon'      => Dcat\Admin\DcatIcon::HOME_CIRCLE(),
+        'uri'       => admin_route(App\Enums\RouteSneat::GRIDS_TREE()),
+        'parent_id' => 'grids',
+    ],
     // Basic
     [
         'id'        => 'basic',
@@ -155,7 +182,13 @@ return [
         'uri'       => admin_route(App\Enums\RouteSneat::CLIENTS()),
         'parent_id' => 'basic',
     ],
-
+    [
+        'id'        => 'basic-layout',
+        'title'     => __('sneat.layout'),
+        'icon'      => Dcat\Admin\DcatIcon::HOME_CIRCLE(),
+        'uri'       => admin_route(App\Enums\RouteSneat::LAYOUT()),
+        'parent_id' => 'basic',
+    ],
     // Forms
     [
         'id'        => 'forms',
@@ -170,6 +203,20 @@ return [
         'title'     => __('sneat.when'),
         'icon'      => Dcat\Admin\DcatIcon::HOME_CIRCLE(),
         'uri'       => admin_route(App\Enums\RouteSneat::FORMS_WHEN()),
+        'parent_id' => 'forms',
+    ],
+    [
+        'id'        => 'forms-step',
+        'title'     => __('sneat.step'),
+        'icon'      => Dcat\Admin\DcatIcon::HOME_CIRCLE(),
+        'uri'       => admin_route(App\Enums\RouteSneat::FORMS_STEP()),
+        'parent_id' => 'forms',
+    ],
+    [
+        'id'        => 'forms-form',
+        'title'     => __('sneat.form'),
+        'icon'      => Dcat\Admin\DcatIcon::HOME_CIRCLE(),
+        'uri'       => admin_route(App\Enums\RouteSneat::FORMS_FORM()),
         'parent_id' => 'forms',
     ],
     // Forms - Editors

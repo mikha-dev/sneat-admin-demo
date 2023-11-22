@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Admin\Controllers;
+namespace App\Admin\Controllers\Grids;
 
 use Dcat\Admin\Grid;
 use Dcat\Admin\Layout\Content;
@@ -8,7 +8,7 @@ use App\Admin\Traits\PreviewCode;
 use App\Admin\Repositories\Report;
 use App\Http\Controllers\Controller;
 
-class FixedController extends Controller
+class FixedColumnsController extends Controller
 {
     use PreviewCode;
 

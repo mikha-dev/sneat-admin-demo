@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Admin\Controllers;
+namespace App\Admin\Controllers\Grids;
 
 use Dcat\Admin\Grid;
 use Dcat\Admin\Admin;

@@ -50,9 +50,9 @@ class LayerController extends Controller
     <div class="btn-group">
         <a class='btn btn-info' onclick='LA.info("Info")'>LA.info("Info")</a>{$menuButtons[3]}
     </div> &nbsp;
-    
+
     <a class='btn btn-custom' onclick='LA.confirm("确认?", function(){ LA.success("已确认") })'>LA.confirm("确认?", fn)</a>&nbsp;&nbsp;&nbsp;
-    
+
     <a class='btn btn-purple' id="layeropen">iframe弹窗</a>&nbsp;
 </p>
 EOF

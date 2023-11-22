@@ -5,10 +5,16 @@ use App\Enums\RouteSneat;
 use Dcat\Admin\Layout\Content;
 use Illuminate\Routing\Router;
 use Illuminate\Support\Facades\Route;
+use App\Admin\Controllers\UserController;
+use App\Admin\Controllers\LayoutController;
+use App\Admin\Controllers\Forms\FormController;
 use App\Admin\Controllers\Grids\GridController;
 use App\Admin\Controllers\Forms\EditorController;
+use App\Admin\Controllers\Grids\ReportController;
 use App\Admin\Controllers\BasicStructureController;
 use App\Admin\Controllers\Forms\FormWhenController;
+use App\Admin\Controllers\Grids\GridTreeController;
+use App\Admin\Controllers\Grids\SelectorController;
 use App\Admin\Controllers\Components\CardController;
 use App\Admin\Controllers\Components\TabsController;
 use App\Admin\Controllers\Components\AlertController;
@@ -16,6 +22,7 @@ use App\Admin\Controllers\Components\ChartController;
 use App\Admin\Controllers\Components\ModalController;
 use App\Admin\Controllers\Grids\CustomGridController;
 use App\Admin\Controllers\Components\ToastrController;
+use App\Admin\Controllers\Grids\FixedColumnsController;
 use App\Admin\Controllers\Components\MarkdownController;
 use App\Admin\Controllers\Components\ProgressController;
 use App\Admin\Controllers\Dashboards\AnalyticController;
@@ -23,7 +30,6 @@ use App\Admin\Controllers\Components\AccordionController;
 use App\Admin\Controllers\Components\DropdownMenuController;
 use App\Admin\Controllers\Components\TipAndPopoverController;
 use App\Admin\Controllers\Components\CheckboxAndRadioController;
-use App\Admin\Controllers\UserController;
 
 Admin::routes();
 
@@ -95,6 +101,25 @@ Route::group([
 	    return (new GridController())->index($content);
 	})->name(RouteSneat::GRIDS_GRID());
 
+    $router->get('grids-selector', function (Content $content) {
+	    return (new SelectorController())->index($content);
+	})->name(RouteSneat::GRIDS_SELECTOR());
+
+    $router->get('grids-report', function (Content $content) {
+	    return (new ReportController())->index($content);
+	})->name(RouteSneat::GRIDS_REPORT());
+    $router->get('grids-report/preview', 'ReportController@preview');
+
+    $router->get('grids-fixed', function (Content $content) {
+	    return (new FixedColumnsController())->index($content);
+	})->name(RouteSneat::GRIDS_FIXED());
+    $router->get('grids-fixed/preview', 'Grids\FixedColumnsController@preview');
+
+    $router->get('grids-tree', function (Content $content) {
+	    return (new GridTreeController())->index($content);
+	})->name(RouteSneat::GRIDS_TREE());
+    $router->get('grids-tree/preview', 'Grids\GridTreeController@preview');
+
     $router->get('forms-editors-markdown', function (Content $content) {
 	    return (new EditorController())->markdown($content);
 	})->name(RouteSneat::FORMS_EDITORS_MARKDOWN());
@@ -112,7 +137,22 @@ Route::group([
 	    return (new FormWhenController())->index($content);
 	})->name(RouteSneat::FORMS_WHEN());
 
+    $router->get('forms-step', function (Content $content) {
+	    return (new FormWhenController())->index($content);
+	})->name(RouteSneat::FORMS_STEP());
+    $router->get('forms-step/preview', 'StepFormController@preview');
+    $router->post('forms-step', 'StepFormController@store');
+
+    $router->get('forms-form', function (Content $content) {
+	    return (new FormController())->index($content);
+	})->name(RouteSneat::FORMS_FORM());
+
     $router->resource('basic', BasicStructureController::class)->name('index', RouteSneat::BASIC());
+    $router->resource('basic', BasicStructureController::class)->name('index', RouteSneat::BASIC());
+    $router->get('layout', function (Content $content) {
+	    return (new LayoutController())->index($content);
+	})->name(RouteSneat::LAYOUT());
+
     $router->resource('clients', UserController::class)->name('index', RouteSneat::CLIENTS());
 
     // $router->resource('example', 'ExampleController');
