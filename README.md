@@ -7,8 +7,11 @@
     npm install --global yarn
     php artisan admin:minify default
     php artisan admin:publish
+    # fill db from sql: database\sql\sneat-admin-demo.sql
     php artisan serve
     ```
+# database in sql file for now
+    use file database\sql\sneat-admin-demo.sql
 
 # sneat-admin-demo
 demo for sneat-admin

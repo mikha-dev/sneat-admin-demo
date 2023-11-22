@@ -1,4 +1,6 @@
 /*
+SQLyog Ultimate v13.1.1 (64 bit)
+MySQL - 8.0.31-23 : Database - sneat-admin-demo
 *********************************************************************
 */
 
@@ -14,35 +16,136 @@ CREATE DATABASE /*!32312 IF NOT EXISTS*/`sneat-admin-demo` /*!40100 DEFAULT CHAR
 
 USE `sneat-admin-demo`;
 
+/*Table structure for table `admin_domains` */
+
+DROP TABLE IF EXISTS `admin_domains`;
+
+CREATE TABLE `admin_domains` (
+  `id` int unsigned NOT NULL AUTO_INCREMENT,
+  `host` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `manager_id` bigint unsigned NOT NULL,
+  `created_at` datetime DEFAULT NULL,
+  `updated_at` datetime DEFAULT NULL,
+  `schema` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `manager_id` (`manager_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+/*Data for the table `admin_domains` */
+
+insert  into `admin_domains`(`id`,`host`,`manager_id`,`created_at`,`updated_at`,`schema`) values 
+(16,'127.0.0.1',1,'2023-11-03 17:54:44',NULL,'http');
+
+/*Table structure for table `admin_extension_histories` */
+
+DROP TABLE IF EXISTS `admin_extension_histories`;
+
+CREATE TABLE `admin_extension_histories` (
+  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `type` tinyint NOT NULL DEFAULT '1',
+  `version` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '0',
+  `detail` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `admin_extension_histories_name_index` (`name`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+/*Data for the table `admin_extension_histories` */
+
+/*Table structure for table `admin_extensions` */
+
+DROP TABLE IF EXISTS `admin_extensions`;
+
+CREATE TABLE `admin_extensions` (
+  `id` int unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `version` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
+  `is_enabled` tinyint NOT NULL DEFAULT '0',
+  `options` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `admin_extensions_name_unique` (`name`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+/*Data for the table `admin_extensions` */
+
 /*Table structure for table `admin_menu` */
 
 DROP TABLE IF EXISTS `admin_menu`;
 
 CREATE TABLE `admin_menu` (
-  `id` int unsigned NOT NULL AUTO_INCREMENT,
-  `parent_id` int NOT NULL DEFAULT '0',
+  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
+  `parent_id` bigint NOT NULL DEFAULT '0',
   `order` int NOT NULL DEFAULT '0',
   `title` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `icon` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `uri` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `icon` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `uri` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `extension` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
+  `show` tinyint NOT NULL DEFAULT '1',
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
-  `permission` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `is_target_blank` tinyint DEFAULT '0',
-  `show` tinyint DEFAULT '1',
-  `extension` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=196 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 /*Data for the table `admin_menu` */
+
+insert  into `admin_menu`(`id`,`parent_id`,`order`,`title`,`icon`,`uri`,`extension`,`show`,`created_at`,`updated_at`) values 
+(1,0,1,'Index','fas fa-chart-bar','/','',1,'2023-10-26 13:10:19',NULL),
+(2,0,2,'Admin','fas fa-gear','','',1,'2023-10-26 13:10:19',NULL),
+(3,2,3,'Users','','auth/users','',1,'2023-10-26 13:10:19',NULL),
+(4,2,4,'Roles','','auth/roles','',1,'2023-10-26 13:10:19',NULL),
+(5,2,5,'Permission','','auth/permissions','',1,'2023-10-26 13:10:19',NULL),
+(6,2,6,'Menu','','auth/menu','',1,'2023-10-26 13:10:19',NULL),
+(7,2,7,'Extensions','','auth/extensions','',1,'2023-10-26 13:10:19',NULL);
+
+/*Table structure for table `admin_menu_domain_settings` */
+
+DROP TABLE IF EXISTS `admin_menu_domain_settings`;
+
+CREATE TABLE `admin_menu_domain_settings` (
+  `id` int unsigned NOT NULL AUTO_INCREMENT,
+  `menu_id` int unsigned NOT NULL,
+  `domain_id` int unsigned NOT NULL,
+  `created_at` datetime DEFAULT NULL,
+  `updated_at` datetime DEFAULT NULL,
+  `icon_svg` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `visible` tinyint DEFAULT '1',
+  `icon_font` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `icon_type` tinyint DEFAULT '1',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+/*Data for the table `admin_menu_domain_settings` */
+
+/*Table structure for table `admin_operation_log` */
+
+DROP TABLE IF EXISTS `admin_operation_log`;
+
+CREATE TABLE `admin_operation_log` (
+  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
+  `user_id` bigint NOT NULL,
+  `path` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `method` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `ip` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `input` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `admin_operation_log_user_id_index` (`user_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+/*Data for the table `admin_operation_log` */
 
 /*Table structure for table `admin_permission_menu` */
 
 DROP TABLE IF EXISTS `admin_permission_menu`;
 
 CREATE TABLE `admin_permission_menu` (
-  `permission_id` int NOT NULL,
-  `menu_id` int NOT NULL,
+  `permission_id` bigint NOT NULL,
+  `menu_id` bigint NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   UNIQUE KEY `admin_permission_menu_permission_id_menu_id_unique` (`permission_id`,`menu_id`)
@@ -50,861 +153,279 @@ CREATE TABLE `admin_permission_menu` (
 
 /*Data for the table `admin_permission_menu` */
 
-insert  into `admin_permission_menu`(`permission_id`,`menu_id`,`created_at`,`updated_at`) values 
-(13,12,'2021-12-23 15:13:17','2021-12-23 15:13:17'),
-(14,15,'2021-12-23 15:13:47','2021-12-23 15:13:47'),
-(15,16,'2021-11-26 17:21:19','2021-11-26 17:21:19'),
-(15,106,'2022-09-23 09:09:16','2022-09-23 09:09:16'),
-(16,17,'2022-09-23 09:10:50','2022-09-23 09:10:50'),
-(16,107,'2022-09-23 09:11:04','2022-09-23 09:11:04'),
-(18,19,'2021-10-28 13:18:13','2021-10-28 13:18:13'),
-(21,21,'2021-10-25 11:31:21','2021-10-25 11:31:21'),
-(22,22,'2021-10-25 11:29:08','2021-10-25 11:29:08'),
-(22,133,'2023-03-16 16:57:34','2023-03-16 16:57:34'),
-(29,33,'2021-11-23 14:21:38','2021-11-23 14:21:38'),
-(29,37,'2021-10-25 11:19:41','2021-10-25 11:19:41'),
-(32,39,'2021-10-25 11:14:43','2021-10-25 11:14:43'),
-(33,40,'2021-10-25 11:07:41','2021-10-25 11:07:41'),
-(37,36,'2021-10-25 11:33:32','2021-10-25 11:33:32'),
-(38,41,'2021-10-28 21:43:58','2021-10-28 21:43:58'),
-(39,42,'2021-10-25 11:15:31','2021-10-25 11:15:31'),
-(39,102,'2022-09-23 08:59:54','2022-09-23 08:59:54'),
-(39,133,'2023-03-16 16:57:34','2023-03-16 16:57:34'),
-(42,43,'2021-10-25 11:16:26','2021-10-25 11:16:26'),
-(45,44,'2021-10-25 11:16:59','2021-10-25 11:16:59'),
-(53,52,'2021-10-28 21:44:27','2021-10-28 21:44:27'),
-(56,54,'2021-10-28 21:50:34','2021-10-28 21:50:34'),
-(57,55,'2021-10-28 21:50:50','2021-10-28 21:50:50'),
-(71,63,'2021-10-25 11:24:54','2021-10-25 11:24:54'),
-(71,102,'2022-09-23 08:59:54','2022-09-23 08:59:54'),
-(72,65,'2021-10-25 11:25:21','2021-10-25 11:25:21'),
-(72,102,'2022-09-23 08:59:54','2022-09-23 08:59:54'),
-(77,68,'2021-10-25 11:28:09','2021-10-25 11:28:09'),
-(77,102,'2022-09-23 08:59:54','2022-09-23 08:59:54'),
-(78,69,'2021-10-25 11:28:37','2021-10-25 11:28:37'),
-(80,72,'2021-10-28 13:19:30','2021-10-28 13:19:30'),
-(81,71,'2021-10-28 13:00:12','2021-10-28 13:00:12'),
-(82,73,'2021-10-28 13:28:16','2021-10-28 13:28:16'),
-(86,74,'2021-10-29 14:17:43','2021-10-29 14:17:43'),
-(88,77,'2021-11-03 16:04:58','2021-11-03 16:04:58'),
-(97,85,'2021-11-12 20:12:28','2021-11-12 20:12:28'),
-(97,102,'2022-09-23 08:59:54','2022-09-23 08:59:54'),
-(106,92,'2021-11-23 13:20:15','2021-11-23 13:20:15'),
-(109,94,'2021-11-26 16:53:16','2021-11-26 16:53:16'),
-(111,95,'2021-12-18 21:28:51','2021-12-18 21:28:51'),
-(111,102,'2022-09-23 08:59:54','2022-09-23 08:59:54'),
-(115,13,'2022-10-08 09:34:59','2022-10-08 09:34:59'),
-(115,102,'2022-09-23 08:59:54','2022-09-23 08:59:54'),
-(116,96,'2021-12-30 07:51:39','2021-12-30 07:51:39'),
-(117,102,'2022-09-23 08:59:54','2022-09-23 08:59:54'),
-(118,97,'2022-01-05 21:56:06','2022-01-05 21:56:06'),
-(118,102,'2022-09-23 08:59:54','2022-09-23 08:59:54'),
-(119,98,'2022-01-07 10:00:37','2022-01-07 10:00:37'),
-(125,99,'2022-01-07 13:17:00','2022-01-07 13:17:00'),
-(126,102,'2022-09-23 08:59:54','2022-09-23 08:59:54'),
-(127,101,'2022-01-19 19:54:33','2022-01-19 19:54:33'),
-(128,100,'2022-01-19 19:53:59','2022-01-19 19:53:59'),
-(129,13,'2022-10-08 09:34:59','2022-10-08 09:34:59'),
-(129,42,'2022-09-23 08:56:53','2022-09-23 08:56:53'),
-(129,63,'2022-09-23 08:56:42','2022-09-23 08:56:42'),
-(129,65,'2022-09-23 08:57:28','2022-09-23 08:57:28'),
-(129,68,'2022-09-23 08:56:22','2022-09-23 08:56:22'),
-(129,95,'2022-09-23 08:57:38','2022-09-23 08:57:38'),
-(129,97,'2022-09-23 08:57:16','2022-09-23 08:57:16'),
-(129,102,'2022-01-19 20:07:11','2022-01-19 20:07:11'),
-(129,117,'2022-10-06 08:44:57','2022-10-06 08:44:57'),
-(129,118,'2023-02-04 12:38:52','2023-02-04 12:38:52'),
-(129,162,'2023-08-11 06:43:13','2023-08-11 06:43:13'),
-(129,191,'2023-09-16 20:26:29','2023-09-16 20:26:29'),
-(131,102,'2022-09-23 08:59:54','2022-09-23 08:59:54'),
-(131,117,'2022-10-06 08:44:57','2022-10-06 08:44:57'),
-(136,103,'2022-09-06 18:55:48','2022-09-06 18:55:48'),
-(137,104,'2022-09-06 18:56:43','2022-09-06 18:56:43'),
-(140,70,'2022-09-23 08:27:48','2022-09-23 08:27:48'),
-(142,105,'2022-09-23 09:14:24','2022-09-23 09:14:24'),
-(142,106,'2022-09-23 09:14:44','2022-09-23 09:14:44'),
-(142,107,'2022-09-23 09:14:58','2022-09-23 09:14:58'),
-(142,108,'2022-09-23 09:26:36','2022-09-23 09:26:36'),
-(142,109,'2022-09-23 09:27:51','2022-09-23 09:27:51'),
-(143,105,'2022-09-23 09:34:22','2022-09-23 09:34:22'),
-(143,106,'2022-09-23 09:34:51','2022-09-23 09:34:51'),
-(144,105,'2022-09-23 09:34:22','2022-09-23 09:34:22'),
-(144,107,'2022-09-23 09:35:01','2022-09-23 09:35:01'),
-(145,105,'2022-09-23 09:34:22','2022-09-23 09:34:22'),
-(145,109,'2022-09-23 09:35:52','2022-09-23 09:35:52'),
-(146,105,'2022-09-23 09:34:22','2022-09-23 09:34:22'),
-(146,108,'2022-09-23 09:35:40','2022-09-23 09:35:40'),
-(147,110,'2022-10-04 10:41:56','2022-10-04 10:41:56'),
-(147,111,'2022-10-04 10:43:37','2022-10-04 10:43:37'),
-(148,110,'2022-10-04 10:53:59','2022-10-04 10:53:59'),
-(148,111,'2022-10-04 10:43:37','2022-10-04 10:43:37'),
-(149,110,'2022-10-04 10:53:59','2022-10-04 10:53:59'),
-(149,112,'2022-10-04 10:44:43','2022-10-04 10:44:43'),
-(155,118,'2023-01-31 05:43:09','2023-01-31 05:43:09'),
-(158,119,'2023-02-08 20:38:31','2023-02-08 20:38:31'),
-(159,120,'2023-02-09 11:40:34','2023-02-09 11:40:34'),
-(162,123,'2023-02-13 12:45:32','2023-02-13 12:45:32'),
-(163,124,'2023-02-17 12:40:23','2023-02-17 12:40:23'),
-(165,125,'2023-03-04 10:54:22','2023-03-04 10:54:22'),
-(165,141,'2023-03-29 06:28:46','2023-03-29 06:28:46'),
-(166,127,'2023-03-04 10:55:49','2023-03-04 10:55:49'),
-(166,141,'2023-03-29 06:28:46','2023-03-29 06:28:46'),
-(167,126,'2023-03-04 10:55:08','2023-03-04 10:55:08'),
-(167,141,'2023-03-29 06:28:46','2023-03-29 06:28:46'),
-(168,128,'2023-03-06 15:33:43','2023-03-06 15:33:43'),
-(169,129,'2023-03-06 16:23:22','2023-03-06 16:23:22'),
-(169,130,'2023-03-06 16:24:34','2023-03-06 16:24:34'),
-(169,131,'2023-03-06 16:25:10','2023-03-06 16:25:10'),
-(170,129,'2023-03-06 16:29:20','2023-03-06 16:29:20'),
-(170,130,'2023-03-06 16:24:34','2023-03-06 16:24:34'),
-(171,129,'2023-03-06 16:29:20','2023-03-06 16:29:20'),
-(171,131,'2023-03-06 16:25:10','2023-03-06 16:25:10'),
-(172,132,'2023-03-16 15:32:19','2023-03-16 15:32:19'),
-(172,133,'2023-03-16 16:57:34','2023-03-16 16:57:34'),
-(173,22,'2023-03-16 16:59:10','2023-03-16 16:59:10'),
-(173,42,'2023-03-16 16:58:53','2023-03-16 16:58:53'),
-(173,132,'2023-03-16 16:58:59','2023-03-16 16:58:59'),
-(173,133,'2023-03-16 16:57:34','2023-03-16 16:57:34'),
-(173,134,'2023-03-19 09:56:33','2023-03-19 09:56:33'),
-(174,134,'2023-03-19 09:56:33','2023-03-19 09:56:33'),
-(174,137,'2023-03-19 15:10:11','2023-03-19 15:10:11'),
-(175,138,'2023-03-19 15:24:11','2023-03-19 15:24:11'),
-(176,142,'2023-03-31 21:02:56','2023-03-31 21:02:56'),
-(178,136,'2023-03-19 15:09:00','2023-03-19 15:09:00'),
-(181,140,'2023-03-28 20:52:07','2023-03-28 20:52:07'),
-(182,125,'2023-03-29 06:44:54','2023-03-29 06:44:54'),
-(182,126,'2023-03-29 06:45:08','2023-03-29 06:45:08'),
-(182,127,'2023-03-29 06:45:01','2023-03-29 06:45:01'),
-(182,141,'2023-03-29 06:28:46','2023-03-29 06:28:46'),
-(183,142,'2023-03-31 21:02:56','2023-03-31 21:02:56'),
-(184,143,'2023-04-07 18:58:31','2023-04-07 18:58:31'),
-(185,144,'2023-04-09 18:51:02','2023-04-09 18:51:02'),
-(186,145,'2023-04-19 16:17:55','2023-04-19 16:17:55'),
-(187,146,'2023-04-27 18:14:13','2023-04-27 18:14:13'),
-(189,15,'2023-05-31 12:13:37','2023-05-31 12:13:37'),
-(190,147,'2023-06-13 10:39:09','2023-06-13 10:39:09'),
-(191,148,'2023-06-14 10:12:36','2023-06-14 10:12:36'),
-(193,152,'2023-08-01 12:32:54','2023-08-01 12:32:54'),
-(194,153,'2023-08-01 12:26:00','2023-08-01 12:26:00'),
-(195,154,'2023-08-01 12:29:29','2023-08-01 12:29:29'),
-(196,149,'2023-08-01 12:34:18','2023-08-01 12:34:18'),
-(197,155,'2023-08-08 07:23:36','2023-08-08 07:23:36'),
-(198,156,'2023-08-08 07:39:47','2023-08-08 07:39:47'),
-(199,157,'2023-08-08 07:40:49','2023-08-08 07:40:49'),
-(199,160,'2023-08-08 07:42:02','2023-08-08 07:42:02'),
-(199,161,'2023-08-08 07:42:43','2023-08-08 07:42:43'),
-(200,157,'2023-08-08 07:43:47','2023-08-08 07:43:47'),
-(200,160,'2023-08-08 07:42:02','2023-08-08 07:42:02'),
-(201,157,'2023-08-08 07:43:47','2023-08-08 07:43:47'),
-(201,161,'2023-08-08 07:42:43','2023-08-08 07:42:43'),
-(202,162,'2023-08-11 06:41:15','2023-08-11 06:41:15'),
-(203,163,'2023-08-15 06:43:14','2023-08-15 06:43:14'),
-(203,164,'2023-08-15 06:43:51','2023-08-15 06:43:51'),
-(203,165,'2023-08-15 07:01:14','2023-08-15 07:01:14'),
-(203,168,'2023-08-17 06:33:44','2023-08-17 06:33:44'),
-(203,169,'2023-08-17 14:26:54','2023-08-17 14:26:54'),
-(203,171,'2023-08-22 08:08:19','2023-08-22 08:08:19'),
-(203,172,'2023-08-26 10:03:03','2023-08-26 10:03:03'),
-(204,163,'2023-08-15 06:43:14','2023-08-15 06:43:14'),
-(204,164,'2023-08-15 06:43:51','2023-08-15 06:43:51'),
-(205,163,'2023-08-18 07:47:23','2023-08-18 07:47:23'),
-(205,165,'2023-08-15 07:01:14','2023-08-15 07:01:14'),
-(206,166,'2023-08-15 07:08:13','2023-08-15 07:08:13'),
-(207,166,'2023-08-15 07:08:13','2023-08-15 07:08:13'),
-(208,167,'2023-08-15 09:34:37','2023-08-15 09:34:37'),
-(209,163,'2023-08-18 07:47:23','2023-08-18 07:47:23'),
-(209,168,'2023-08-17 06:33:44','2023-08-17 06:33:44'),
-(210,163,'2023-08-18 07:47:23','2023-08-18 07:47:23'),
-(210,169,'2023-08-17 14:26:54','2023-08-17 14:26:54'),
-(211,170,'2023-08-20 08:23:28','2023-08-20 08:23:28'),
-(213,171,'2023-08-22 08:08:19','2023-08-22 08:08:19'),
-(214,172,'2023-08-26 10:03:03','2023-08-26 10:03:03'),
-(215,173,'2023-09-01 12:26:10','2023-09-01 12:26:10'),
-(215,174,'2023-09-01 12:24:43','2023-09-01 12:24:43'),
-(215,175,'2023-09-01 12:24:25','2023-09-01 12:24:25'),
-(215,176,'2023-09-01 12:25:33','2023-09-01 12:25:33'),
-(215,177,'2023-09-01 13:31:44','2023-09-01 13:31:44'),
-(215,178,'2023-09-01 13:32:35','2023-09-01 13:32:35'),
-(215,179,'2023-09-01 13:33:32','2023-09-01 13:33:32'),
-(215,180,'2023-09-01 13:34:10','2023-09-01 13:34:10'),
-(215,181,'2023-09-01 13:34:40','2023-09-01 13:34:40'),
-(215,182,'2023-09-01 13:35:11','2023-09-01 13:35:11'),
-(218,173,'2023-09-01 12:26:10','2023-09-01 12:26:10'),
-(218,174,'2023-09-01 12:24:43','2023-09-01 12:24:43'),
-(219,173,'2023-09-01 12:26:10','2023-09-01 12:26:10'),
-(219,176,'2023-09-01 12:25:33','2023-09-01 12:25:33'),
-(220,173,'2023-09-01 12:26:10','2023-09-01 12:26:10'),
-(220,175,'2023-09-01 12:24:25','2023-09-01 12:24:25'),
-(221,173,'2023-09-01 13:36:35','2023-09-01 13:36:35'),
-(221,177,'2023-09-01 13:31:44','2023-09-01 13:31:44'),
-(222,173,'2023-09-01 13:36:35','2023-09-01 13:36:35'),
-(222,178,'2023-09-01 13:32:35','2023-09-01 13:32:35'),
-(224,173,'2023-09-01 13:36:35','2023-09-01 13:36:35'),
-(224,179,'2023-09-01 13:33:32','2023-09-01 13:33:32'),
-(225,173,'2023-09-01 13:36:35','2023-09-01 13:36:35'),
-(225,180,'2023-09-01 13:34:10','2023-09-01 13:34:10'),
-(226,173,'2023-09-01 13:36:35','2023-09-01 13:36:35'),
-(226,181,'2023-09-01 13:34:40','2023-09-01 13:34:40'),
-(227,173,'2023-09-01 13:36:35','2023-09-01 13:36:35'),
-(227,182,'2023-09-01 13:35:11','2023-09-01 13:35:11'),
-(229,183,'2023-09-04 13:41:52','2023-09-04 13:41:52'),
-(229,184,'2023-09-04 14:32:27','2023-09-04 14:32:27'),
-(230,185,'2023-09-04 16:19:04','2023-09-04 16:19:04'),
-(231,186,'2023-09-07 21:47:29','2023-09-07 21:47:29'),
-(232,190,'2023-09-15 12:08:17','2023-09-15 12:08:17'),
-(233,191,'2023-09-16 20:26:29','2023-09-16 20:26:29'),
-(234,192,'2023-09-18 08:55:42','2023-09-18 08:55:42'),
-(234,193,'2023-09-18 11:22:54','2023-09-18 11:22:54'),
-(234,194,'2023-09-18 11:23:26','2023-09-18 11:23:26'),
-(234,195,'2023-09-19 14:45:58','2023-09-19 14:45:58'),
-(235,192,'2023-09-18 11:23:49','2023-09-18 11:23:49'),
-(235,193,'2023-09-18 11:22:54','2023-09-18 11:22:54'),
-(236,192,'2023-09-18 11:23:49','2023-09-18 11:23:49'),
-(236,194,'2023-09-18 11:23:26','2023-09-18 11:23:26'),
-(237,195,'2023-09-19 14:45:58','2023-09-19 14:45:58');
-
 /*Table structure for table `admin_permissions` */
 
 DROP TABLE IF EXISTS `admin_permissions`;
 
 CREATE TABLE `admin_permissions` (
-  `id` int unsigned NOT NULL AUTO_INCREMENT,
+  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `slug` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `http_method` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `http_path` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `order` int NOT NULL DEFAULT '0',
+  `parent_id` bigint NOT NULL DEFAULT '0',
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
-  `parent_id` int NOT NULL DEFAULT '0',
-  `order` int NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
-  UNIQUE KEY `admin_permissions_name_unique` (`name`)
-) ENGINE=InnoDB AUTO_INCREMENT=238 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  UNIQUE KEY `admin_permissions_slug_unique` (`slug`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 /*Data for the table `admin_permissions` */
 
-insert  into `admin_permissions`(`id`,`name`,`slug`,`http_method`,`http_path`,`created_at`,`updated_at`,`parent_id`,`order`) values 
-(1,'All permission','*','','*',NULL,'2023-02-04 12:38:24',0,32),
-(2,'Dashboard','dashboard','GET','/',NULL,'2023-02-04 12:38:24',0,18),
-(3,'Login','auth.login','','/auth/login\r\n/auth/logout',NULL,'2023-02-04 12:38:24',0,31),
-(4,'User setting','auth.setting','GET,PUT','/auth/setting',NULL,'2023-02-04 12:38:24',0,30),
-(5,'Auth management','auth.management','','/auth/roles\r\n/auth/permissions\r\n/auth/menu\r\n/auth/logs',NULL,'2023-02-04 12:38:24',0,29),
-(11,'Admin helpers','ext.helpers',NULL,'/helpers/*','2017-09-30 10:06:26','2023-02-04 12:38:24',0,27),
-(13,'Manage Clients','mng.users','','/clients*','2019-08-20 20:48:36','2023-02-04 12:38:24',0,26),
-(14,'Manager Accounts','mng.accounts','','/accounts*','2019-08-20 20:52:33','2023-02-04 12:38:24',0,25),
-(15,'Manage Copier Signals','mng.copier_signals','','/signals*','2019-08-20 20:54:00','2023-02-04 12:38:24',0,24),
-(16,'Manage Signal Followers','mng.copier_followers','','/followers*','2019-08-20 20:54:19','2023-02-04 12:38:24',0,23),
-(18,'User Accounts','user.accounts',NULL,'/my-accounts*','2019-08-29 23:39:18','2023-02-04 12:38:24',0,34),
-(20,'Manage Experts','mng.experts','','/experts*','2019-08-30 19:41:35','2023-03-16 16:55:45',0,41),
-(21,'Settings Overriden','usr.setting','GET,PUT','/user/setting','2019-09-03 15:34:16','2023-03-16 16:55:45',0,40),
-(22,'Manage Broker Managers','mng.broker_manager','','broker-managers*','2019-09-03 17:56:06','2023-03-29 06:27:16',173,80),
-(27,'Server Statistics','admin.stats','','/stats','2019-09-05 16:25:51','2023-02-04 12:38:24',0,39),
-(29,'Manage Email Subscriptions','mng.email_subscriptions','','/emailsubscriptions*','2019-09-06 18:16:52','2023-02-04 12:38:24',0,33),
-(30,'User Email Subscriptions','user.email_subscriptions','','/myemailsubscriptions*','2019-09-06 18:46:43','2023-02-04 12:38:24',0,38),
-(31,'Manage User & Email Subscriptions','mng.user_email_subscriptions','','/useremailsubscriptions*','2019-09-06 20:45:43','2023-02-04 12:38:24',0,37),
-(32,'Manage Orders','mng.orders','','/orders*','2019-09-09 11:58:18','2023-02-04 12:38:24',0,36),
-(33,'Copier Manager Copied Orders Comparer','mng.copier_orders_copied','','/comparer*','2019-09-10 21:21:29','2023-02-04 12:38:24',0,35),
-(38,'Manage Telegram Subscriptions','mng.telegram_subscriptions','','/telegramsubscriptions*','2019-09-12 18:45:23','2023-02-04 12:38:24',0,28),
-(39,'Manage Broker Servers','mng.broker_servers','','/broker-servers*','2019-09-14 21:02:20','2023-03-29 06:27:16',173,79),
-(41,'User Expert Subscriptions','usr.expertsubscriptions','','/myexpertsubscriptions*','2019-09-19 11:01:58','2023-02-04 12:38:24',0,11),
-(42,'User Orders','usr.my_orders','','/my-trades*','2019-09-23 15:24:54','2023-02-04 12:38:24',0,10),
-(43,'User Orders Not Filled','user.orders_not_filled','','/empty','2019-09-23 17:22:26','2023-02-04 12:38:24',0,9),
-(44,'Manage Orders Not Filled','mng.orders_not_filled','','/empty','2019-09-23 17:24:31','2023-02-04 12:38:24',0,8),
-(45,'Manage Strategies','mng.strategies','','/strategies*','2019-09-26 08:46:31','2023-02-04 12:38:24',0,7),
-(46,'View API Logs','apilogs.view','','/apilogs*','2019-10-02 03:13:50','2023-02-04 12:38:24',0,6),
-(47,'Impersonatable','impersonatable','GET','/user/impersonate/*','2019-10-07 07:15:24','2023-02-04 12:38:24',0,5),
-(48,'Graphql Playground','graphql.playground','','graphiql*','2019-10-11 17:15:04','2021-11-11 21:11:09',0,1),
-(52,'Manage Files','mng.files','','/efiles*','2019-10-15 05:22:52','2023-02-04 12:38:24',0,3),
-(55,'Manage Experts Templates','mng.expert_templates','','/accounttemplates*','2019-10-16 09:18:17','2023-02-04 12:38:24',0,2),
-(61,'Manage Products','mng.products','','/products*','2020-04-25 03:12:48','2023-02-04 12:38:24',0,22),
-(64,'Manage Product Options','mng.product_options','','/poptions*','2020-04-25 03:13:52','2023-02-04 12:38:24',0,21),
-(65,'Manage Product Files','mng.product_files','','/pfiles*','2020-04-25 03:14:17','2023-02-04 12:38:24',0,20),
-(67,'Manage Campaigns','mng.campaign','','/campaigns*','2020-04-25 03:16:17','2023-02-04 12:38:24',0,19),
-(68,'Manage Product Members','mng.product_members','','/members*','2020-04-25 03:17:54','2023-02-04 12:38:24',0,12),
-(70,'Manage License Presets','mng.licensing_presets','','/presets*','2020-04-25 03:34:58','2023-02-04 12:38:24',0,17),
-(71,'Manage Email Templates','mng.emails_templates','','/email-templates*','2020-04-25 03:42:59','2023-03-29 06:27:16',129,65),
-(72,'Manage Tags','mng.tags','','/tags*','2020-04-25 12:33:44','2023-04-28 17:58:43',129,70),
-(73,'Manage Product Accounts','mng.product_accounts','','/pmaccounts*','2020-04-26 08:37:23','2023-02-04 12:38:24',0,16),
-(75,'Manage Users for Defender','mng.users4defender','','dusers*','2020-04-26 13:27:16','2023-02-04 12:38:24',0,15),
-(76,'Manage Modal','mng.modal','POST','/_handle_action_','2020-05-05 08:05:45','2023-02-04 12:38:24',0,14),
-(77,'Manage Email Settings','mng.email_settings','','/email-settings*','2020-05-08 10:50:08','2023-03-29 06:27:16',129,64),
-(78,'Manage Porfolios','mng.portfolios','','/portfolios*','2020-12-16 12:04:41','2023-02-04 12:38:24',0,13),
-(80,'User Performances','user.performances','','/my-trading-objectives*','2021-10-28 09:28:56','2023-03-16 16:55:45',0,42),
-(83,'View Traging Objectives','view.trading_objectives','','trading-objectives/view/*','2021-10-28 13:51:57','2023-03-16 16:55:45',0,43),
-(88,'Manage Objective Plans','mng.performance_plans','','/plans*','2021-11-03 16:03:15','2023-03-16 16:55:45',0,44),
-(97,'Site Settings','mng.site_settings','','dashboard-settings','2021-11-12 20:11:37','2023-03-29 06:27:16',129,66),
-(106,'View Operation Logs as Manage','mng.operation_logs','','auth/operation-logs*','2021-11-23 13:18:30','2023-03-16 16:55:45',0,45),
-(108,'DeImpersonatable','deimpersonatable','GET','user/deimpersonate*','2019-10-07 07:15:24','2023-02-04 12:38:24',0,4),
-(109,'Manage System Dashboard','mng.system_dashboard','','system-dashboard*','2021-11-26 16:30:35','2023-03-16 16:55:45',0,46),
-(110,'Account Analysis','account.analysis','','account-analysis/*','2021-11-27 17:50:52','2023-03-16 16:55:45',0,47),
-(111,'Manage Video Posts','mng.video_posts','','video-posts*','2021-12-18 21:28:11','2023-03-29 06:27:16',129,67),
-(112,'View System Logs','view.system_logs','','system-logs*','2021-12-21 12:19:05','2023-03-16 16:55:45',0,48),
-(113,'Notifications','mng.notifications','','notifications*','2021-12-22 18:27:47','2023-03-16 16:55:45',0,49),
-(114,'View Overview as Manager','mng.view_overview','','/empty','2021-12-23 14:50:56','2023-03-16 16:55:45',120,53),
-(115,'Manage Api Servers','mng.api_servers','','api-servers*','2021-12-23 15:03:55','2023-04-28 17:58:43',176,84),
-(116,'Manage Copier Followers Overview','copier.mng.followers_overview','','followers-overview*','2021-12-30 07:50:50','2023-03-16 16:55:45',0,50),
-(117,'Manage Horizon','mng.horizon','','horizon*','2022-01-04 14:00:59','2023-04-28 17:58:43',129,68),
-(118,'Manage Translator','mng.translator','','translator*','2022-01-05 21:54:18','2023-04-28 17:58:43',129,73),
-(119,'Authentication Logs','view.auth_logs','','authentication-log*','2022-01-07 09:45:39','2023-03-16 16:55:45',0,51),
-(120,'Manage Views','mng.views','','/empty','2022-01-07 12:59:07','2023-03-16 16:55:45',0,52),
-(121,'View Acccounts as Manager','mng.view_accounts','','empty*','2022-01-07 13:02:28','2023-03-16 16:55:45',120,54),
-(122,'View Trades as Manager','mng.view_positions','','empty*','2022-01-07 13:03:37','2023-03-16 16:55:45',120,55),
-(123,'View Trades History as Manager','mng.view_orders','','empty*','2022-01-07 13:04:23','2023-03-16 16:55:45',120,56),
-(124,'View Copier Errors as Manager','mng.view_copier_errors','','empty*','2022-01-07 13:05:07','2023-03-16 16:55:45',120,57),
-(125,'User Video Posts','user.video_posts','','my-video-posts*','2022-01-07 13:08:51','2023-03-29 06:27:16',0,60),
-(126,'Manage Telescope','mng.telescope','','telescope/*','2022-01-17 13:41:12','2023-04-28 17:58:43',129,69),
-(127,'Manage Helpdesk','mng.helpdesk','','tickets*','2022-01-19 19:43:01','2023-03-29 06:27:16',0,61),
-(128,'User Helpdesk','user.helpdesk','','helpdesk*','2022-01-19 19:43:32','2023-03-29 06:27:16',0,62),
-(129,'Manage Setup','mng.setup','','empty*','2022-01-19 20:06:34','2023-03-29 06:27:16',0,63),
-(130,'Manage List API Servers','mng.list_api_servers','','empty*','2022-01-25 08:44:33','2023-04-28 17:58:43',0,93),
-(131,'Manage Access Tokens','mng.access_token','','access-tokens*','2022-01-31 16:02:34','2023-04-28 17:58:43',129,71),
-(132,'User Copiers','user.copiers','','my-copiers*','2022-02-18 22:27:19','2023-04-28 17:58:43',0,94),
-(133,'User Can see Past due','user.can_see_past_due','','empty*','2022-02-21 22:03:29','2023-04-28 17:58:43',0,95),
-(134,'Manager Can See Past Due','mng.can_see_past_due','','empty*','2022-02-25 08:41:03','2023-04-28 17:58:43',0,96),
-(135,'Custom Page','custom_page','','custom*','2022-07-18 03:43:42','2023-04-28 17:58:43',0,97),
-(136,'Manage Challenges','mng.challenges','','challenges*','2022-09-06 18:53:02','2023-04-28 17:58:43',0,98),
-(137,'User Challenge Orders','user.challenge_orders','','my-challenges*','2022-09-06 18:53:35','2023-04-28 17:58:43',0,99),
-(138,'User Notifications','user.notifications','','my-notifications*','2022-09-07 08:49:55','2023-04-28 17:58:43',0,100),
-(139,'Manage Copiers','mng.copiers','','/empty','2022-09-22 21:13:21','2023-04-28 17:58:43',0,101),
-(140,'Manage Objectives','mng.objectives','','trading-objectives*','2022-09-22 21:13:55','2023-04-28 17:58:43',0,102),
-(142,'Manage Turnkey Copier','mng.turnkey_copier','','empty*','2022-09-23 09:13:44','2023-04-28 17:58:43',0,103),
-(143,'Copier Signals','mng.turnkey_copier_signals','','signals*','2022-09-23 09:29:10','2023-04-28 17:58:43',142,104),
-(144,'Copier Followers','mng.turnkey_copier_followers','','followers*','2022-09-23 09:30:26','2023-04-28 17:58:43',142,105),
-(145,'Copier Comparer','mng.turnkey_copier_comparer','','comparer*','2022-09-23 09:31:23','2023-04-28 17:58:43',142,106),
-(146,'Copier Followers Overview','mng.turnkey_copier_followers_overview','','followers-overview*','2022-09-23 09:32:09','2023-04-28 17:58:43',142,107),
-(147,'Manage Turnkey Portfolio','mng.turnkey_portfolios','','empty*','2022-10-04 10:36:31','2023-04-28 17:58:43',0,108),
-(148,'Portfolio Strategies','mng.turnkey_strategies','','strategies*','2022-10-04 10:38:06','2023-04-28 17:58:43',147,109),
-(149,'Portfolio Portfolios','mng.turnkey_portfolio_portfolios','','portfolios*','2022-10-04 10:40:08','2023-04-28 17:58:43',147,110),
-(150,'Manage Turnkey Auto Experts','mng.turnkey_auto_experts','','empty*','2022-10-04 10:46:43','2023-04-28 17:58:43',0,111),
-(151,'Files','mng.turnkey_files','','mt4-files*','2022-10-04 10:47:24','2023-04-28 17:58:43',150,112),
-(152,'Experts','mng.turnkey_experts','','experts*','2022-10-04 10:48:02','2023-04-28 17:58:43',150,113),
-(153,'Account Expert Templates','mng.turnkey_experts_templates','','account-templates*','2022-10-04 11:31:23','2023-04-28 17:58:43',150,114),
-(154,'User Manage Challenges','user.manage_challenges','','empty*','2022-10-15 14:08:49','2023-04-28 17:58:43',0,115),
-(155,'Audit Events','mng.audit','','audits*','2023-01-31 05:42:33','2023-04-28 17:58:43',129,72),
-(156,'Manage Plan Phases','mng.plan_phases','','phases*','2023-02-04 09:24:25','2023-04-28 17:58:43',0,116),
-(157,'View Performances as Manager','mng.view_performances','','/empty','2023-02-06 19:55:56','2023-03-16 16:55:45',120,58),
-(158,'Manage Help System','mng.help_system','','help-categories*,help-posts*','2023-02-08 20:35:54','2023-04-28 17:58:43',129,74),
-(159,'View Help','view.help','','help*','2023-02-09 11:40:03','2023-04-28 17:58:43',0,117),
-(162,'User Dashboard','user.dasboard','','user-dashboard*','2023-02-13 12:44:42','2023-04-28 17:58:43',0,119),
-(163,'Contest Programs','mng.contest_programs','','contest-programs*','2023-02-17 12:36:44','2023-04-28 17:58:43',0,120),
-(164,'Manager ReOrderPhases','mng.reorder_phases','','plans-phases*','2023-02-19 11:31:51','2023-04-28 17:58:43',0,121),
-(165,'Manager Leaderbord for Plans','mng.leaderboard4plans','','leaderboards-plans*','2023-03-04 10:48:46','2023-04-28 17:58:43',182,127),
-(166,'Manager Leaderboard for Account Sizes','mng.leaderboard4accounts_sizes','','leaderboards-accounts*','2023-03-04 10:49:21','2023-04-28 17:58:43',182,128),
-(167,'Manager Leaderboard for Contests','mng.leaderboard4contests','','leaderboards-contests*','2023-03-04 10:52:47','2023-04-28 17:58:43',182,129),
-(168,'User Withdraw Requests','user.withdraw_requests','','my-withdraw-requests*','2023-03-06 14:15:02','2023-04-28 17:58:43',0,122),
-(169,'Withdrawals','mng.withdraws','','empty*','2023-03-06 16:20:12','2023-04-28 17:58:43',0,123),
-(170,'Manager Withdraw Overview','mng.withdraws_oeverview','','withdraw-overview*','2023-03-06 16:20:57','2023-04-28 17:58:43',169,124),
-(171,'Manager Withdraw Requests','mng.withdraw_requests','','withdraw-requests*','2023-03-06 16:21:43','2023-04-28 17:58:43',169,125),
-(172,'Manage Broker Companies','mng.broker_companies','','broker-companies*','2023-03-16 15:31:27','2023-04-07 18:57:45',173,78),
-(173,'Manage Broker Settings','mng.broker_settings','','empty*','2023-03-16 16:52:50','2023-03-29 06:27:16',129,77),
-(174,'Manage Broker Services Overview','mng.broker_services_overview','','broker-services*','2023-03-19 09:54:36','2023-04-28 17:58:43',176,85),
-(175,'Manage Broker Service Logs','mng.broker_service_logs','','service-logs*','2023-03-19 10:35:10','2023-04-28 17:58:43',176,86),
-(176,'Services','mng.broker_services_top','','empty*','2023-03-19 14:59:52','2023-04-28 17:58:43',129,83),
-(177,'MT5 Post Services','mng.mt5_post_service','','mt5-post-services*','2023-03-19 15:06:59','2023-04-28 17:58:43',176,87),
-(178,'MT5 Mysql Services','mng.mt5_mysql_services','','mt5-mysql-services*','2023-03-19 15:07:33','2023-04-28 17:58:43',176,89),
-(180,'View API Servers Monitoring as Manager','mng.view_api_servers_monitoring','','empty*','2023-03-19 19:11:41','2023-03-29 06:27:16',120,59),
-(181,'Account Sizes','mng.account_sizes','','account-sizes*','2023-03-28 20:50:33','2023-04-28 17:58:43',129,76),
-(182,'Manager Leaderboards','mng.leaderboards','','empty*','2023-03-29 06:26:49','2023-04-28 17:58:43',0,126),
-(183,'MT5 Rest Services','mng.mt5_rest_service','','mt5-rest-services*','2023-03-19 15:06:59','2023-04-28 17:58:43',176,88),
-(184,'Manage Broker Users','mng.broker_users','','broker-users*','2023-04-07 18:56:43','2023-04-28 17:58:43',173,81),
-(185,'Import MT5 Accounts','mng.import_mt5_accounts','','import-mt5-accounts*','2023-04-09 18:50:02','2023-04-28 17:58:43',173,82),
-(186,'MT4 Nj4x Services','mng.mt4_nj4x_service','','mt4-nj4x-services*','2023-04-19 16:15:48','2023-04-28 17:58:43',176,91),
-(187,'MT4 Rest Services','mng.mt4_rest_service','','mt4-rest-services*','2023-04-27 18:13:07','2023-04-28 17:58:43',176,92),
-(188,'Manager See Account Passwords','mng.see_account_passwords','','empty*','2023-05-26 16:37:25','2023-05-26 16:37:25',0,130),
-(189,'Manager View Only Accounts','mng.accounts_view_only','GET,POST,PUT,PATCH','accounts*','2023-05-31 10:48:23','2023-05-31 15:25:21',0,131),
-(190,'Manage Domain Templates','mng.domain_templates','','domain-email-templates*','2023-06-13 10:36:31','2023-06-13 10:36:31',129,132),
-(191,'Manage Notification Subscriptions','mng.notification_subscriptions','','notification-subscriptions*','2023-06-14 10:11:24','2023-06-14 10:11:24',129,133),
-(192,'Manager Export Users','mng.export_users','','empty*','2023-06-26 20:07:01','2023-06-26 20:07:01',0,134),
-(193,'Manager Vistor Statistics','mng.visitors_stat','','auth/statistics*','2023-07-31 10:39:43','2023-07-31 10:39:43',129,135),
-(194,'Manage Broker Symbols','mng.broker_symbols','','broker-symbols*','2023-08-01 12:24:30','2023-08-01 12:25:09',129,136),
-(195,'View Broker Symbols','view.broker_symbols','','symbols*','2023-08-01 12:27:00','2023-08-01 12:27:00',0,137),
-(196,'Manage Media','mng.media','','media*','2023-08-01 12:34:04','2023-08-01 12:34:35',129,138),
-(197,'User Certificates','user.certificates','','my-certificates*','2023-08-08 07:22:15','2023-08-08 07:22:15',0,139),
-(198,'Manage Certificates','mng.user_certificates','','user-certificates*','2023-08-08 07:27:55','2023-08-08 07:27:55',0,140),
-(199,'Manage Certificate Template','mng.certificate_template','','empty*','2023-08-08 07:28:58','2023-08-08 07:28:58',0,141),
-(200,'Manage Certificate Template Username','mng.certificate_template_username','','certificate-templates*','2023-08-08 07:30:10','2023-08-08 07:30:10',199,142),
-(201,'Manage Certificate Template Challenge','mng.certificate_template_challenge','','challenge-certificates-templates*','2023-08-08 07:31:18','2023-08-08 07:36:25',199,143),
-(202,'Manage Signatures','mng.signatures','','signatures*','2023-08-11 06:07:39','2023-08-11 06:07:39',129,144),
-(203,'Payment Gateway','mng.payment_gateways','','empty*','2023-08-15 06:41:36','2023-08-15 06:41:36',0,145),
-(204,'Manage Payment Gateway BtcPay','mng.payment_gateway_btcpay','','payment-gateway-btcpay*','2023-08-15 06:42:16','2023-08-15 06:42:16',203,146),
-(205,'Manage Payment Gateway CoinPayments','mng.payment_gateway_coinpayments','','payment-gateway-coinpayments*','2023-08-15 07:00:18','2023-08-15 07:00:18',203,147),
-(206,'Manage Payment Transactions','mng.payment_transaction','','empty*','2023-08-15 07:05:23','2023-08-15 07:05:54',0,148),
-(207,'Manage Payment Transactions Challenge','mng.payment_transaction_challenge','','challenge-orders*','2023-08-15 07:06:42','2023-08-15 07:06:42',206,149),
-(208,'User Payment Transaction Challenge','user.payment_transaction_challenge','','my-challenge-orders*','2023-08-15 09:33:10','2023-08-15 09:33:10',0,150),
-(209,'Manage Payment Gateway Sqala','mng.payment_gateway_sqala','','payment-gateway-sqala*','2023-08-17 06:32:08','2023-08-17 06:32:08',203,151),
-(210,'Manager Payment Gateway LetKnowPay','mng.payment_gateway_letknowpay','','payment-gateway-letknowpay*','2023-08-17 14:26:00','2023-08-17 14:26:00',203,152),
-(211,'User Dashboard Templates','mng.userdashboard_templates','','userdashboard-templates*','2023-08-20 08:22:32','2023-08-20 08:22:32',0,153),
-(212,'Manage D4T Support','mng.d4t_support','','empty*','2023-08-21 14:28:21','2023-08-21 14:28:21',0,154),
-(213,'Manage Payment Gateway CoinGate','mng.payment_gateway_coingate','','payment-gateway-coingate*','2023-08-22 08:07:22','2023-08-22 08:07:22',203,155),
-(214,'Manage Payment Gateway Fake','mng.payment_gateway_fake','','payment-gateway-fake*','2023-08-26 10:02:01','2023-08-26 10:02:01',203,156),
-(215,'Affiliate Portal','mng.affiliate_portal','','empty*','2023-08-31 15:06:06','2023-08-31 15:06:06',0,157),
-(218,'Referral Programs','mng.affiliate_portal_programs','','affiliate-portal/programs*','2023-08-31 15:07:08','2023-09-01 12:23:02',215,158),
-(219,'Participants','mng.affiliate_portal_participants','','affiliate-portal/participants*','2023-08-31 15:13:07','2023-09-01 12:22:48',215,159),
-(220,'Vistis','mng.affiliate_portal_visits','','affiliate-portal/visits*','2023-09-01 12:22:33','2023-09-01 12:22:33',215,160),
-(221,'User Links','user.affiliate_portal_links','','affiliate-portal/links*','2023-09-01 13:27:14','2023-09-01 13:27:14',215,161),
-(222,'Overview','user.affiliate_portal_overview','','affiliate-portal/overview*','2023-09-01 13:27:43','2023-09-01 13:27:43',215,162),
-(224,'Referrals','user.affiliate_portal_referrals','','affiliate-portal/referrals*','2023-09-01 13:29:16','2023-09-01 13:29:16',215,163),
-(225,'Payouts','user.affiliate_portal_payouts','','affiliate-portal/payouts*','2023-09-01 13:29:50','2023-09-01 13:29:50',215,164),
-(226,'Creatives','user.affiliate_portal_creatives','','affiliate-portal/creatives*','2023-09-01 13:30:22','2023-09-01 13:30:22',215,165),
-(227,'Visits','user.affiliate_portal_visits','','affiliate-portal/my-visits*','2023-09-01 13:30:51','2023-09-01 13:30:51',215,166),
-(228,'Become Affiliate','user.become_affiliate','','affiliate-portal/links/setup*','2023-09-01 13:43:30','2023-09-01 14:32:43',215,167),
-(229,'SVG Icons','mng.svg_icons','','svg-icons*','2023-09-04 13:41:14','2023-09-04 13:41:14',129,168),
-(230,'Domain Menu','mng.domain_menu','','auth/domain-menu*','2023-09-04 16:18:04','2023-09-04 16:18:04',129,169),
-(231,'System Notifications','mng.system_notifications','','system-notifications*','2023-09-07 21:46:16','2023-09-07 21:46:16',129,170),
-(232,'Controller Help Topics','mng.controller_help_topics','','controller-help-topics*','2023-09-15 12:07:40','2023-09-15 12:07:40',0,171),
-(233,'Email Departments','mng.email_departments','','email-departments*','2023-09-16 20:25:55','2023-09-16 20:25:55',129,172),
-(234,'Emails','mng.emails','','emails*','2023-09-18 08:55:13','2023-09-18 08:55:13',0,173),
-(235,'Manager Mail Inbox','mng.email_inbox','','email-inbox*','2023-09-18 11:21:38','2023-09-18 11:21:38',234,174),
-(236,'Manager Emails Sent','mng.emails_sent','','email-sent*','2023-09-18 11:22:16','2023-09-18 11:22:16',234,175),
-(237,'Manager Trashed Emails','mng.email_trashed','','email-trashed*','2023-09-19 14:45:24','2023-09-19 14:45:24',234,176);
+insert  into `admin_permissions`(`id`,`name`,`slug`,`http_method`,`http_path`,`order`,`parent_id`,`created_at`,`updated_at`) values 
+(1,'Auth management','auth-management','','',1,0,'2023-10-26 13:10:19',NULL),
+(2,'Users','users','','/auth/users*',2,1,'2023-10-26 13:10:19',NULL),
+(3,'Roles','roles','','/auth/roles*',3,1,'2023-10-26 13:10:19',NULL),
+(4,'Permissions','permissions','','/auth/permissions*',4,1,'2023-10-26 13:10:19',NULL),
+(5,'Menu','menu','','/auth/menu*',5,1,'2023-10-26 13:10:19',NULL),
+(6,'Extension','extension','','/auth/extensions*',6,1,'2023-10-26 13:10:19',NULL);
 
 /*Table structure for table `admin_role_menu` */
 
 DROP TABLE IF EXISTS `admin_role_menu`;
 
 CREATE TABLE `admin_role_menu` (
-  `role_id` int NOT NULL,
-  `menu_id` int NOT NULL,
+  `role_id` bigint NOT NULL,
+  `menu_id` bigint NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`role_id`,`menu_id`)
+  UNIQUE KEY `admin_role_menu_role_id_menu_id_unique` (`role_id`,`menu_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 /*Data for the table `admin_role_menu` */
-
-insert  into `admin_role_menu`(`role_id`,`menu_id`,`created_at`,`updated_at`) values 
-(1,2,NULL,NULL),
-(1,6,NULL,NULL),
-(1,38,NULL,NULL),
-(7,19,NULL,NULL),
-(12,57,NULL,NULL);
 
 /*Table structure for table `admin_role_permissions` */
 
 DROP TABLE IF EXISTS `admin_role_permissions`;
 
 CREATE TABLE `admin_role_permissions` (
-  `role_id` int NOT NULL,
-  `permission_id` int NOT NULL,
+  `role_id` bigint NOT NULL,
+  `permission_id` bigint NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`role_id`,`permission_id`)
+  UNIQUE KEY `admin_role_permissions_role_id_permission_id_unique` (`role_id`,`permission_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 /*Data for the table `admin_role_permissions` */
-
-insert  into `admin_role_permissions`(`role_id`,`permission_id`,`created_at`,`updated_at`) values 
-(1,1,NULL,NULL),
-(1,47,NULL,NULL),
-(3,2,NULL,NULL),
-(3,3,NULL,NULL),
-(3,47,NULL,NULL),
-(3,108,'2023-04-10 17:26:06','2023-04-10 17:26:06'),
-(4,2,NULL,NULL),
-(4,3,NULL,NULL),
-(4,13,NULL,NULL),
-(4,14,NULL,NULL),
-(4,22,NULL,NULL),
-(4,47,NULL,NULL),
-(7,18,NULL,NULL),
-(7,42,NULL,NULL),
-(7,47,NULL,NULL),
-(7,108,'2021-11-29 16:38:22','2021-11-29 16:38:22'),
-(7,110,'2021-12-28 18:23:43','2021-12-28 18:23:43'),
-(7,119,'2022-01-07 09:52:18','2022-01-07 09:52:18'),
-(7,125,'2022-01-07 13:11:38','2022-01-07 13:11:38'),
-(7,128,'2022-01-19 19:53:13','2022-01-19 19:53:13'),
-(7,133,'2022-02-21 17:05:14','2022-02-21 17:05:14'),
-(7,135,'2022-07-18 03:44:07','2022-07-18 03:44:07'),
-(9,13,'2021-11-26 16:32:15','2021-11-26 16:32:15'),
-(9,14,'2021-11-26 16:32:15','2021-11-26 16:32:15'),
-(9,15,NULL,NULL),
-(9,16,NULL,NULL),
-(9,32,NULL,NULL),
-(9,33,NULL,NULL),
-(9,39,NULL,NULL),
-(9,45,'2022-09-22 20:06:32','2022-09-22 20:06:32'),
-(9,47,NULL,NULL),
-(9,71,'2021-11-29 20:22:24','2021-11-29 20:22:24'),
-(9,72,'2022-01-28 17:13:37','2022-01-28 17:13:37'),
-(9,77,'2021-11-29 20:22:24','2021-11-29 20:22:24'),
-(9,78,'2022-09-22 20:11:28','2022-09-22 20:11:28'),
-(9,97,'2021-11-30 10:56:15','2021-11-30 10:56:15'),
-(9,106,'2021-11-26 16:32:15','2021-11-26 16:32:15'),
-(9,108,'2021-11-26 16:32:15','2021-11-26 16:32:15'),
-(9,109,'2021-11-26 16:32:15','2021-11-26 16:32:15'),
-(9,110,'2021-11-27 17:51:52','2021-11-27 17:51:52'),
-(9,111,'2022-01-07 13:11:14','2022-01-07 13:11:14'),
-(9,112,'2021-12-23 14:51:58','2021-12-23 14:51:58'),
-(9,113,'2021-12-22 18:30:31','2021-12-22 18:30:31'),
-(9,114,'2021-12-23 14:51:58','2021-12-23 14:51:58'),
-(9,115,'2021-12-23 15:04:25','2021-12-23 15:04:25'),
-(9,116,'2022-01-06 18:25:12','2022-01-06 18:25:12'),
-(9,117,'2022-01-04 14:01:30','2022-01-04 14:01:30'),
-(9,118,'2022-01-05 21:54:48','2022-01-05 21:54:48'),
-(9,119,'2022-01-07 09:51:56','2022-01-07 09:51:56'),
-(9,121,'2022-01-07 13:11:14','2022-01-07 13:11:14'),
-(9,122,'2022-01-07 13:11:14','2022-01-07 13:11:14'),
-(9,123,'2022-01-07 13:11:14','2022-01-07 13:11:14'),
-(9,124,'2022-01-07 13:11:14','2022-01-07 13:11:14'),
-(9,126,'2022-01-17 13:41:50','2022-01-17 13:41:50'),
-(9,127,'2022-01-19 19:44:36','2022-01-19 19:44:36'),
-(9,130,'2022-02-03 09:56:45','2022-02-03 09:56:45'),
-(9,131,'2022-09-23 08:47:32','2022-09-23 08:47:32'),
-(9,134,'2022-02-25 03:43:26','2022-02-25 03:43:26'),
-(9,139,'2022-09-23 08:47:32','2022-09-23 08:47:32'),
-(9,155,'2023-02-11 08:54:36','2023-02-11 08:54:36'),
-(9,158,'2023-02-11 08:54:36','2023-02-11 08:54:36'),
-(12,2,NULL,NULL),
-(12,21,NULL,NULL),
-(12,47,NULL,NULL),
-(12,61,NULL,NULL),
-(12,64,NULL,NULL),
-(12,65,NULL,NULL),
-(12,67,NULL,NULL),
-(12,68,NULL,NULL),
-(12,70,NULL,NULL),
-(12,71,NULL,NULL),
-(12,72,NULL,NULL),
-(12,73,NULL,NULL),
-(12,75,NULL,NULL),
-(12,76,NULL,NULL),
-(12,202,'2023-08-11 06:08:16','2023-08-11 06:08:16'),
-(15,13,'2021-12-23 20:37:30','2021-12-23 20:37:30'),
-(15,14,'2021-12-23 20:37:30','2021-12-23 20:37:30'),
-(15,71,'2022-09-06 19:09:27','2022-09-06 19:09:27'),
-(15,72,'2022-09-23 08:49:40','2022-09-23 08:49:40'),
-(15,77,'2022-09-06 19:09:27','2022-09-06 19:09:27'),
-(15,88,'2021-11-03 16:06:01','2021-11-03 16:06:01'),
-(15,97,'2022-01-04 14:02:08','2022-01-04 14:02:08'),
-(15,109,'2022-09-23 08:49:40','2022-09-23 08:49:40'),
-(15,110,'2021-12-24 13:16:52','2021-12-24 13:16:52'),
-(15,111,'2022-09-14 19:26:40','2022-09-14 19:26:40'),
-(15,112,'2021-12-23 15:04:51','2021-12-23 15:04:51'),
-(15,113,'2021-12-23 15:04:51','2021-12-23 15:04:51'),
-(15,114,'2021-12-23 15:04:51','2021-12-23 15:04:51'),
-(15,117,'2022-01-04 14:01:50','2022-01-04 14:01:50'),
-(15,118,'2022-09-14 19:26:40','2022-09-14 19:26:40'),
-(15,119,'2022-09-14 19:25:42','2022-09-14 19:25:42'),
-(15,121,'2022-09-23 08:51:01','2022-09-23 08:51:01'),
-(15,122,'2022-09-23 08:51:01','2022-09-23 08:51:01'),
-(15,123,'2022-09-23 08:51:01','2022-09-23 08:51:01'),
-(15,126,'2022-09-23 08:49:40','2022-09-23 08:49:40'),
-(15,127,'2022-09-06 18:59:38','2022-09-06 18:59:38'),
-(15,130,'2023-04-05 14:07:11','2023-04-05 14:07:11'),
-(15,131,'2022-09-06 18:59:38','2022-09-06 18:59:38'),
-(15,136,'2022-09-06 18:59:08','2022-09-06 18:59:08'),
-(15,140,'2022-09-22 21:15:36','2022-09-22 21:15:36'),
-(15,156,'2023-02-04 09:25:32','2023-02-04 09:25:32'),
-(15,157,'2023-02-06 19:58:27','2023-02-06 19:58:27'),
-(15,158,'2023-02-08 20:36:10','2023-02-08 20:36:10'),
-(15,163,'2023-02-17 12:37:14','2023-02-17 12:37:14'),
-(15,164,'2023-02-19 11:32:13','2023-02-19 11:32:13'),
-(15,165,'2023-03-29 06:27:52','2023-03-29 06:27:52'),
-(15,166,'2023-03-29 06:27:52','2023-03-29 06:27:52'),
-(15,167,'2023-03-29 06:27:52','2023-03-29 06:27:52'),
-(15,170,'2023-03-06 16:22:17','2023-03-06 16:22:17'),
-(15,171,'2023-03-06 16:22:17','2023-03-06 16:22:17'),
-(15,181,'2023-03-28 20:51:11','2023-03-28 20:51:11'),
-(15,191,'2023-06-14 10:12:00','2023-06-14 10:12:00'),
-(15,193,'2023-07-31 10:40:26','2023-07-31 10:40:26'),
-(15,194,'2023-08-01 12:24:52','2023-08-01 12:24:52'),
-(15,195,'2023-08-01 12:27:41','2023-08-01 12:27:41'),
-(15,198,'2023-08-08 07:43:30','2023-08-08 07:43:30'),
-(15,200,'2023-08-08 07:37:34','2023-08-08 07:37:34'),
-(15,201,'2023-08-08 07:37:34','2023-08-08 07:37:34'),
-(15,202,'2023-08-11 06:43:57','2023-08-11 06:43:57'),
-(15,204,'2023-08-15 06:42:32','2023-08-15 06:42:32'),
-(15,205,'2023-08-15 07:00:30','2023-08-15 07:00:30'),
-(15,207,'2023-08-15 07:07:01','2023-08-15 07:07:01'),
-(15,209,'2023-08-17 06:32:22','2023-08-17 06:32:22'),
-(15,210,'2023-08-17 14:26:15','2023-08-17 14:26:15'),
-(15,211,'2023-08-20 08:22:48','2023-08-20 08:22:48'),
-(15,212,'2023-08-21 14:28:37','2023-08-21 14:28:37'),
-(15,213,'2023-08-22 08:07:38','2023-08-22 08:07:38'),
-(15,214,'2023-08-26 10:02:22','2023-08-26 10:02:22'),
-(15,218,'2023-08-31 15:07:56','2023-08-31 15:07:56'),
-(15,219,'2023-08-31 15:58:15','2023-08-31 15:58:15'),
-(15,220,'2023-09-01 12:26:39','2023-09-01 12:26:39'),
-(15,229,'2023-09-04 13:42:17','2023-09-04 13:42:17'),
-(15,230,'2023-09-04 16:18:19','2023-09-04 16:18:19'),
-(15,231,'2023-09-07 21:46:34','2023-09-07 21:46:34'),
-(15,233,'2023-09-16 20:27:05','2023-09-16 20:27:05'),
-(15,235,'2023-09-18 11:24:02','2023-09-18 11:24:02'),
-(15,236,'2023-09-18 11:24:02','2023-09-18 11:24:02'),
-(15,237,'2023-09-19 14:46:11','2023-09-19 14:46:11'),
-(16,18,'2021-12-23 20:49:11','2021-12-23 20:49:11'),
-(16,80,'2021-10-28 09:30:42','2021-10-28 09:30:42'),
-(16,83,'2021-10-28 13:52:20','2021-10-28 13:52:20'),
-(16,108,'2022-09-07 12:05:07','2022-09-07 12:05:07'),
-(16,128,'2022-09-06 19:00:07','2022-09-06 19:00:07'),
-(16,137,'2022-09-06 19:00:07','2022-09-06 19:00:07'),
-(16,138,'2022-09-07 08:53:56','2022-09-07 08:53:56'),
-(16,154,'2023-08-15 09:38:59','2023-08-15 09:38:59'),
-(16,159,'2023-02-09 11:40:54','2023-02-09 11:40:54'),
-(16,162,'2023-02-13 12:44:57','2023-02-13 12:44:57'),
-(16,168,'2023-03-06 15:44:57','2023-03-06 15:44:57'),
-(16,195,'2023-08-01 12:27:27','2023-08-01 12:27:27'),
-(16,197,'2023-08-08 07:22:47','2023-08-08 07:22:47'),
-(16,208,'2023-08-15 09:33:37','2023-08-15 09:33:37'),
-(16,228,'2023-09-01 13:51:48','2023-09-01 13:51:48'),
-(18,13,'2022-09-23 08:05:26','2022-09-23 08:05:26'),
-(18,14,'2022-09-23 08:05:26','2022-09-23 08:05:26'),
-(18,32,'2022-09-23 08:05:26','2022-09-23 08:05:26'),
-(18,39,'2021-11-03 22:30:24','2021-11-03 22:30:24'),
-(18,44,'2022-09-23 08:05:26','2022-09-23 08:05:26'),
-(18,46,'2022-09-23 08:05:26','2022-09-23 08:05:26'),
-(18,47,'2022-09-23 08:05:26','2022-09-23 08:05:26'),
-(18,71,'2022-09-23 08:05:26','2022-09-23 08:05:26'),
-(18,72,'2022-09-23 08:05:26','2022-09-23 08:05:26'),
-(18,77,'2022-09-23 08:05:26','2022-09-23 08:05:26'),
-(18,88,'2022-09-23 08:05:26','2022-09-23 08:05:26'),
-(18,97,'2022-09-23 08:05:26','2022-09-23 08:05:26'),
-(18,106,'2022-09-23 08:05:26','2022-09-23 08:05:26'),
-(18,108,'2022-09-23 08:05:26','2022-09-23 08:05:26'),
-(18,109,'2022-09-23 08:05:26','2022-09-23 08:05:26'),
-(18,110,'2022-09-23 20:06:38','2022-09-23 20:06:38'),
-(18,111,'2022-09-23 08:05:26','2022-09-23 08:05:26'),
-(18,112,'2022-09-23 08:05:26','2022-09-23 08:05:26'),
-(18,113,'2022-09-23 08:05:26','2022-09-23 08:05:26'),
-(18,114,'2022-09-23 08:05:26','2022-09-23 08:05:26'),
-(18,115,'2022-09-23 08:05:26','2022-09-23 08:05:26'),
-(18,117,'2022-09-23 08:05:26','2022-09-23 08:05:26'),
-(18,118,'2022-09-23 08:05:26','2022-09-23 08:05:26'),
-(18,119,'2022-09-23 08:05:26','2022-09-23 08:05:26'),
-(18,121,'2022-09-23 08:05:26','2022-09-23 08:05:26'),
-(18,122,'2022-09-23 08:05:26','2022-09-23 08:05:26'),
-(18,123,'2022-09-23 08:05:26','2022-09-23 08:05:26'),
-(18,124,'2022-09-23 08:05:26','2022-09-23 08:05:26'),
-(18,126,'2022-09-23 08:05:26','2022-09-23 08:05:26'),
-(18,127,'2022-09-23 08:05:26','2022-09-23 08:05:26'),
-(18,131,'2022-09-23 08:05:26','2022-09-23 08:05:26'),
-(18,136,'2022-09-23 08:05:26','2022-09-23 08:05:26'),
-(18,139,'2022-09-23 08:05:26','2022-09-23 08:05:26'),
-(18,140,'2022-09-23 08:05:26','2022-09-23 08:05:26'),
-(18,143,'2022-09-23 09:36:37','2022-09-23 09:36:37'),
-(18,144,'2022-09-23 09:36:37','2022-09-23 09:36:37'),
-(18,145,'2022-09-23 09:36:37','2022-09-23 09:36:37'),
-(18,146,'2022-09-23 09:36:37','2022-09-23 09:36:37'),
-(18,148,'2022-10-04 10:48:41','2022-10-04 10:48:41'),
-(18,149,'2022-10-04 10:48:41','2022-10-04 10:48:41'),
-(18,151,'2022-10-04 10:48:41','2022-10-04 10:48:41'),
-(18,152,'2022-10-04 10:48:41','2022-10-04 10:48:41'),
-(18,153,'2022-10-04 11:32:26','2022-10-04 11:32:26'),
-(18,155,'2023-02-11 08:53:54','2023-02-11 08:53:54'),
-(18,156,'2023-02-11 08:53:54','2023-02-11 08:53:54'),
-(18,157,'2023-02-11 08:57:02','2023-02-11 08:57:02'),
-(18,158,'2023-02-11 08:53:54','2023-02-11 08:53:54'),
-(19,2,'2023-03-19 09:44:01','2023-03-19 09:44:01'),
-(19,3,'2023-03-19 09:44:01','2023-03-19 09:44:01'),
-(19,22,'2023-03-19 09:23:35','2023-03-19 09:23:35'),
-(19,39,'2023-03-19 09:23:35','2023-03-19 09:23:35'),
-(19,47,'2023-03-19 09:44:01','2023-03-19 09:44:01'),
-(19,108,'2023-03-19 09:44:01','2023-03-19 09:44:01'),
-(19,109,'2023-03-19 19:08:54','2023-03-19 19:08:54'),
-(19,112,'2023-04-01 12:05:23','2023-04-01 12:05:23'),
-(19,113,'2023-03-19 09:44:01','2023-03-19 09:44:01'),
-(19,115,'2023-03-19 10:25:44','2023-03-19 10:25:44'),
-(19,117,'2023-04-05 14:01:44','2023-04-05 14:01:44'),
-(19,155,'2023-04-29 07:36:06','2023-04-29 07:36:06'),
-(19,172,'2023-03-19 09:23:35','2023-03-19 09:23:35'),
-(19,174,'2023-03-19 09:55:16','2023-03-19 09:55:16'),
-(19,175,'2023-03-19 10:35:25','2023-03-19 10:35:25'),
-(19,177,'2023-03-19 15:08:01','2023-03-19 15:08:01'),
-(19,178,'2023-03-19 15:08:01','2023-03-19 15:08:01'),
-(19,180,'2023-03-19 19:12:04','2023-03-19 19:12:04'),
-(19,181,'2023-04-28 17:58:00','2023-04-28 17:58:00'),
-(19,183,'2023-03-31 21:02:36','2023-03-31 21:02:36'),
-(19,184,'2023-04-07 18:57:03','2023-04-07 18:57:03'),
-(19,185,'2023-04-09 18:50:14','2023-04-09 18:50:14'),
-(19,186,'2023-04-19 16:16:16','2023-04-19 16:16:16'),
-(19,187,'2023-04-27 18:13:29','2023-04-27 18:13:29'),
-(19,190,'2023-06-13 10:37:43','2023-06-13 10:37:43'),
-(19,194,'2023-08-02 10:16:21','2023-08-02 10:16:21'),
-(19,195,'2023-08-02 10:21:49','2023-08-02 10:21:49'),
-(19,202,'2023-08-11 06:42:45','2023-08-11 06:42:45'),
-(19,232,'2023-09-15 12:08:38','2023-09-15 12:08:38'),
-(20,2,'2023-04-10 17:35:16','2023-04-10 17:35:16'),
-(20,3,'2023-04-10 17:35:16','2023-04-10 17:35:16'),
-(20,47,'2023-04-10 17:35:16','2023-04-10 17:35:16'),
-(20,108,'2023-04-10 17:35:16','2023-04-10 17:35:16'),
-(20,192,'2023-06-26 20:07:28','2023-06-26 20:07:28'),
-(21,3,'2023-04-12 15:02:30','2023-04-12 15:02:30'),
-(21,13,'2023-04-12 15:02:30','2023-04-12 15:02:30'),
-(21,140,'2023-05-29 14:24:01','2023-05-29 14:24:01'),
-(21,181,'2023-05-29 14:24:01','2023-05-29 14:24:01'),
-(21,189,'2023-05-31 10:54:09','2023-05-31 10:54:09'),
-(22,13,'2023-04-12 15:03:27','2023-04-12 15:03:27'),
-(22,72,'2023-04-12 15:03:27','2023-04-12 15:03:27'),
-(22,88,'2023-05-29 14:26:21','2023-05-29 14:26:21'),
-(22,127,'2023-04-12 15:03:27','2023-04-12 15:03:27'),
-(22,140,'2023-05-29 14:26:21','2023-05-29 14:26:21'),
-(22,170,'2023-04-12 15:03:27','2023-04-12 15:03:27'),
-(22,171,'2023-04-12 15:03:27','2023-04-12 15:03:27'),
-(22,181,'2023-05-29 14:26:21','2023-05-29 14:26:21'),
-(22,189,'2023-05-31 10:53:55','2023-05-31 10:53:55'),
-(23,13,'2023-04-12 15:05:05','2023-04-12 15:05:05'),
-(23,127,'2023-04-12 15:05:05','2023-04-12 15:05:05'),
-(23,140,'2023-04-12 15:05:05','2023-04-12 15:05:05'),
-(23,170,'2023-05-29 14:22:17','2023-05-29 14:22:17'),
-(23,171,'2023-05-29 14:22:17','2023-05-29 14:22:17'),
-(23,189,'2023-05-31 10:53:39','2023-05-31 10:53:39'),
-(24,13,'2023-04-12 15:06:37','2023-04-12 15:06:37'),
-(24,127,'2023-04-12 15:06:37','2023-04-12 15:06:37'),
-(24,140,'2023-04-12 15:06:37','2023-04-12 15:06:37'),
-(24,170,'2023-04-12 15:06:37','2023-04-12 15:06:37'),
-(24,171,'2023-04-12 15:06:37','2023-04-12 15:06:37'),
-(24,189,'2023-05-31 10:53:17','2023-05-31 10:53:17'),
-(25,2,'2023-05-31 10:51:38','2023-05-31 10:51:38'),
-(25,13,'2023-05-31 10:51:38','2023-05-31 10:51:38'),
-(25,14,'2023-05-31 10:51:38','2023-05-31 10:51:38'),
-(25,72,'2023-05-31 10:51:38','2023-05-31 10:51:38'),
-(25,88,'2023-05-31 10:51:38','2023-05-31 10:51:38'),
-(25,127,'2023-05-31 10:51:38','2023-05-31 10:51:38'),
-(25,140,'2023-05-31 10:51:38','2023-05-31 10:51:38'),
-(25,170,'2023-05-31 10:51:38','2023-05-31 10:51:38'),
-(25,171,'2023-05-31 10:51:38','2023-05-31 10:51:38'),
-(25,181,'2023-05-31 10:51:38','2023-05-31 10:51:38'),
-(25,188,'2023-05-31 10:57:17','2023-05-31 10:57:17'),
-(26,18,'2023-06-14 15:29:12','2023-06-14 15:29:12'),
-(26,80,'2023-06-14 15:29:12','2023-06-14 15:29:12'),
-(26,83,'2023-06-14 15:29:12','2023-06-14 15:29:12'),
-(26,137,'2023-06-14 15:29:12','2023-06-14 15:29:12'),
-(26,138,'2023-06-14 15:29:12','2023-06-14 15:29:12'),
-(26,159,'2023-06-14 15:29:12','2023-06-14 15:29:12'),
-(26,162,'2023-06-14 15:29:12','2023-06-14 15:29:12'),
-(27,13,'2023-06-19 15:14:34','2023-06-19 15:14:34'),
-(27,14,'2023-06-19 15:14:34','2023-06-19 15:14:34'),
-(27,71,'2023-06-19 15:14:34','2023-06-19 15:14:34'),
-(27,77,'2023-06-19 15:14:34','2023-06-19 15:14:34'),
-(27,88,'2023-06-19 15:14:34','2023-06-19 15:14:34'),
-(27,97,'2023-06-19 15:14:34','2023-06-19 15:14:34'),
-(27,109,'2023-06-19 15:17:42','2023-06-19 15:17:42'),
-(27,112,'2023-06-19 15:18:39','2023-06-19 15:18:39'),
-(27,114,'2023-06-19 15:18:06','2023-06-19 15:18:06'),
-(27,136,'2023-06-19 15:14:34','2023-06-19 15:14:34'),
-(27,140,'2023-06-19 15:14:34','2023-06-19 15:14:34'),
-(27,181,'2023-06-19 15:20:00','2023-06-19 15:20:00'),
-(28,18,'2023-06-19 15:22:29','2023-06-19 15:22:29'),
-(28,80,'2023-06-19 15:22:29','2023-06-19 15:22:29'),
-(28,83,'2023-06-19 15:23:14','2023-06-19 15:23:14'),
-(28,137,'2023-06-19 15:22:29','2023-06-19 15:22:29'),
-(28,162,'2023-06-19 15:22:29','2023-06-19 15:22:29'),
-(29,221,'2023-09-01 13:51:25','2023-09-01 13:51:25'),
-(29,222,'2023-09-01 13:51:25','2023-09-01 13:51:25'),
-(29,224,'2023-09-01 13:51:25','2023-09-01 13:51:25'),
-(29,225,'2023-09-01 13:51:25','2023-09-01 13:51:25'),
-(29,226,'2023-09-01 13:51:25','2023-09-01 13:51:25'),
-(29,227,'2023-09-01 13:51:25','2023-09-01 13:51:25'),
-(29,228,'2023-09-01 13:51:25','2023-09-01 13:51:25');
 
 /*Table structure for table `admin_role_users` */
 
 DROP TABLE IF EXISTS `admin_role_users`;
 
 CREATE TABLE `admin_role_users` (
-  `role_id` int NOT NULL,
-  `user_id` int unsigned NOT NULL,
+  `role_id` bigint NOT NULL,
+  `user_id` bigint NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`role_id`,`user_id`),
-  KEY `user_id` (`user_id`),
-  CONSTRAINT `admin_role_users_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `admin_users` (`id`) ON DELETE CASCADE
+  UNIQUE KEY `admin_role_users_role_id_user_id_unique` (`role_id`,`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 /*Data for the table `admin_role_users` */
 
 insert  into `admin_role_users`(`role_id`,`user_id`,`created_at`,`updated_at`) values 
-(1,1,NULL,NULL);
+(1,1,'2023-10-26 13:10:19','2023-10-26 13:10:19');
 
 /*Table structure for table `admin_roles` */
 
 DROP TABLE IF EXISTS `admin_roles`;
 
 CREATE TABLE `admin_roles` (
-  `id` int unsigned NOT NULL AUTO_INCREMENT,
+  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `slug` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
-  `start_page` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE KEY `admin_roles_name_unique` (`name`)
-) ENGINE=InnoDB AUTO_INCREMENT=30 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  UNIQUE KEY `admin_roles_slug_unique` (`slug`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 /*Data for the table `admin_roles` */
 
-insert  into `admin_roles`(`id`,`name`,`slug`,`created_at`,`updated_at`,`start_page`) values 
-(1,'Administrator','administrator','2017-07-30 11:24:38','2017-07-30 11:24:38','clients'),
-(3,'User','user','2017-07-30 11:45:44','2017-07-30 11:45:44',NULL),
-(4,'Manager MT4 API','manager_mt4_api','2019-09-03 17:57:46','2019-09-11 13:45:45',NULL),
-(7,'User Copier','user_copier','2019-09-12 09:47:15','2021-12-23 20:50:36',NULL),
-(9,'Manager Copier','manager_copier','2019-09-14 23:20:45','2021-11-26 16:32:15',NULL),
-(12,'Manager Defender','manager_defender','2019-10-15 06:42:26','2021-11-01 18:44:30',NULL),
-(15,'Manager Performances','manager_performances','2021-10-26 19:07:52','2021-12-23 20:37:30','system-dashboard'),
-(16,'User Performances','user_performances','2021-10-28 09:30:42','2021-10-28 13:17:06','user-dashboard'),
-(18,'Manager Copier&Performance&Portfolio&Experts','manager_turnkey','2022-09-23 08:05:26','2022-10-04 10:48:39','system-dashboard'),
-(19,'DevOps Performances','devops_performances','2023-03-19 09:23:35','2023-03-19 09:23:48',NULL),
-(20,'Manager','manager','2023-04-10 17:35:16','2023-04-10 17:35:16',NULL),
-(21,'Sale Expert','sale_expert','2023-04-12 15:02:30','2023-04-12 15:02:30',NULL),
-(22,'Sale Manager','sale_manager','2023-04-12 15:03:27','2023-04-12 15:03:27',NULL),
-(23,'Analyse Expert','analyse_expert','2023-04-12 15:05:05','2023-04-12 15:05:05',NULL),
-(24,'Financial Expert','financial_expert','2023-04-12 15:06:37','2023-04-12 15:06:37',NULL),
-(25,'Mr Aghapour','aghapour','2023-05-31 10:51:38','2023-05-31 10:51:38',NULL),
-(26,'User Performances for SGB','user_performances4sgb','2023-06-14 15:29:12','2023-06-14 15:29:12',NULL),
-(27,'Manager Performances Lite','manager_performances_lite','2023-06-19 15:14:34','2023-06-19 15:14:34',NULL),
-(28,'User Performances Lite','user_performances_lite','2023-06-19 15:22:29','2023-06-19 15:22:29',NULL),
-(29,'Affiliate','user.affiliate_portal','2023-09-01 13:51:25','2023-09-01 13:51:25',NULL);
+insert  into `admin_roles`(`id`,`name`,`slug`,`created_at`,`updated_at`) values 
+(1,'Administrator','administrator','2023-10-26 13:10:19','2023-10-26 13:10:19');
 
-/*Table structure for table `admin_user_permissions` */
+/*Table structure for table `admin_settings` */
 
-DROP TABLE IF EXISTS `admin_user_permissions`;
+DROP TABLE IF EXISTS `admin_settings`;
 
-CREATE TABLE `admin_user_permissions` (
-  `user_id` int unsigned NOT NULL,
-  `permission_id` int NOT NULL,
+CREATE TABLE `admin_settings` (
+  `slug` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `value` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`user_id`,`permission_id`),
-  CONSTRAINT `admin_user_permissions_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `admin_users` (`id`) ON DELETE CASCADE
+  PRIMARY KEY (`slug`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
-/*Data for the table `admin_user_permissions` */
+/*Data for the table `admin_settings` */
+
+/*Table structure for table `admin_taggables` */
+
+DROP TABLE IF EXISTS `admin_taggables`;
+
+CREATE TABLE `admin_taggables` (
+  `tag_id` int unsigned NOT NULL,
+  `taggable_id` int unsigned NOT NULL,
+  `taggable_type` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL,
+  `created_at` datetime DEFAULT NULL,
+  `updated_at` datetime DEFAULT NULL,
+  PRIMARY KEY (`tag_id`,`taggable_id`,`taggable_type`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
+
+/*Data for the table `admin_taggables` */
+
+/*Table structure for table `admin_tags` */
+
+DROP TABLE IF EXISTS `admin_tags`;
+
+CREATE TABLE `admin_tags` (
+  `id` int unsigned NOT NULL AUTO_INCREMENT,
+  `title` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `color` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `domain_id` int unsigned NOT NULL,
+  `enabled` tinyint DEFAULT '1',
+  `created_at` datetime DEFAULT NULL,
+  `updated_at` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `tags_ibfk_1` (`domain_id`),
+  CONSTRAINT `admin_tags_ibfk_1` FOREIGN KEY (`domain_id`) REFERENCES `admin_domains` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+/*Data for the table `admin_tags` */
 
 /*Table structure for table `admin_users` */
 
 DROP TABLE IF EXISTS `admin_users`;
 
 CREATE TABLE `admin_users` (
-  `id` int unsigned NOT NULL AUTO_INCREMENT,
-  `manager_id` int unsigned DEFAULT NULL,
-  `username` varchar(190) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `password` varchar(60) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
+  `username` varchar(120) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `password` varchar(80) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `avatar` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `remember_token` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
-  `creator_id` int DEFAULT NULL,
-  `email` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `api_token` varchar(60) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `theme` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `trusted_hosts` json DEFAULT NULL,
-  `activated` tinyint(1) DEFAULT '0',
-  `signup_ip` varchar(15) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `signup_confirmation_ip` varchar(15) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `signup_sm_ip` varchar(15) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `last_login_at` datetime DEFAULT NULL,
-  `last_login_ip` varchar(15) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `domain_id` int unsigned DEFAULT NULL,
+  `domain_id` int unsigned NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `admin_users_username_unique` (`username`)
-) ENGINE=InnoDB AUTO_INCREMENT=5314 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 /*Data for the table `admin_users` */
 
-insert  into `admin_users`(`id`,`manager_id`,`username`,`password`,`name`,`avatar`,`remember_token`,`created_at`,`updated_at`,`creator_id`,`email`,`api_token`,`theme`,`trusted_hosts`,`activated`,`signup_ip`,`signup_confirmation_ip`,`signup_sm_ip`,`last_login_at`,`last_login_ip`,`domain_id`) values 
-(1,1,'admin','$2y$10$PAaUxDndh.96TkIUDi04gurub.w9SJ13U3WeboXY6xF3hYuK64sHS','Administrator',NULL,'a4GBhkKYS7Aoar5qgsXqlU4QVWKA46srMStdxtigHhBAI2lsH6LUvgiMhu1n','2017-07-30 13:24:38','2023-09-08 10:39:32',NULL,'mikha.dev@gmail.com','XgZeUbrEQyD8',NULL,NULL,0,NULL,NULL,NULL,'2022-01-19 08:12:52','85.172.104.95',2);
+insert  into `admin_users`(`id`,`username`,`password`,`name`,`avatar`,`remember_token`,`created_at`,`updated_at`,`domain_id`) values 
+(1,'admin','$2y$10$0I9bDYuAr65EndMqnz9WU.5ec5/eHw9UuznVvJlU7dhVghO6qcb26','Administrator',NULL,NULL,'2023-10-26 13:10:19','2023-10-26 13:10:19',16);
+
+/*Table structure for table `audits` */
+
+DROP TABLE IF EXISTS `audits`;
+
+CREATE TABLE `audits` (
+  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
+  `user_type` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `user_id` bigint unsigned DEFAULT NULL,
+  `event` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `auditable_type` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `auditable_id` bigint unsigned NOT NULL,
+  `old_values` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `new_values` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `url` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `ip_address` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `user_agent` varchar(1023) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `tags` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `audits_auditable_type_auditable_id_index` (`auditable_type`,`auditable_id`),
+  KEY `audits_user_id_user_type_index` (`user_id`,`user_type`)
+) ENGINE=InnoDB AUTO_INCREMENT=5251 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+/*Data for the table `audits` */
+
+/*Table structure for table `migrations` */
+
+DROP TABLE IF EXISTS `migrations`;
+
+CREATE TABLE `migrations` (
+  `id` int unsigned NOT NULL AUTO_INCREMENT,
+  `migration` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `batch` int NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+/*Data for the table `migrations` */
+
+insert  into `migrations`(`id`,`migration`,`batch`) values 
+(1,'2014_10_12_000000_create_users_table',1),
+(2,'2014_10_12_100000_create_password_resets_table',1),
+(3,'2016_01_04_173148_create_admin_tables',1),
+(4,'2019_04_23_154507_create_posts_table',1),
+(5,'2020_09_07_090635_create_admin_settings_table',1),
+(6,'2020_09_22_015815_create_admin_extensions_table',1),
+(7,'2020_11_01_083237_update_admin_menu_table',1);
+
+/*Table structure for table `notifications` */
+
+DROP TABLE IF EXISTS `notifications`;
+
+CREATE TABLE `notifications` (
+  `id` char(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `type` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `notifiable_type` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `notifiable_id` bigint unsigned NOT NULL,
+  `data` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `read_at` timestamp NULL DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `notifications_notifiable_type_notifiable_id_index` (`notifiable_type`,`notifiable_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+/*Data for the table `notifications` */
+
+/*Table structure for table `password_resets` */
+
+DROP TABLE IF EXISTS `password_resets`;
+
+CREATE TABLE `password_resets` (
+  `email` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `token` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  KEY `password_resets_email_index` (`email`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+/*Data for the table `password_resets` */
+
+/*Table structure for table `posts` */
+
+DROP TABLE IF EXISTS `posts`;
+
+CREATE TABLE `posts` (
+  `id` int unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+/*Data for the table `posts` */
+
+/*Table structure for table `users` */
+
+DROP TABLE IF EXISTS `users`;
+
+CREATE TABLE `users` (
+  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email_verified_at` timestamp NULL DEFAULT NULL,
+  `password` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `remember_token` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `users_email_unique` (`email`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+/*Data for the table `users` */
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
