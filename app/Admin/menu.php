@@ -67,4 +67,11 @@ return [
         'uri'       => admin_route(App\Enums\RouteSneat::COMPONENTS_TIP_AND_POPOVER()),
         'parent_id' => 'components',
     ],
+    [
+        'id'        => 'toastr',
+        'title'     => __('sneat.toastr'),
+        'icon'      => Dcat\Admin\DcatIcon::HOME_CIRCLE(),
+        'uri'       => admin_route(App\Enums\RouteSneat::COMPONENTS_TOASTR()),
+        'parent_id' => 'components',
+    ],
 ];

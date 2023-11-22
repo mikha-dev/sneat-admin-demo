@@ -12,6 +12,7 @@ use App\Admin\Controllers\Components\AccordionController;
 use App\Admin\Controllers\Components\DropdownMenuController;
 use App\Admin\Controllers\Components\CheckboxAndRadioController;
 use App\Admin\Controllers\Components\TipAndPopoverController;
+use App\Admin\Controllers\Components\ToastrController;
 
 Admin::routes();
 
@@ -50,6 +51,10 @@ Route::group([
     $router->get('compoments-tip-amd-popover', function (Content $content) {
 	    return (new TipAndPopoverController())->index($content);
 	})->name(RouteSneat::COMPONENTS_TIP_AND_POPOVER());
+
+    $router->get('compoments-toastr', function (Content $content) {
+	    return (new ToastrController())->index($content);
+	})->name(RouteSneat::COMPONENTS_TOASTR());
 
     // $router->resource('example', 'ExampleController');
 
