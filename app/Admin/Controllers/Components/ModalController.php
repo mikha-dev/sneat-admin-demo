@@ -2,17 +2,17 @@
 
 namespace App\Admin\Controllers\Components;
 
-use App\Admin\Controllers\PreviewCode;
-use App\Admin\Forms\UserProfile;
-use App\Admin\Renderable\BarChart;
-use App\Admin\Renderable\ModalForm;
-use App\Admin\Renderable\UserTable;
 use Dcat\Admin\Admin;
-use Dcat\Admin\Layout\Content;
+use Illuminate\Support\Arr;
 use Dcat\Admin\Widgets\Modal;
 use Dcat\Admin\Widgets\Table;
+use Dcat\Admin\Layout\Content;
+use App\Admin\Forms\UserProfile;
+use App\Admin\Traits\PreviewCode;
+use App\Admin\Renderable\BarChart;
 use Illuminate\Routing\Controller;
-use Illuminate\Support\Arr;
+use App\Admin\Renderable\ModalForm;
+use App\Admin\Renderable\UserTable;
 
 class ModalController extends Controller
 {
@@ -22,49 +22,45 @@ class ModalController extends Controller
     {
         return $content
             ->header('Modal')
-            ->description('模态窗')
+            ->description('Modals')
             ->body($this->render());
     }
 
-    // 普通非异步弹窗
     protected function modal1()
     {
-        return Modal::make()
+        return (new Modal())
             ->lg()
-            ->title('弹窗')
+            ->title('Table')
             ->body($this->table())
-            ->button('<button class="btn btn-white"><i class="feather icon-grid"></i> 普通弹窗</button>');
+            ->button('<button class="btn btn-white"><i class="feather icon-grid"></i> Table</button>');
     }
 
-    // 异步加载弹窗内容
     protected function modal2()
     {
-        return Modal::make()
+        return (new Modal())
             ->lg()
-            ->delay(300) // loading 效果延迟时间设置长一些，否则图表可能显示不出来
-            ->title('异步加载 - 图表')
+            ->delay(300)
+            ->title('Bar Chart delay')
             ->body(BarChart::make())
-            ->button('<button class="btn btn-white"><i class="feather icon-bar-chart-2"></i> 异步加载</button>');
+            ->button('<button class="btn btn-white"><i class="feather icon-bar-chart-2"></i> Delay</button>');
     }
 
-    // 异步加载弹窗内容
-    protected function modal3()
-    {
-        return Modal::make()
-            ->lg()
-            ->title('异步加载 - 表单')
-            ->body(UserProfile::make())
-            ->button('<button class="btn btn-white btn-outline"><i class="feather icon-edit"></i> 异步加载</button>');
-    }
+    // protected function modal3()
+    // {
+    //     return Modal::make()
+    //         ->lg()
+    //         ->title('异步加载 - 表单')
+    //         ->body(UserProfile::make())
+    //         ->button('<button class="btn btn-white btn-outline"><i class="feather icon-edit"></i> 异步加载</button>');
+    // }
 
-    // 异步加载表格
     protected function modal4()
     {
-        return Modal::make()
+        return (new Modal())
             ->lg()
-            ->title('异步加载 - 表格')
+            ->title('User table')
             ->body(UserTable::make())
-            ->button('<button class="btn btn-white "><i class="feather icon-grid"></i> 异步加载</button>');
+            ->button('<button class="btn btn-white "><i class="feather icon-grid"></i> User table</button>');
     }
 
     protected function render()
@@ -74,7 +70,6 @@ class ModalController extends Controller
 &nbsp;&nbsp;
 <div class="btn-group">
 {$this->modal2()}
-{$this->modal3()}
 {$this->modal4()}
 </div>
 &nbsp;

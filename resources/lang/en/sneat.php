@@ -11,5 +11,7 @@ return [
     'progress' => 'Progress',
     'tip_and_popover' => 'Tooltip and Popover',
     'toastr' => 'Toastr',
-
+    'tabs' => 'Tabs',
+    'modals' => 'Modals',
+    'cards' => 'Cards',
 ];

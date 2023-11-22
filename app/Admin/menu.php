@@ -74,4 +74,25 @@ return [
         'uri'       => admin_route(App\Enums\RouteSneat::COMPONENTS_TOASTR()),
         'parent_id' => 'components',
     ],
+    [
+        'id'        => 'tabs',
+        'title'     => __('sneat.tabs'),
+        'icon'      => Dcat\Admin\DcatIcon::HOME_CIRCLE(),
+        'uri'       => admin_route(App\Enums\RouteSneat::COMPONENTS_TABS()),
+        'parent_id' => 'components',
+    ],
+    [
+        'id'        => 'modal',
+        'title'     => __('sneat.modals'),
+        'icon'      => Dcat\Admin\DcatIcon::HOME_CIRCLE(),
+        'uri'       => admin_route(App\Enums\RouteSneat::COMPONENTS_MODAL()),
+        'parent_id' => 'components',
+    ],
+    [
+        'id'        => 'cards',
+        'title'     => __('sneat.cards'),
+        'icon'      => Dcat\Admin\DcatIcon::HOME_CIRCLE(),
+        'uri'       => admin_route(App\Enums\RouteSneat::COMPONENTS_CARDS()),
+        'parent_id' => 'components',
+    ],
 ];

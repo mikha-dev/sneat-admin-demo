@@ -6,13 +6,16 @@ use Dcat\Admin\Layout\Content;
 use Illuminate\Routing\Router;
 use Illuminate\Support\Facades\Route;
 use App\Admin\Controllers\AnalyticController;
+use App\Admin\Controllers\Components\CardController;
+use App\Admin\Controllers\Components\TabsController;
 use App\Admin\Controllers\Components\AlertController;
+use App\Admin\Controllers\Components\ModalController;
+use App\Admin\Controllers\Components\ToastrController;
 use App\Admin\Controllers\Components\ProgressController;
 use App\Admin\Controllers\Components\AccordionController;
 use App\Admin\Controllers\Components\DropdownMenuController;
-use App\Admin\Controllers\Components\CheckboxAndRadioController;
 use App\Admin\Controllers\Components\TipAndPopoverController;
-use App\Admin\Controllers\Components\ToastrController;
+use App\Admin\Controllers\Components\CheckboxAndRadioController;
 
 Admin::routes();
 
@@ -55,6 +58,18 @@ Route::group([
     $router->get('compoments-toastr', function (Content $content) {
 	    return (new ToastrController())->index($content);
 	})->name(RouteSneat::COMPONENTS_TOASTR());
+
+    $router->get('compoments-tabs', function (Content $content) {
+	    return (new TabsController())->index($content);
+	})->name(RouteSneat::COMPONENTS_TABS());
+
+    $router->get('compoments-modal', function (Content $content) {
+	    return (new ModalController())->index($content);
+	})->name(RouteSneat::COMPONENTS_MODAL());
+
+    $router->get('compoments-cards', function (Content $content) {
+	    return (new CardController())->index($content);
+	})->name(RouteSneat::COMPONENTS_CARDS());
 
     // $router->resource('example', 'ExampleController');
 

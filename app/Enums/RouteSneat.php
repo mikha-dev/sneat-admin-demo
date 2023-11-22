@@ -20,4 +20,7 @@ enum RouteSneat : string implements DcatEnum
     case COMPONENTS_PROGRESS = 'components.progress';
     case COMPONENTS_TIP_AND_POPOVER = 'components.tip_and_popover';
     case COMPONENTS_TOASTR = 'components.toastr';
+    case COMPONENTS_TABS = 'components.tabs';
+    case COMPONENTS_MODAL = 'components.modal';
+    case COMPONENTS_CARDS = 'components.cards';
 }
