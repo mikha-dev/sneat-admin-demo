@@ -23,4 +23,18 @@ enum RouteSneat : string implements DcatEnum
     case COMPONENTS_TABS = 'components.tabs';
     case COMPONENTS_MODAL = 'components.modal';
     case COMPONENTS_CARDS = 'components.cards';
+    case COMPONENTS_MARKDOWN = 'components.markdown';
+    case COMPONENTS_CHARTS = 'components.charts';
+
+    case GRIDS_CUSTOM = 'grids.custom';
+    case GRIDS_GRID = 'grids.grid';
+
+    case FORMS_EDITORS_MARKDOWN = 'formds.editors.markdown';
+    case FORMS_EDITORS_SUMMERCODE = 'formds.editors.summercode';
+    case FORMS_EDITORS_TINYMCE = 'formds.editors.tinymce';
+
+    case FORMS_WHEN = 'fords.when';
+
+    case BASIC = 'basic';
+    case CLIENTS = 'clients';
 }

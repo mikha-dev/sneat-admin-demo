@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Admin\Controllers;
+namespace App\Admin\Controllers\Dashboards;
 
 use Dcat\Admin\Layout\Row;
 use Dcat\Admin\Layout\Column;

@@ -2,10 +2,9 @@
 
 namespace App\Admin\Controllers\Components;
 
-use App\Admin\Traits\PreviewCode;
-use Dcat\Admin\Layout\Content;
 use Dcat\Admin\Layout\Row;
-use Dcat\Admin\Widgets\Box;
+use Dcat\Admin\Layout\Content;
+use App\Admin\Traits\PreviewCode;
 use Illuminate\Routing\Controller;
 
 class ChartController extends Controller
@@ -28,13 +27,4 @@ class ChartController extends Controller
             });
     }
 
-    /**
-     * @param $title
-     * @param $content
-     * @return Box
-     */
-    protected function box(string $title, $content, string $class = '')
-    {
-        return Box::make($title, $content)->style('default')->setHtmlAttribute('class', $class);
-    }
 }

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Admin\Controllers;
+namespace App\Admin\Controllers\Forms;
 
 use Dcat\Admin\Widgets\Form;
 use Dcat\Admin\Layout\Content;
@@ -11,15 +11,15 @@ class FormWhenController
     use PreviewCode;
 
     protected $options = [
-        1 => '显示文本框',
-        2 => '显示编辑器',
-        3 => '显示文件上传',
-        4 => '还是显示文本框',
+        1 => 'Show text box',
+        2 => 'Show editor',
+        3 => 'Show file upload',
+        4 => 'Still display the text box',
     ];
 
     public function index(Content $content)
     {
-        return $content->title('表单动态显示')
+        return $content->title('Form dynamic display')
             ->body($this->buildPreviewButton())
             ->body($this->newline())
             ->body(
@@ -34,7 +34,7 @@ HTML
         $form = new Form();
 
         $form->tab('Radio', function (Form $form) {
-            $form->display('title')->value('单选框动态展示');
+            $form->display('title')->value('Dynamic display of radio button boxes');
 
             $form->radio('radio')
                 ->when([1, 4], function (Form $form) {
@@ -53,7 +53,7 @@ HTML
         });
 
         $form->tab('Checkbox', function (Form $form) {
-            $form->display('title')->value('复选框动态展示');
+            $form->display('title')->value('Check box dynamic display');
 
             $form->checkbox('checkbox')
                 ->when([1, 4], function (Form $form) {
@@ -71,7 +71,7 @@ HTML
         });
 
         $form->tab('Select', function (Form $form) {
-            $form->display('title')->value('下拉选框动态展示');
+            $form->display('title')->value('Dynamic display of drop-down selection boxes');
 
             $form->select('select')
                 ->when([1, 4], function (Form $form) {
@@ -89,7 +89,7 @@ HTML
         });
 
         $form->tab('MultipleSelect', function (Form $form) {
-            $form->display('title')->value('下拉选框多选动态展示');
+            $form->display('title')->value('Drop-down box multi-select dynamic display');
 
             $form->multipleSelect('selects')
                 ->when([1, 4], function (Form $form) {

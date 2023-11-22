@@ -5,6 +5,7 @@ namespace App\Admin\Controllers\Components;
 use Faker\Factory;
 use Dcat\Admin\DcatIcon;
 use Dcat\Admin\Layout\Row;
+use Dcat\Admin\Widgets\Card;
 use Dcat\Admin\Layout\Content;
 use Dcat\Admin\Enums\RouteAuth;
 use Dcat\Admin\Widgets\Dropdown;
@@ -14,7 +15,6 @@ use Dcat\Admin\Widgets\IconWithToolTip;
 use Dcat\Admin\Widgets\Cards\ProfitCard;
 use Dcat\Admin\Widgets\Cards\PictureCard;
 
-// todo:rm. box is abandoned, using cards
 class CardController extends Controller
 {
     public function index(Content $content)
@@ -32,6 +32,10 @@ class CardController extends Controller
             $row->column(2, (new ProfitCard('Profit', '$2000', '78%', DcatIcon::HOME_CIRCLE, new IconWithToolTip(DcatIcon::HELP, $faker->text(100)), admin_route(RouteAuth::SETTINGS())))->growing());
             $row->column(2, (new ProfitCard('Loss', '-$2000', '-78%', DcatIcon::HOME_CIRCLE, new IconWithToolTip(DcatIcon::HELP, $faker->text(100)), admin_route(RouteAuth::SETTINGS())))->growing(false));
             $row->column(2, new ProfitCard('Dropdown', '$2000', '78%', DcatIcon::HOME_CIRCLE, new Dropdown(['test']), admin_route(RouteAuth::SETTINGS()) ) );
+        });
+
+        $content->row(function (Row $row) use ($faker) {
+            $row->column(4, (new Card($faker->text(20), $faker->text(200)) ) );
         });
 
         $header = 'Cards';

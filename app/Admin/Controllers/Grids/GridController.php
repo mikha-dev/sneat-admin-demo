@@ -1,5 +1,5 @@
 <?php
-namespace App\Admin\Controllers;
+namespace App\Admin\Controllers\Grids;
 
 use Faker\Factory;
 use Dcat\Admin\Grid;
@@ -10,9 +10,6 @@ use Illuminate\Routing\Controller;
 use App\Admin\Renderable\PostTable;
 use App\Admin\Renderable\UserTable;
 use Dcat\Admin\Models\Administrator;
-use App\Admin\Metrics\Examples\NewUsers;
-use App\Admin\Metrics\Examples\NewDevices;
-use App\Admin\Metrics\Examples\TotalUsers;
 
 class GridController extends Controller
 {

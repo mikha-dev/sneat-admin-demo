@@ -10,7 +10,7 @@ use Dcat\Admin\Layout\Content;
 use App\Http\Controllers\Controller;
 use Dcat\Admin\Http\Controllers\HasResourceActions;
 
-class ExampleController extends Controller
+class BasicStructureController extends Controller
 {
     use HasResourceActions;
 

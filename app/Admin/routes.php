@@ -5,17 +5,25 @@ use App\Enums\RouteSneat;
 use Dcat\Admin\Layout\Content;
 use Illuminate\Routing\Router;
 use Illuminate\Support\Facades\Route;
-use App\Admin\Controllers\AnalyticController;
+use App\Admin\Controllers\Grids\GridController;
+use App\Admin\Controllers\Forms\EditorController;
+use App\Admin\Controllers\BasicStructureController;
+use App\Admin\Controllers\Forms\FormWhenController;
 use App\Admin\Controllers\Components\CardController;
 use App\Admin\Controllers\Components\TabsController;
 use App\Admin\Controllers\Components\AlertController;
+use App\Admin\Controllers\Components\ChartController;
 use App\Admin\Controllers\Components\ModalController;
+use App\Admin\Controllers\Grids\CustomGridController;
 use App\Admin\Controllers\Components\ToastrController;
+use App\Admin\Controllers\Components\MarkdownController;
 use App\Admin\Controllers\Components\ProgressController;
+use App\Admin\Controllers\Dashboards\AnalyticController;
 use App\Admin\Controllers\Components\AccordionController;
 use App\Admin\Controllers\Components\DropdownMenuController;
 use App\Admin\Controllers\Components\TipAndPopoverController;
 use App\Admin\Controllers\Components\CheckboxAndRadioController;
+use App\Admin\Controllers\UserController;
 
 Admin::routes();
 
@@ -31,45 +39,81 @@ Route::group([
 	    return (new AnalyticController())->index($content);
 	})->name(RouteSneat::DASHBOARD_ANALYTIC());
 
-    $router->get('compoments-accordion', function (Content $content) {
+    $router->get('components-accordion', function (Content $content) {
 	    return (new AccordionController())->index($content);
 	})->name(RouteSneat::COMPONENTS_ACCORDION());
 
-    $router->get('compoments-alerts', function (Content $content) {
+    $router->get('components-alerts', function (Content $content) {
 	    return (new AlertController())->index($content);
 	})->name(RouteSneat::COMPONENTS_ALERTS());
 
-    $router->get('compoments-check-and-radio', function (Content $content) {
+    $router->get('components-check-and-radio', function (Content $content) {
 	    return (new CheckboxAndRadioController())->index($content);
 	})->name(RouteSneat::COMPONENTS_CHECK_AND_RADIO());
 
-    $router->get('compoments-dropdown', function (Content $content) {
+    $router->get('components-dropdown', function (Content $content) {
 	    return (new DropdownMenuController())->index($content);
 	})->name(RouteSneat::COMPONENTS_DROPDOWN());
 
-    $router->get('compoments-progress', function (Content $content) {
+    $router->get('components-progress', function (Content $content) {
 	    return (new ProgressController())->index($content);
 	})->name(RouteSneat::COMPONENTS_PROGRESS());
 
-    $router->get('compoments-tip-amd-popover', function (Content $content) {
+    $router->get('components-tip-amd-popover', function (Content $content) {
 	    return (new TipAndPopoverController())->index($content);
 	})->name(RouteSneat::COMPONENTS_TIP_AND_POPOVER());
 
-    $router->get('compoments-toastr', function (Content $content) {
+    $router->get('components-toastr', function (Content $content) {
 	    return (new ToastrController())->index($content);
 	})->name(RouteSneat::COMPONENTS_TOASTR());
 
-    $router->get('compoments-tabs', function (Content $content) {
+    $router->get('components-tabs', function (Content $content) {
 	    return (new TabsController())->index($content);
 	})->name(RouteSneat::COMPONENTS_TABS());
 
-    $router->get('compoments-modal', function (Content $content) {
+    $router->get('components-modal', function (Content $content) {
 	    return (new ModalController())->index($content);
 	})->name(RouteSneat::COMPONENTS_MODAL());
 
-    $router->get('compoments-cards', function (Content $content) {
+    $router->get('components-cards', function (Content $content) {
 	    return (new CardController())->index($content);
 	})->name(RouteSneat::COMPONENTS_CARDS());
+
+    $router->get('components-markdown', function (Content $content) {
+	    return (new MarkdownController())->index($content);
+	})->name(RouteSneat::COMPONENTS_MARKDOWN());
+
+    $router->get('components-charts', function (Content $content) {
+	    return (new ChartController())->index($content);
+	})->name(RouteSneat::COMPONENTS_CHARTS());
+
+    $router->get('grids-custom', function (Content $content) {
+	    return (new CustomGridController())->index($content);
+	})->name(RouteSneat::GRIDS_CUSTOM());
+
+    $router->get('grids-grid', function (Content $content) {
+	    return (new GridController())->index($content);
+	})->name(RouteSneat::GRIDS_GRID());
+
+    $router->get('forms-editors-markdown', function (Content $content) {
+	    return (new EditorController())->markdown($content);
+	})->name(RouteSneat::FORMS_EDITORS_MARKDOWN());
+
+    $router->get('forms-editors-summercode', function (Content $content) {
+	    return (new EditorController())->summercode($content);
+	})->name(RouteSneat::FORMS_EDITORS_SUMMERCODE());
+
+    $router->get('forms-editors-tinymce', function (Content $content) {
+	    return (new EditorController())->tinymce($content);
+	})->name(RouteSneat::FORMS_EDITORS_TINYMCE());
+
+
+    $router->get('forms-when', function (Content $content) {
+	    return (new FormWhenController())->index($content);
+	})->name(RouteSneat::FORMS_WHEN());
+
+    $router->resource('basic', BasicStructureController::class)->name('index', RouteSneat::BASIC());
+    $router->resource('clients', UserController::class)->name('index', RouteSneat::CLIENTS());
 
     // $router->resource('example', 'ExampleController');
 

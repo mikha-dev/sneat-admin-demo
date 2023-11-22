@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Admin\Controllers;
+namespace App\Admin\Controllers\Grids;
 
 use Dcat\Admin\Grid;
 use Dcat\Admin\Layout\Content;
 use App\Admin\Repositories\Image;
 use App\Admin\Traits\PreviewCode;
-use App\Admin\Actions\Grid\SwitchGridViewAction;
+//use App\Admin\Actions\Grid\SwitchGridViewAction;
 
 class CustomGridController
 {
@@ -32,7 +32,7 @@ class CustomGridController
 
             $grid->tools([
                 $this->buildPreviewButton('btn-primary'),
-                new SwitchGridViewAction(),
+               // new SwitchGridViewAction(),
             ]);
 
             $grid->disableCreateButton();

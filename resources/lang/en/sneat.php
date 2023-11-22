@@ -14,4 +14,16 @@ return [
     'tabs' => 'Tabs',
     'modals' => 'Modals',
     'cards' => 'Cards',
+    'markdown' => 'Markdown',
+    'charts' => 'Charts',
+    'grids' => 'Grids',
+    'custom' => 'Custom',
+
+    'forms' => 'Forms',
+    'editors' => 'Editors',
+    'summercode' => 'SummerCode',
+    'tinymce' => 'TinyMCE',
+
+    'basic' => 'Basic',
+    'basic_structure' => 'Basic Structure',
 ];

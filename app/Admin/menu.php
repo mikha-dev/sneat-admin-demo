@@ -95,4 +95,112 @@ return [
         'uri'       => admin_route(App\Enums\RouteSneat::COMPONENTS_CARDS()),
         'parent_id' => 'components',
     ],
+    [
+        'id'        => 'markdown',
+        'title'     => __('sneat.markdown'),
+        'icon'      => Dcat\Admin\DcatIcon::HOME_CIRCLE(),
+        'uri'       => admin_route(App\Enums\RouteSneat::COMPONENTS_MARKDOWN()),
+        'parent_id' => 'components',
+    ],
+    [
+        'id'        => 'charts',
+        'title'     => __('sneat.charts'),
+        'icon'      => Dcat\Admin\DcatIcon::HOME_CIRCLE(),
+        'uri'       => admin_route(App\Enums\RouteSneat::COMPONENTS_CHARTS()),
+        'parent_id' => 'components',
+    ],
+
+    // Grids
+    [
+        'id'        => 'grids',
+        'title'     => __('sneat.grids'),
+        'icon'      => Dcat\Admin\DcatIcon::HOME_CIRCLE(),
+        'uri'       => '',
+        'parent_id' => 0,
+    ],
+    [
+        'id'        => 'grid-custon',
+        'title'     => __('sneat.custon'),
+        'icon'      => Dcat\Admin\DcatIcon::HOME_CIRCLE(),
+        'uri'       => admin_route(App\Enums\RouteSneat::GRIDS_CUSTOM()),
+        'parent_id' => 'grids',
+    ],
+    [
+        'id'        => 'grid',
+        'title'     => __('sneat.grid'),
+        'icon'      => Dcat\Admin\DcatIcon::HOME_CIRCLE(),
+        'uri'       => admin_route(App\Enums\RouteSneat::GRIDS_GRID()),
+        'parent_id' => 'grids',
+    ],
+
+    // Basic
+    [
+        'id'        => 'basic',
+        'title'     => __('sneat.basic'),
+        'icon'      => Dcat\Admin\DcatIcon::HOME_CIRCLE(),
+        'uri'       => '',
+        'parent_id' => 0,
+    ],
+    [
+        'id'        => 'basic-structure',
+        'title'     => __('sneat.basic_structure'),
+        'icon'      => Dcat\Admin\DcatIcon::HOME_CIRCLE(),
+        'uri'       => admin_route(App\Enums\RouteSneat::BASIC()),
+        'parent_id' => 'basic',
+    ],
+    [
+        'id'        => 'basic-clients',
+        'title'     => __('sneat.clients'),
+        'icon'      => Dcat\Admin\DcatIcon::HOME_CIRCLE(),
+        'uri'       => admin_route(App\Enums\RouteSneat::CLIENTS()),
+        'parent_id' => 'basic',
+    ],
+
+    // Forms
+    [
+        'id'        => 'forms',
+        'title'     => __('sneat.forms'),
+        'icon'      => Dcat\Admin\DcatIcon::HOME_CIRCLE(),
+        'uri'       => '',
+        'parent_id' => 0,
+    ],
+    // Forms - Basic Forms
+    [
+        'id'        => 'forms-when',
+        'title'     => __('sneat.when'),
+        'icon'      => Dcat\Admin\DcatIcon::HOME_CIRCLE(),
+        'uri'       => admin_route(App\Enums\RouteSneat::FORMS_WHEN()),
+        'parent_id' => 'forms',
+    ],
+    // Forms - Editors
+    [
+        'id'        => 'forms-editors',
+        'title'     => __('sneat.editors'),
+        'icon'      => Dcat\Admin\DcatIcon::HOME_CIRCLE(),
+        'uri'       => admin_route(App\Enums\RouteSneat::FORMS_EDITORS_MARKDOWN()),
+        'parent_id' => 'forms',
+    ],
+    [
+        'id'        => 'forms-editor-markdown',
+        'title'     => __('sneat.markdown'),
+        'icon'      => Dcat\Admin\DcatIcon::HOME_CIRCLE(),
+        'uri'       => admin_route(App\Enums\RouteSneat::FORMS_EDITORS_MARKDOWN()),
+        'parent_id' => 'forms-editors',
+    ],
+
+    [
+        'id'        => 'forms-editor-summercode',
+        'title'     => __('sneat.summercode'),
+        'icon'      => Dcat\Admin\DcatIcon::HOME_CIRCLE(),
+        'uri'       => admin_route(App\Enums\RouteSneat::FORMS_EDITORS_SUMMERCODE()),
+        'parent_id' => 'forms-editors',
+    ],
+    [
+        'id'        => 'forms-editor-tinycme',
+        'title'     => __('sneat.tinymce'),
+        'icon'      => Dcat\Admin\DcatIcon::HOME_CIRCLE(),
+        'uri'       => admin_route(App\Enums\RouteSneat::FORMS_EDITORS_TINYMCE()),
+        'parent_id' => 'forms-editors',
+    ],
+
 ];
