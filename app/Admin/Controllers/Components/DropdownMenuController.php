@@ -2,6 +2,8 @@
 
 namespace App\Admin\Controllers\Components;
 
+use App\Enums\ButtonClassType;
+use App\Enums\ColorClassType;
 use Dcat\Admin\Layout\Content;
 use App\Admin\Traits\PreviewCode;
 use Dcat\Admin\Widgets\Card;
@@ -11,14 +13,7 @@ use Illuminate\Routing\Controller;
 class DropdownMenuController extends Controller {
 	use PreviewCode;
 
-	protected $colors = [
-		'primary',
-		'secondary',
-		'warning',
-		'danger',
-		'success',
-		'info',
-	];
+	protected $colors = ColorClassType::ALL_COLORS;
 
 	public function index(Content $content) {
 		$header = 'DropDown';
@@ -36,7 +31,7 @@ class DropdownMenuController extends Controller {
 		$base = collect($this->colors)->map(function ($color) {
 			$dropdown = new Dropdown();
 			return $dropdown->button($color)
-				->buttonClass("btn btn-$color")
+				->buttonClass(ButtonClassType::BTN . ' ' . ButtonClassType::BTN . '-' . $color)
 				->add('option1')
 				->add('option2', TRUE)
 				->add('option1', TRUE, TRUE)
@@ -49,7 +44,7 @@ class DropdownMenuController extends Controller {
 		$base = collect($this->colors)->map(function ($color) {
 			$dropdown = new Dropdown();
 			return $dropdown->button($color)
-				->buttonClass("btn btn-outline-$color")
+				->buttonClass(ButtonClassType::BTN . ' ' . ButtonClassType::BTN_OUTLINE . '-' . $color)
 				->add('option1')
 				->add('option2', TRUE)
 				->add('option1', TRUE, TRUE)
@@ -62,7 +57,7 @@ class DropdownMenuController extends Controller {
 		$base = collect($this->colors)->map(function ($color) {
 			$dropdown = new Dropdown();
 			return $dropdown->button($color)
-				->buttonClass("btn btn-$color")
+				->buttonClass(ButtonClassType::BTN . ' ' . ButtonClassType::BTN . '-' . $color)
 				->toggleSplit()
 				->add('option1')
 				->add('option2', TRUE)
@@ -76,7 +71,7 @@ class DropdownMenuController extends Controller {
 		$base = collect($this->colors)->map(function ($color) {
 			$dropdown = new Dropdown();
 			return $dropdown->button($color)
-				->buttonClass("btn btn-outline-$color")
+				->buttonClass(ButtonClassType::BTN . ' ' . ButtonClassType::BTN_OUTLINE . '-' . $color)
 				->toggleSplit()
 				->add('option1')
 				->add('option2', TRUE)
@@ -89,7 +84,7 @@ class DropdownMenuController extends Controller {
 	public function specific() {
 		$hiddenArrow = new Dropdown();
 		$hiddenArrow->button('primary')
-			->buttonClass("btn btn-primary")
+			->buttonClass(ButtonClassType::PRIMARY)
 			->hideArrow()
 			->add('option1')
 			->add('option2', TRUE)
@@ -97,14 +92,14 @@ class DropdownMenuController extends Controller {
 			->render();
 		$iconWithDropdown = new Dropdown();
 		$iconWithDropdown->button('primary')
-			->buttonClass("btn btn-primary")
+			->buttonClass(ButtonClassType::PRIMARY)
 			->icon('bx bx-menu me-1')
 			->add('option1')
 			->add('option2', TRUE)
 			->add('option1', TRUE, TRUE)
 			->render();
 		$icon = new Dropdown();
-		$icon->buttonClass("btn btn-primary btn-icon rounded-pill")
+		$icon->buttonClass(ButtonClassType::PRIMARY . " btn-icon rounded-pill")
 			->hideArrow()
 			->icon('bx bx-dots-vertical-rounded')
 			->add('option1')
