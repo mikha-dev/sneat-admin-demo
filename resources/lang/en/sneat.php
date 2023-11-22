@@ -7,5 +7,6 @@ return [
     'accordion' => 'Accordion',
     'alerts' => 'Alerts',
     'check_and_radio' => 'Checkbox and Radio',
-    'dropdown' => 'Dropdown'
+    'dropdown' => 'Dropdown',
+    'progress' => 'Progress',
 ];

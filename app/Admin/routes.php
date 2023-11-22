@@ -6,10 +6,11 @@ use Dcat\Admin\Layout\Content;
 use Illuminate\Routing\Router;
 use Illuminate\Support\Facades\Route;
 use App\Admin\Controllers\AnalyticController;
-use App\Admin\Controllers\Components\AccordionController;
 use App\Admin\Controllers\Components\AlertController;
-use App\Admin\Controllers\Components\CheckboxAndRadioController;
+use App\Admin\Controllers\Components\ProgressController;
+use App\Admin\Controllers\Components\AccordionController;
 use App\Admin\Controllers\Components\DropdownMenuController;
+use App\Admin\Controllers\Components\CheckboxAndRadioController;
 
 Admin::routes();
 
@@ -40,6 +41,11 @@ Route::group([
     $router->get('compoments-dropdown', function (Content $content) {
 	    return (new DropdownMenuController())->index($content);
 	})->name(RouteSneat::COMPONENTS_DROPDOWN());
+
+    $router->get('compoments-progress', function (Content $content) {
+	    return (new ProgressController())->index($content);
+	})->name(RouteSneat::COMPONENTS_PROGRESS());
+
 
     // $router->resource('example', 'ExampleController');
 

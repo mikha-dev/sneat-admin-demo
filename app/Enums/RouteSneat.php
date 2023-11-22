@@ -17,4 +17,5 @@ enum RouteSneat : string implements DcatEnum
     case COMPONENTS_ALERTS = 'components.alerts';
     case COMPONENTS_CHECK_AND_RADIO = 'components.check_and_radio';
     case COMPONENTS_DROPDOWN = 'components.dropdown';
+    case COMPONENTS_PROGRESS = 'components.progress';
 }
