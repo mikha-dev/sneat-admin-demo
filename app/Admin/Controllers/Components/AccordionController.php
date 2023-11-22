@@ -18,24 +18,25 @@ class AccordionController extends Controller
             ->row(function (Row $row) {
                 $faker = Factory::create();
 
-                $collapse = Accordion::make();
+                $accordion1 = Accordion::make();
 
-                $collapse->add($faker->name(), $faker->text(200), NULL, true);
-                $collapse->add($faker->name(), $faker->text(200));
-                $collapse->add($faker->name(), $faker->text(200));
-                $collapse->add($faker->name(), $faker->text(200));
-                $collapse->add($faker->name(), $faker->text(200));
+                $accordion1->add($faker->name(), $faker->text(200), NULL, true);
+                $accordion1->add($faker->name(), $faker->text(200));
+                $accordion1->add($faker->name(), $faker->text(200));
+                $accordion1->add($faker->name(), $faker->text(200));
+                $accordion1->add($faker->name(), $faker->text(200));
 
-                $row->column(5, Box::make('Accordion', $collapse)->style('default'));
+                $row->column(5, Box::make('Accordion', $accordion1)->style('default'));
 
-                $collapse = Accordion::make();
+                $accordion2 = Accordion::make();
 
-                $collapse->add($faker->name(), $faker->text(200));
-                $collapse->add($faker->name(), $faker->text(200));
-                $collapse->add($faker->name(), $faker->text(200));
-                $collapse->add($faker->name(), $faker->text(200));
-                $collapse->add($faker->name(), $faker->text(200));
-                $row->column(5, $collapse);
+                $accordion2->add($faker->name(), $faker->text(200));
+                $accordion2->add($faker->name(), $faker->text(200));
+                $accordion2->add($faker->name(), $faker->text(200));
+                $accordion2->add($faker->name(), $faker->text(200));
+                $accordion2->add($faker->name(), $faker->text(200));
+
+                $row->column(5, $accordion2);
             })
             ->row(Box::make('Accordion', new Code(__FILE__, 15, 44))->style('default'));
 

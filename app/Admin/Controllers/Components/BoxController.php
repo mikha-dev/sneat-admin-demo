@@ -10,6 +10,7 @@ use Dcat\Admin\Widgets\Code;
 use Dcat\Admin\Layout\Content;
 use Illuminate\Routing\Controller;
 
+// todo:rm. box is abandoned, using cards
 class BoxController extends Controller
 {
     public function index(Content $content)

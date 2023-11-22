@@ -17,7 +17,7 @@ class AlertController extends Controller
     {
         $faker = Factory::create();
 
-        $callout = Callout::make($faker->text, '标题')->light()->removable();
+        $callout = Callout::make($faker->text, 'Title')->light()->removable();
 
         $content->row(Card::make(
             <<<HTML
@@ -26,14 +26,14 @@ class AlertController extends Controller
 <p>{$faker->text}</p>
 HTML
         ));
-        $content->row(Callout::make($faker->text, 'Removable')->removable());
-        $content->row(Callout::make($faker->text, 'Primary')->primary()->removable());
-        $content->row(Alert::make($faker->text, 'Danger'));
-        $content->row(Alert::make($faker->text, 'Warning')->warning());
-        $content->row(Alert::make($faker->text, 'Success')->success());
-        $content->row(Alert::make($faker->text, 'Info')->info());
+        $content->row(( new Callout($faker->text, 'Removable'))->dismi());
+        $content->row(( new Callout($faker->text, 'Primary'))->primary()->dismissable());
+        $content->row(( new Alert($faker->text, 'Danger')));
+        $content->row(( new Alert($faker->text, 'Warning'))->warning()->dismissable());
+        $content->row(( new Alert($faker->text, 'Success'))->success());
+        $content->row(( new Alert($faker->text, 'Info'))->info());
 
-        $content->row(Box::make('代码', new Code(__FILE__, 15, 45))->style('default'));
+        $content->row(Box::make('Code', new Code(__FILE__, 15, 45))->style('default'));
 
         $header = 'Alert';
         $content->breadcrumb('Components');

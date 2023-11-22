@@ -9,7 +9,7 @@ use Dcat\Admin\Widgets\Checkbox;
 use App\Admin\Traits\PreviewCode;
 use Illuminate\Routing\Controller;
 
-class CheckboxController extends Controller
+class CheckboxAndRadioController extends Controller
 {
     use PreviewCode;
 
@@ -27,7 +27,8 @@ class CheckboxController extends Controller
     {
         $checkbox = Checkbox::make('la1[]', $this->colors)
             ->inline()
-            ->check([0, 5])
+            //->check([0, 5])
+            ->check(0)
             ->render();
 
         $radio = Radio::make('la1', $this->colors)

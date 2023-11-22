@@ -24,12 +24,12 @@ trait PreviewCode
         $url = url()->current();
 
         if ($preview) {
-            $tab->addLink('示例', "$url?preview=0");
+            $tab->addLink('Example', "$url?preview=0");
 
-            $tab->add('代码', $this->code(), true);
+            $tab->add('code', $this->code(), true);
         } else {
-            $tab->add('示例', $callback($tab, $content));
-            $tab->addLink('代码', "$url?preview=1");
+            $tab->add('Example', $callback($tab, $content));
+            $tab->addLink('code', "$url?preview=1");
         }
 
         return $tab;
@@ -59,7 +59,7 @@ trait PreviewCode
     /**
      * @return string
      */
-    protected function buildPreviewButton($class = 'btn-white')
+    protected function buildPreviewButton($class = 'btn-primary')
     {
         $previewUrl = '/'.request()->path().'/preview';
 
@@ -68,7 +68,7 @@ trait PreviewCode
 $('.preview-code').click(function () {
     layer.open({
         type: 2,
-        title: '预览代码',
+        title: 'Preview Code',
         area: ['65%', '80%'],
         content: '$previewUrl',
     });
@@ -77,7 +77,7 @@ SCRIPT
 
         );
 
-        return "<button class='btn {$class} preview-code'> &nbsp;&nbsp;&nbsp;<i class=' fa  fa-code'></i>&nbsp;预览代码&nbsp;&nbsp;&nbsp; </button>";
+        return "<button class='btn {$class} preview-code'> &nbsp;&nbsp;&nbsp;<i class=' fa  fa-code'></i>&nbsp;Preview Code&nbsp;&nbsp;&nbsp; </button>";
     }
 
     /**

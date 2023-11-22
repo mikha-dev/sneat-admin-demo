@@ -6,6 +6,10 @@ use Dcat\Admin\Layout\Content;
 use Illuminate\Routing\Router;
 use Illuminate\Support\Facades\Route;
 use App\Admin\Controllers\AnalyticController;
+use App\Admin\Controllers\Components\AccordionController;
+use App\Admin\Controllers\Components\AlertController;
+use App\Admin\Controllers\Components\CheckboxAndRadioController;
+use App\Admin\Controllers\Components\DropdownMenuController;
 
 Admin::routes();
 
@@ -20,6 +24,22 @@ Route::group([
     $router->get('dashbord-analytic', function (Content $content) {
 	    return (new AnalyticController())->index($content);
 	})->name(RouteSneat::DASHBOARD_ANALYTIC());
+
+    $router->get('compoments-accordion', function (Content $content) {
+	    return (new AccordionController())->index($content);
+	})->name(RouteSneat::COMPONENTS_ACCORDION());
+
+    $router->get('compoments-alerts', function (Content $content) {
+	    return (new AlertController())->index($content);
+	})->name(RouteSneat::COMPONENTS_ALERTS());
+
+    $router->get('compoments-check-and-radio', function (Content $content) {
+	    return (new CheckboxAndRadioController())->index($content);
+	})->name(RouteSneat::COMPONENTS_CHECK_AND_RADIO());
+
+    $router->get('compoments-dropdown', function (Content $content) {
+	    return (new DropdownMenuController())->index($content);
+	})->name(RouteSneat::COMPONENTS_DROPDOWN());
 
     // $router->resource('example', 'ExampleController');
 
