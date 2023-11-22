@@ -11,6 +11,7 @@ use App\Admin\Controllers\Components\ProgressController;
 use App\Admin\Controllers\Components\AccordionController;
 use App\Admin\Controllers\Components\DropdownMenuController;
 use App\Admin\Controllers\Components\CheckboxAndRadioController;
+use App\Admin\Controllers\Components\TipAndPopoverController;
 
 Admin::routes();
 
@@ -46,6 +47,9 @@ Route::group([
 	    return (new ProgressController())->index($content);
 	})->name(RouteSneat::COMPONENTS_PROGRESS());
 
+    $router->get('compoments-tip-amd-popover', function (Content $content) {
+	    return (new TipAndPopoverController())->index($content);
+	})->name(RouteSneat::COMPONENTS_TIP_AND_POPOVER());
 
     // $router->resource('example', 'ExampleController');
 

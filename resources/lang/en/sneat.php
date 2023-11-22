@@ -9,4 +9,6 @@ return [
     'check_and_radio' => 'Checkbox and Radio',
     'dropdown' => 'Dropdown',
     'progress' => 'Progress',
+    'tip_and_popover' => 'Tooltip and Popover',
+
 ];

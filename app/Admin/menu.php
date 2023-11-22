@@ -60,4 +60,11 @@ return [
         'uri'       => admin_route(App\Enums\RouteSneat::COMPONENTS_PROGRESS()),
         'parent_id' => 'components',
     ],
+    [
+        'id'        => 'tip-and-popover',
+        'title'     => __('sneat.tip_and_popover'),
+        'icon'      => Dcat\Admin\DcatIcon::HOME_CIRCLE(),
+        'uri'       => admin_route(App\Enums\RouteSneat::COMPONENTS_TIP_AND_POPOVER()),
+        'parent_id' => 'components',
+    ],
 ];
