@@ -1,6 +1,7 @@
 # quick steps
     ```bash
     composer install
+    composer update
     # rename `.env.example` to `.env`
     php artisan key:generate
     npm install --global yarn
