@@ -13,8 +13,11 @@
 # database in sql file for now
     use file database\sql\sneat-admin-demo.sql
 
+# test credenntials
+    login: admin
+    password: admin
+
 # sneat-admin-demo
-demo for sneat-admin
 
     **sneat theme builder
     https://tools.themeselection.com/generator/sneat/html
