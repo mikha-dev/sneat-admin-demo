@@ -3,8 +3,10 @@
     composer install
     # rename `.env.example` to `.env`
     php artisan key:generate
+    npm install --global yarn
+    php artisan admin:minify default
     php artisan admin:publish
-    php artisan admin:minify default --publish
+    php artisan serve
     ```
 
 # sneat-admin-demo
