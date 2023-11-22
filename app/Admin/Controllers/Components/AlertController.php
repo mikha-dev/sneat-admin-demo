@@ -26,7 +26,7 @@ class AlertController extends Controller
 <p>{$faker->text}</p>
 HTML
         ));
-        $content->row(( new Callout($faker->text, 'Removable'))->dismi());
+        $content->row(( new Callout($faker->text, 'Removable'))->dismissable());
         $content->row(( new Callout($faker->text, 'Primary'))->primary()->dismissable());
         $content->row(( new Alert($faker->text, 'Danger')));
         $content->row(( new Alert($faker->text, 'Warning'))->warning()->dismissable());
