@@ -109,6 +109,13 @@ return [
         'uri'       => admin_route(App\Enums\RouteSneat::COMPONENTS_CHARTS()),
         'parent_id' => 'components',
     ],
+    [
+        'id'        => 'table',
+        'title'     => __('sneat.table'),
+        'icon'      => Dcat\Admin\DcatIcon::HOME_CIRCLE(),
+        'uri'       => admin_route(App\Enums\RouteSneat::COMPONENTS_TABLE()),
+        'parent_id' => 'components',
+    ],
 
     // Grids
     [

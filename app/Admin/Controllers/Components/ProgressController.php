@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace App\Admin\Controllers\Components;
 
@@ -11,7 +12,6 @@ use Dcat\Admin\Layout\Content;
 use Dcat\Admin\Widgets\Progress;
 use Illuminate\Routing\Controller;
 use Dcat\Admin\Enums\StyleClassType;
-use Dcat\Admin\Enums\StyleBgClassType;
 
 class ProgressController extends Controller
 {

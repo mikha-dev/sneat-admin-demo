@@ -8,6 +8,7 @@ use Dcat\Admin\Enums\ButtonSizeType;
 use Dcat\Admin\Enums\ButtonClassType;
 use Illuminate\Support\Facades\Route;
 use App\Admin\Controllers\UserController;
+use App\Admin\Controllers\TableController;
 use App\Admin\Controllers\LayoutController;
 use App\Admin\Controllers\Forms\FormController;
 use App\Admin\Controllers\Grids\GridController;
@@ -88,6 +89,10 @@ Route::group([
     $router->get('components-modal', function (Content $content) {
 	    return (new ModalController())->index($content);
 	})->name(RouteSneat::COMPONENTS_MODAL());
+
+    $router->get('components-table', function (Content $content) {
+	    return (new TableController())->index($content);
+	})->name(RouteSneat::COMPONENTS_TABLE());
 
     $router->get('components-cards', function (Content $content) {
 	    return (new CardController())->index($content);
