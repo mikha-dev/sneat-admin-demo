@@ -1,41 +1,47 @@
 <?php
+declare(strict_types=1);
 
 namespace App\Admin\Controllers\Components;
 
 use Faker\Factory;
-use Dcat\Admin\Widgets\Box;
+use Dcat\Admin\DcatIcon;
+use Dcat\Admin\Layout\Row;
 use Dcat\Admin\Widgets\Card;
 use Dcat\Admin\Widgets\Code;
 use Dcat\Admin\Widgets\Alert;
 use Dcat\Admin\Layout\Content;
-use Dcat\Admin\Widgets\Callout;
 use Illuminate\Routing\Controller;
+use Dcat\Admin\Enums\StyleClassType;
 
 class AlertController extends Controller
 {
     public function index(Content $content)
     {
         $faker = Factory::create();
+        $types = StyleClassType::cases();
 
-        $callout = Callout::make($faker->text, 'Title')->light()->removable();
+        $content->row(function (Row $row) use ($faker, $types) {
+            $alerts = collect($types)->map(function ($type) use($faker) {
+                $alert = new Alert($faker->text, $type->value);
 
-        $content->row(Card::make(
-            <<<HTML
-{$callout}
+                return $alert->class($type)->render();
+            })->join(' ');
+            $card1 = new Card('basic Alerts', $alerts);
 
-<p>{$faker->text}</p>
-HTML
-        ));
-        $content->row(( new Callout($faker->text, 'Removable'))->dismissable());
-        $content->row(( new Callout($faker->text, 'Primary'))->primary()->dismissable());
-        $content->row(( new Alert($faker->text, 'Danger')));
-        $content->row(( new Alert($faker->text, 'Warning'))->warning()->dismissable());
-        $content->row(( new Alert($faker->text, 'Success'))->success());
-        $content->row(( new Alert($faker->text, 'Info'))->info());
+            $alerts = collect($types)->map(function ($type) use($faker) {
+                $alert = new Alert($faker->text, $type->value, $type);
 
-        $content->row(Box::make('Code', new Code(__FILE__, 15, 45))->style('default'));
+                return $alert->dismissable()->icon(DcatIcon::HOME)->render();
+            })->join(' ');
+            $card2 = new Card('Dismissable Alerts with icon', $alerts);
 
-        $header = 'Alert';
+            $row->column(6, $card1);
+            $row->column(6, $card2);
+        });
+
+        $content->row(new Card('Code', new Code(__FILE__, 15, 45)));
+
+        $header = 'Alerts';
         $content->breadcrumb('Components');
         $content->breadcrumb($header);
 
