@@ -19,7 +19,7 @@ use Symfony\Component\VarDumper\Dumper\HtmlDumper;
 
 class FormController extends Controller
 {
-    use PreviewCode;
+    //use PreviewCode;
 
     private array $names = [];
 
@@ -29,22 +29,27 @@ class FormController extends Controller
             $content->row(new Card('POST', $this->dump(request()->all())));
         }
 
-        $content->row('<div style="margin:5px 0 15px;">'.$this->buildPreviewButton().'</div>');
+        //$content->row('<div style="margin:5px 0 15px;">'.$this->buildPreviewButton().'</div>');
 
         $content->row(function (Row $row) {
-            $type = request('_t', 1);
+            // $type = request('_t', 1);
 
-            $tab = new Tab();
+            // $tab = new Tab();
 
-            if ($type == 1) {
-                $tab->add('Form-1', $this->form1());
-                $tab->addLink('Form-2', request()->fullUrlWithQuery(['_t' => 2]));
-            } else {
-                $tab->addLink('Form-1', request()->fullUrlWithQuery(['_t' => 1]));
-                $tab->add('Form-2', $this->form2(), true);
-            }
+            // if ($type == 1) {
+            //     $tab->add('Form-1', $this->form1());
+            //     $tab->addLink('Form-2', request()->fullUrlWithQuery(['_t' => 2]));
+            // } else {
+            //     $tab->addLink('Form-1', request()->fullUrlWithQuery(['_t' => 1]));
+            //     $tab->add('Form-2', $this->form2(), true);
+            // }
 
-            $row->column(12, $tab->withCard());
+            //$row->column(12, $tab->withCard());
+            $row->column(12, new Card('Form1', $this->form1()));
+        });
+
+        $content->row(function (Row $row) {
+            $row->column(12, new Card('Form2', $this->form2()));
         });
 
         return $content
@@ -96,8 +101,8 @@ class FormController extends Controller
         $form->datetimeRange('form1.datetime-start', 'form1.datetime-end', 'datetime range');
 
         $form->html(function () {
-            return '<b>自定义HTML</b>';
-        }, 'html')->help('自定义内容');
+            return '<b>Test</b>';
+        }, 'html')->help('Test');
 
         $form->textarea('form1.textarea', 'textarea');
 
@@ -109,7 +114,7 @@ class FormController extends Controller
             $table->text('desc');
         });
 
-        return "<div style='padding:10px 8px'>{$form->render()}</div>";
+        return $form->render();
     }
 
     protected function form2()
