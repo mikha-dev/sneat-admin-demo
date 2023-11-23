@@ -160,6 +160,36 @@ return [
         'uri'       => admin_route(App\Enums\RouteSneat::GRIDS_TREE()),
         'parent_id' => 'grids',
     ],
+    // Grids -- Movie
+    [
+        'id'        => 'grids-movie',
+        'title'     => __('sneat.movie'),
+        'icon'      => Dcat\Admin\DcatIcon::HOME_CIRCLE(),
+        'uri'       => admin_route(App\Enums\RouteSneat::GRIDS_MOVIE_COMING()),
+        'parent_id' => 'grids',
+    ],
+
+    [
+        'id'        => 'grids-movie-coming',
+        'title'     => __('sneat.movie'),
+        'icon'      => Dcat\Admin\DcatIcon::HOME_CIRCLE(),
+        'uri'       => admin_route(App\Enums\RouteSneat::GRIDS_MOVIE_COMING()),
+        'parent_id' => 'grids-movie',
+    ],
+    [
+        'id'        => 'grids-movie-in-theatre',
+        'title'     => __('sneat.movie_in_theatre'),
+        'icon'      => Dcat\Admin\DcatIcon::HOME_CIRCLE(),
+        'uri'       => admin_route(App\Enums\RouteSneat::GRIDS_MOVIE_IN_THEATRE()),
+        'parent_id' => 'grids-movie',
+    ],
+    [
+        'id'        => 'grids-movie-top',
+        'title'     => __('sneat.movie_top'),
+        'icon'      => Dcat\Admin\DcatIcon::HOME_CIRCLE(),
+        'uri'       => admin_route(App\Enums\RouteSneat::GRIDS_MOVIE_TOP()),
+        'parent_id' => 'grids-movie',
+    ],
     // Basic
     [
         'id'        => 'basic',

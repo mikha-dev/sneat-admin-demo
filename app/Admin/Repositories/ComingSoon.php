@@ -3,11 +3,13 @@
 namespace App\Admin\Repositories;
 
 use Dcat\Admin\Grid;
+use Illuminate\Support\Facades\Log;
 use Dcat\Admin\Repositories\Repository;
 use Illuminate\Pagination\LengthAwarePaginator;
 
 class ComingSoon extends Repository
 {
+    //fix api
     protected $api = 'https://api.douban.com/v2/movie/coming_soon';
 
     protected $apiKey = 'apikey=0b2bdeda43b5688921839c8ecb20399b';
@@ -30,8 +32,12 @@ class ComingSoon extends Repository
 
         $client = new \GuzzleHttp\Client();
 
-        $response = $client->get("{$this->api}?{$this->apiKey}&city=$city&start=$start&count=$perPage");
-        $data = json_decode((string)$response->getBody(), true);
+        try {
+            $response = $client->get("{$this->api}?{$this->apiKey}&city=$city&start=$start&count=$perPage");
+            $data = json_decode((string)$response->getBody(), true);
+        } catch (\Exception $ex) {
+            Log::critical($ex->getMessage());
+        }
 
         return $model->makePaginator(
             $data['total'] ?? 0,

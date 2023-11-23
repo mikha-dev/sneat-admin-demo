@@ -2557,7 +2557,7 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/mikha-dev/sneat-admin.git",
-                "reference": "4ade25bc3d7b642b7b923d8af6cd309b46c47db2"
+                "reference": "131353ad7d40dfda37ee2a6becf356d5a65a59a5"
             },
             "require": {
                 "darkaonline/l5-swagger": "^8.5",
@@ -2625,7 +2625,7 @@
                 "laravel",
                 "laravel admin"
             ],
-            "time": "2023-11-22T21:18:46+00:00"
+            "time": "2023-11-22T22:58:31+00:00"
         },
         {
             "name": "monolog/monolog",
@@ -8431,12 +8431,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/rectorphp/rector.git",
-                "reference": "622a13c7e5b6a3b2ce664b316490bfabd47eb4f5"
+                "reference": "d63b3725a351f475c6738d7bda5d35b51a6b8c0e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/rectorphp/rector/zipball/622a13c7e5b6a3b2ce664b316490bfabd47eb4f5",
-                "reference": "622a13c7e5b6a3b2ce664b316490bfabd47eb4f5",
+                "url": "https://api.github.com/repos/rectorphp/rector/zipball/d63b3725a351f475c6738d7bda5d35b51a6b8c0e",
+                "reference": "d63b3725a351f475c6738d7bda5d35b51a6b8c0e",
                 "shasum": ""
             },
             "require": {
@@ -8480,7 +8480,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2023-11-22T17:40:48+00:00"
+            "time": "2023-11-23T00:29:58+00:00"
         },
         {
             "name": "sebastian/cli-parser",

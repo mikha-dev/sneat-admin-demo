@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Admin\Controllers\Movies;
+namespace App\Admin\Controllers\Grids\Movies;
 
 use Dcat\Admin\Grid;
 use Dcat\Admin\Admin;
@@ -75,11 +75,11 @@ class ComingSoonController extends Controller
 
     protected function define()
     {
-        Grid\Column::define('title', function ($v) {
-            return sprintf('<a href="%s" target="_blank"><i>《%s》</i></a>', $this->alt, $v);
+        Grid\Column::extend('title', function ($v) {
+            return sprintf('<a href="%s" target="_blank"><i>《%s》</i></a>', 'alt', $v);
         });
 
-        Grid\Column::define('rating', function ($v) {
+        Grid\Column::extend('rating', function ($v) {
             $style = '';
             $color = Admin::color();
 

@@ -4,6 +4,7 @@ namespace App\Admin\Repositories;
 
 use Dcat\Admin\Form;
 use Dcat\Admin\Grid;
+use Illuminate\Support\Facades\Log;
 use Dcat\Admin\Repositories\Repository;
 use Illuminate\Pagination\LengthAwarePaginator;
 
@@ -31,8 +32,13 @@ class InTheater extends Repository
 
         $client = new \GuzzleHttp\Client();
 
-        $response = $client->get("{$this->api}?{$this->apiKey}&city={$city}&start=$start&count=$perPage");
-        $data = json_decode((string)$response->getBody(), true);
+        $data = [];
+        try {
+            $response = $client->get("{$this->api}?{$this->apiKey}&city={$city}&start=$start&count=$perPage");
+            $data = json_decode((string)$response->getBody(), true);
+        } catch(\Exception $ex) {
+            Log::critical($ex->getMessage());
+        }
 
         return $model->makePaginator(
             $data['total'] ?? 0,

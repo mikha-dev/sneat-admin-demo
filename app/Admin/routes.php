@@ -4,6 +4,8 @@ use Dcat\Admin\Admin;
 use App\Enums\RouteSneat;
 use Dcat\Admin\Layout\Content;
 use Illuminate\Routing\Router;
+use Dcat\Admin\Enums\ButtonSizeType;
+use Dcat\Admin\Enums\ButtonClassType;
 use Illuminate\Support\Facades\Route;
 use App\Admin\Controllers\UserController;
 use App\Admin\Controllers\LayoutController;
@@ -26,8 +28,11 @@ use App\Admin\Controllers\Grids\FixedColumnsController;
 use App\Admin\Controllers\Components\MarkdownController;
 use App\Admin\Controllers\Components\ProgressController;
 use App\Admin\Controllers\Dashboards\AnalyticController;
+use App\Admin\Controllers\Grids\Movies\Top250Controller;
 use App\Admin\Controllers\Components\AccordionController;
+use App\Admin\Controllers\Grids\Movies\InTheaterController;
 use App\Admin\Controllers\Components\DropdownMenuController;
+use App\Admin\Controllers\Grids\Movies\ComingSoonController;
 use App\Admin\Controllers\Components\TipAndPopoverController;
 use App\Admin\Controllers\Components\CheckboxAndRadioController;
 
@@ -40,6 +45,9 @@ Route::group([
 ], function (Router $router) {
 
     $router->get('/', 'HomeController@index');
+    $router->get('/test', function() {
+        return ButtonClassType::PRIMARY(true);
+    });
 
     $router->get('dashbord-analytic', function (Content $content) {
 	    return (new AnalyticController())->index($content);
@@ -119,6 +127,19 @@ Route::group([
 	    return (new GridTreeController())->index($content);
 	})->name(RouteSneat::GRIDS_TREE());
     $router->get('grids-tree/preview', 'Grids\GridTreeController@preview');
+
+    $router->get('grids-movies-coming-soon', function (Content $content) {
+	    return (new ComingSoonController())->index($content);
+	})->name(RouteSneat::GRIDS_MOVIE_COMING());
+    $router->get('grids-movies-coming-soon/preview', 'Grids\Movies\ComingSoonController@preview');
+
+    $router->resource('grids-movies-in-theaters', InTheaterController::class, ['except' => ['create', 'show']])->name('index', RouteSneat::GRIDS_MOVIE_IN_THEATRE());
+    $router->get('grids-movies-in-theaters/preview', 'Grids\Movies\InTheaterController@preview');
+
+    $router->get('grids-movies/top250', function (Content $content) {
+	    return (new Top250Controller())->index($content);
+	})->name(RouteSneat::GRIDS_MOVIE_TOP());
+    $router->get('grids-movies/top250/preview', 'Grids\Movies\Top250Controller@preview');
 
     $router->get('forms-editors-markdown', function (Content $content) {
 	    return (new EditorController())->markdown($content);

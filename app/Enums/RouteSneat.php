@@ -33,6 +33,10 @@ enum RouteSneat : string implements DcatEnum
     case GRIDS_FIXED = 'grids.fixed';
     case GRIDS_TREE = 'grids.tree';
 
+    case GRIDS_MOVIE_COMING = 'grids.coming';
+    case GRIDS_MOVIE_IN_THEATRE = 'grids.in_theatre';
+    case GRIDS_MOVIE_TOP = 'grids.top';
+
     case FORMS_EDITORS_MARKDOWN = 'formds.editors.markdown';
     case FORMS_EDITORS_SUMMERCODE = 'formds.editors.summercode';
     case FORMS_EDITORS_TINYMCE = 'formds.editors.tinymce';

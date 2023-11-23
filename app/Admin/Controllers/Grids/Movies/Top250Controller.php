@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Admin\Controllers\Movies;
+namespace App\Admin\Controllers\Grids\Movies;
 
 use App\Admin\Repositories\Top250;
 use Dcat\Admin\Grid;

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Admin\Controllers\Movies;
+namespace App\Admin\Controllers\Grids\Movies;
 
 use Dcat\Admin\Form;
 use Dcat\Admin\Grid;
@@ -8,7 +8,6 @@ use Dcat\Admin\Layout\Content;
 use App\Admin\Traits\PreviewCode;
 use App\Admin\Repositories\InTheater;
 use Dcat\Admin\Http\Controllers\HasResourceActions;
-use App\Admin\Controllers\Movies\ComingSoonController;
 
 class InTheaterController extends ComingSoonController
 {
