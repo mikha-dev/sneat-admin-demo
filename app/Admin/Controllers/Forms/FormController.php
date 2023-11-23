@@ -3,10 +3,9 @@
 namespace App\Admin\Controllers\Forms;
 
 use Faker\Factory;
-use Dcat\Admin\Admin;
 use Dcat\Admin\Layout\Row;
-use Dcat\Admin\Widgets\Box;
 use Dcat\Admin\Widgets\Tab;
+use Dcat\Admin\Widgets\Card;
 use Dcat\Admin\Widgets\Form;
 use Dcat\Admin\Layout\Content;
 use Dcat\Admin\Form\NestedForm;
@@ -27,7 +26,7 @@ class FormController extends Controller
     public function index(Content $content)
     {
         if (request()->getMethod() == 'POST') {
-            $content->row(Box::make('POST', $this->dump(request()->all()))->style('default'));
+            $content->row(new Card('POST', $this->dump(request()->all())));
         }
 
         $content->row('<div style="margin:5px 0 15px;">'.$this->buildPreviewButton().'</div>');

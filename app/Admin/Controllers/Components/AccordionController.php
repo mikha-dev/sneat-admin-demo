@@ -4,7 +4,7 @@ namespace App\Admin\Controllers\Components;
 
 use Faker\Factory;
 use Dcat\Admin\Layout\Row;
-use Dcat\Admin\Widgets\Box;
+use Dcat\Admin\Widgets\Card;
 use Dcat\Admin\Widgets\Code;
 use Dcat\Admin\Layout\Content;
 use Dcat\Admin\Widgets\Accordion;
@@ -26,7 +26,7 @@ class AccordionController extends Controller
                 $accordion1->add($faker->name(), $faker->text(200));
                 $accordion1->add($faker->name(), $faker->text(200));
 
-                $row->column(5, Box::make('Accordion', $accordion1)->style('default'));
+                $row->column(5, new Card('Accordion', $accordion1));
 
                 $accordion2 = Accordion::make();
 
@@ -38,7 +38,7 @@ class AccordionController extends Controller
 
                 $row->column(5, $accordion2);
             })
-            ->row(Box::make('Accordion', new Code(__FILE__, 15, 44))->style('default'));
+            ->row(new Card('Accordion', new Code(__FILE__, 15, 44)));
 
     }
 }

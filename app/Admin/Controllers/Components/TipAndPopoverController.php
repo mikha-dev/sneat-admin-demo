@@ -4,7 +4,6 @@ namespace App\Admin\Controllers\Components;
 
 use Faker\Factory;
 use Dcat\Admin\Layout\Row;
-use Dcat\Admin\Widgets\Box;
 use Dcat\Admin\Widgets\Card;
 use Dcat\Admin\Widgets\Code;
 use Dcat\Admin\Layout\Content;
@@ -43,7 +42,7 @@ class TipAndPopoverController extends Controller
                 $row->column(6, new Card('Popover with title', $btn1));
             })
 
-            ->row(Box::make('Code', new Code(__FILE__, 15, 44)));
+            ->row(new Card('Code', new Code(__FILE__, 15, 44)));
 
     }
 }

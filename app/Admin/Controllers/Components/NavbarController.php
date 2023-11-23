@@ -2,14 +2,14 @@
 
 namespace App\Admin\Controllers\Components;
 
-use Dcat\Admin\Layout\Content;
+use Faker\Factory;
 use Dcat\Admin\Layout\Row;
-use Dcat\Admin\Widgets\Box;
+use Dcat\Admin\Widgets\Card;
 use Dcat\Admin\Widgets\Code;
-use Dcat\Admin\Widgets\Dropdown;
+use Dcat\Admin\Layout\Content;
 use Dcat\Admin\Widgets\Navbar;
 use Dcat\Admin\Widgets\NavList;
-use Faker\Factory;
+use Dcat\Admin\Widgets\Dropdown;
 use Illuminate\Routing\Controller;
 
 class NavbarController extends Controller
@@ -20,7 +20,7 @@ class NavbarController extends Controller
             ->body(function (Row $row) {
                 $values = ['a' => 'text1' , 'b' => 'text2', 'c' => 'text3', 'd' => 'text4', ['github', 'https://www.github.com']];
 
-                $row->column(3, Box::make('# NAVLIST', function () use (&$values) {
+                $row->column(3, new Card('# NAVLIST', function () use (&$values) {
                     $nav = NavList::make($values)
                         ->checked('a')
                         ->click()
@@ -37,7 +37,7 @@ class NavbarController extends Controller
                         });
 
                     return $nav;
-                })->padding(0)->style('default'));
+                }));
 
                 $navbar = Navbar::make('# Navbar', $values)
                     ->checked('a')
@@ -58,6 +58,6 @@ class NavbarController extends Controller
                 $row->column(4, $navbar);
 
             })
-            ->body(Box::make('代码', new Code(__FILE__, 17, 63))->style('default'));
+            ->body(new Card('代码', new Code(__FILE__, 17, 63)));
     }
 }

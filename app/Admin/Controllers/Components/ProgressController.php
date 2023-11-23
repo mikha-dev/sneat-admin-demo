@@ -5,7 +5,6 @@ namespace App\Admin\Controllers\Components;
 
 use Faker\Factory;
 use Dcat\Admin\Layout\Row;
-use Dcat\Admin\Widgets\Box;
 use Dcat\Admin\Widgets\Card;
 use Dcat\Admin\Widgets\Code;
 use Dcat\Admin\Layout\Content;
@@ -59,7 +58,7 @@ class ProgressController extends Controller
                 $row->column(6, $card1);
                 $row->column(6, $card2);
             })
-            ->row(Box::make('Progress', new Code(__FILE__, 15, 44)));
+            ->row(new Card('Progress', new Code(__FILE__, 15, 44)));
 
     }
 }
