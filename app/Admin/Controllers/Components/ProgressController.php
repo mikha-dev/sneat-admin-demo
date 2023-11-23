@@ -10,25 +10,54 @@ use Dcat\Admin\Widgets\Code;
 use Dcat\Admin\Layout\Content;
 use Dcat\Admin\Widgets\Progress;
 use Illuminate\Routing\Controller;
+use Dcat\Admin\Enums\StyleClassType;
 use Dcat\Admin\Enums\StyleBgClassType;
 
 class ProgressController extends Controller
 {
     public function index(Content $content)
     {
+        $faker = Factory::create();
+        $types = StyleClassType::cases();
+
         return $content->header('Progress')
-            ->row(function (Row $row) {
-                $faker = Factory::create();
+            ->row(function (Row $row) use ($faker, $types) {
 
-                $progress = new Progress($faker->numberBetween(25, 75));
-                $progress->class(StyleBgClassType::PRIMARY);
+                $progresses = collect($types)->map(function ($type) use($faker) {
+                    $progress = new Progress($type, $faker->numberBetween(25, 75));
 
-                $row->column(6, new Card('Progress Privary', $progress));
+                    return $progress->render();
+                })->join(' <br/>');
+                $card1 = new Card('basic Progresses', $progresses);
 
-                $progress = new Progress($faker->numberBetween(25, 75));
-                $progress->animated()->stripped()->class(StyleBgClassType::DANGER);
+                $progresses = collect($types)->map(function ($type) use($faker) {
+                    $progress = new Progress($type, $faker->numberBetween(25, 75));
 
-                $row->column(6, new Card('Progress Danger Stripped Animated', $progress));
+                    return $progress->stripped()->animated()->render();
+                })->join(' <br/>');
+                $card2 = new Card('Stripped Animated Progresses', $progresses);
+
+                $row->column(6, $card1);
+                $row->column(6, $card2);
+            })
+            ->row(function (Row $row) use ($faker, $types) {
+
+                $progresses = collect($types)->map(function ($type) use($faker) {
+                    $progress = new Progress($type, $faker->numberBetween(25, 75), 0, 100, null, '60px');
+
+                    return $progress->render();
+                })->join(' <br/>');
+                $card1 = new Card('height Progresses', $progresses);
+
+                $progresses = collect($types)->map(function ($type) use($faker) {
+                    $progress = new Progress($type, $faker->numberBetween(25, 75), 0, 100, $faker->text(10));
+
+                    return $progress->stripped()->animated()->render();
+                })->join(' <br/>');
+                $card2 = new Card('Text Progresses', $progresses);
+
+                $row->column(6, $card1);
+                $row->column(6, $card2);
             })
             ->row(Box::make('Progress', new Code(__FILE__, 15, 44)));
 
