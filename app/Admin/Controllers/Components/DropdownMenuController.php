@@ -36,8 +36,8 @@ class DropdownMenuController extends Controller {
 			return $dropdown->button($type->value)
 				->buttonClass($type)
 				->add('option1')
-				->add('option2', TRUE)
-				->add('option1', TRUE, TRUE)
+				->add('option2', null, TRUE)
+				->add('option1', null, TRUE, TRUE)
 				->render();
 		})->join(' ');
 		return Card::make('Base Dropdown', $base);
@@ -49,8 +49,8 @@ class DropdownMenuController extends Controller {
 			return $dropdown->button($type->value)
 				->buttonClass($type, true)
 				->add('option1')
-				->add('option2', TRUE)
-				->add('option1', TRUE, TRUE)
+				->add('option2', null, TRUE)
+				->add('option1', null, TRUE, TRUE)
 				->render();
 		})->join(' ');
 		return Card::make('Outline Dropdown', $base);
@@ -63,8 +63,8 @@ class DropdownMenuController extends Controller {
 				->buttonClass($type)
 				->toggleSplit()
 				->add('option1')
-				->add('option2', TRUE)
-				->add('option1', TRUE, TRUE)
+				->add('option2', null, TRUE)
+				->add('option1', null, TRUE, TRUE)
 				->render();
 		})->join(' ');
 		return Card::make('Split Dropdown', $base);
@@ -77,8 +77,8 @@ class DropdownMenuController extends Controller {
 				->buttonClass($type, true)
 				->toggleSplit()
 				->add('option1')
-				->add('option2', TRUE)
-				->add('option1', TRUE, TRUE)
+				->add('option2', null, TRUE)
+				->add('option1', null, TRUE, TRUE)
 				->render();
 		})->join(' ');
 		return Card::make('Outline Split Dropdown', $base);
@@ -90,16 +90,16 @@ class DropdownMenuController extends Controller {
 			->buttonClass(ButtonClassType::PRIMARY)
 			->hideArrow()
 			->add('option1')
-			->add('option2', TRUE)
-			->add('option1', TRUE, TRUE)
+			->add('option2', null, TRUE)
+			->add('option1', null, TRUE, TRUE)
 			->render();
 		$iconWithDropdown = new Dropdown();
 		$iconWithDropdown->button('with icon')
 			->buttonClass(ButtonClassType::PRIMARY)
 			->icon(DcatIcon::MENU)
 			->add('option1')
-			->add('option2', TRUE)
-			->add('option1', TRUE, TRUE)
+			->add('option2', null, TRUE)
+			->add('option1', null, TRUE, TRUE)
 			->render();
 		$icon = new Dropdown();
 		$icon->buttonClass(ButtonClassType::PRIMARY)
@@ -107,8 +107,8 @@ class DropdownMenuController extends Controller {
 			->hideArrow()
 			->icon( DcatIcon::DOTS_VERTICAL_ROUNDED)
 			->add('option1')
-			->add('option2', TRUE)
-			->add('option1', TRUE, TRUE)
+			->add('option2', null, TRUE)
+			->add('option1', null, TRUE, TRUE)
 			->render();
 		return Card::make('specific Dropdown', $hiddenArrow . ' ' . $iconWithDropdown . ' ' . $icon);
 	}
