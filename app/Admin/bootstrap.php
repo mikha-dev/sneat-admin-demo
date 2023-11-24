@@ -27,6 +27,11 @@ Form::resolving(function($form) {
     $form->disableCreatingCheck();
 });
 
+Grid::resolving(function(Grid $grid) {
+    $grid->setActionClass(Grid\Displayers\Actions::class);
+    $grid->paginate(config('admin.paginate-default'));
+});
+
 Grid\Column::extend('code', function ($v) {
     return "<code>$v</code>";
 });

@@ -141,6 +141,8 @@ return [
     'selected_options'      => ':num options selected',
     'pagination'            => [
         'range' => 'Showing :first to :last of :total entries',
+        'next' => 'Next',
+        'previous' => 'Previous',
     ],
     'role'                  => 'Role',
     'permission'            => 'Permission',

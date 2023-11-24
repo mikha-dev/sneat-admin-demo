@@ -80,8 +80,6 @@ HTML;
 
     protected function table()
     {
-        Admin::style('.table td{padding: .85rem .55rem}');
-
         $data = [
             ['name' => 'PHP version',       'value' => 'PHP/'.PHP_VERSION],
             ['name' => 'Laravel version',   'value' => app()->version()],
@@ -92,6 +90,6 @@ HTML;
             ['name' => 'Session driver',    'value' => config('session.driver')],
         ];
 
-        return Table::make(['name', 'value'], $data);
+        return new Table(['name', 'value'], $data);
     }
 }
