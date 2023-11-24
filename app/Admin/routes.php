@@ -24,7 +24,7 @@ use App\Admin\Controllers\Components\AlertController;
 use App\Admin\Controllers\Components\ChartController;
 use App\Admin\Controllers\Components\ModalController;
 use App\Admin\Controllers\Grids\CustomGridController;
-use App\Admin\Controllers\Components\ToastrController;
+use App\Admin\Controllers\Components\ToasterController;
 use App\Admin\Controllers\Grids\FixedColumnsController;
 use App\Admin\Controllers\Components\MarkdownController;
 use App\Admin\Controllers\Components\ProgressController;
@@ -79,7 +79,7 @@ Route::group([
 	})->name(RouteSneat::COMPONENTS_TIP_AND_POPOVER());
 
     $router->get('components-toastr', function (Content $content) {
-	    return (new ToastrController())->index($content);
+	    return (new ToasterController())->index($content);
 	})->name(RouteSneat::COMPONENTS_TOASTR());
 
     $router->get('components-tabs', function (Content $content) {
