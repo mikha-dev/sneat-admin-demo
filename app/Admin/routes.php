@@ -25,6 +25,7 @@ use App\Admin\Controllers\Components\ChartController;
 use App\Admin\Controllers\Components\ModalController;
 use App\Admin\Controllers\Grids\CustomGridController;
 use App\Admin\Controllers\Components\ToastrController;
+use App\Admin\Controllers\Components\LoadingController;
 use App\Admin\Controllers\Grids\FixedColumnsController;
 use App\Admin\Controllers\Components\MarkdownController;
 use App\Admin\Controllers\Components\ProgressController;
@@ -105,6 +106,11 @@ Route::group([
     $router->get('components-charts', function (Content $content) {
 	    return (new ChartController())->index($content);
 	})->name(RouteSneat::COMPONENTS_CHARTS());
+
+    $router->get('components-loading', function (Content $content) {
+	    return (new LoadingController())->index($content);
+	})->name(RouteSneat::COMPONENTS_LOADING());
+    $router->get('components-loading/preview', 'Components\LoadingController@preview');
 
     $router->get('grids-custom', function (Content $content) {
 	    return (new CustomGridController())->index($content);

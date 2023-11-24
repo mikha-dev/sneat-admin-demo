@@ -116,6 +116,13 @@ return [
         'uri'       => admin_route(App\Enums\RouteSneat::COMPONENTS_TABLE()),
         'parent_id' => 'components',
     ],
+    [
+        'id'        => 'loading',
+        'title'     => __('sneat.loading'),
+        'icon'      => Dcat\Admin\DcatIcon::HOME_CIRCLE(),
+        'uri'       => admin_route(App\Enums\RouteSneat::COMPONENTS_LOADING()),
+        'parent_id' => 'components',
+    ],
 
     // Grids
     [

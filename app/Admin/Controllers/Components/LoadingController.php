@@ -8,77 +8,59 @@ use Dcat\Admin\Widgets\Card;
 use Dcat\Admin\Layout\Content;
 use Dcat\Admin\Widgets\Dropdown;
 use App\Admin\Traits\PreviewCode;
+use Dcat\Admin\Enums\ButtonClassType;
+use Dcat\Admin\Widgets\DropdownItem;
 use Illuminate\Routing\Controller;
 
 class LoadingController extends Controller
 {
     use PreviewCode;
-
-    protected $colorMap = [
-        'Green'   => '#a9cf82',
-        'Purple'  => '#919bd2',
-        'Red'     => '#ff8e8e',
-    ];
-
-    protected $options = [
-        'Default',
-        'Green',
-        'Purple',
-        'Red',
-        Dropdown::DIVIDER,
-        'Transparent',
-    ];
-
     public function index(Content $content)
     {
         $content->row($this->buildPreviewButton().$this->newline());
         $content->row(function (Row $row) {
 
-            $card = Card::make('Loading', function () {
+            $card = (new Card('Loading', function () {
                 return <<<HTML
 <div class="mb-1">
-     开启loading效果: &nbsp;<code>$('#loadingtest').loading();</code>
+Enable loading effect: &nbsp;<code>$('#loadingtest').loading();</code>
 </div>
 <div class="mb-1">
-     销毁: &nbsp;<code>$('#loadingtest').loading(false);</code>
+     Destroy: &nbsp;<code>$('#loadingtest').loading(false);</code>
 </div>
 
 <hr>
 
 <div  class="mb-1">
-     全屏居中: &nbsp;<code>Dcat.loading();</code>
+    Center full screen: &nbsp;<code>Dcat.loading();</code>
 </div>
 <div class="mb-1">
-     销毁: &nbsp;<code>Dcat.loading(false);</code>
+     Destroy: &nbsp;<code>Dcat.loading(false);</code>
 </div>
 
 <hr>
 
 <div class="mb-1">
-     按钮loading效果: &nbsp;<code>$('.btn').buttonLoading();</code>
+    Button loading effect:&nbsp;<code>$('.btn').buttonLoading();</code>
 </div>
 <div class="mb-1">
-     销毁: &nbsp;<code>$('.btn').buttonLoading(false);</code>
+     Destroy: &nbsp;<code>$('.btn').buttonLoading(false);</code>
 </div>
 HTML;
-            })
-                ->id('loadingtest')
-                ->tool($this->buildDropdown())
+            }))->id('loadingtest')
                 ->tool('<a class="btn btn-light btn-sm shadow-0" onclick="Dcat.loading();setTimeout(function () { Dcat.loading(false); }, 2000)">Auto Center</a>');
 
             Admin::script(
                 <<<JS
 function loading_test(opt) {
-    // 开始loading效果
     $('#loadingtest').loading(opt);
 
-    setTimeout(function () { // 1.2秒后自动移除loading效果
+    setTimeout(function () {
         $('#loadingtest').loading(false);
     }, 2000);
 }
 loading_test();
 
-// 点击按钮开启loading效果
 $('.start_loading').click(function () {
     loading_test($(this).data());
 });
@@ -114,26 +96,4 @@ HTML
         return $content->header('Loading');
     }
 
-    /**
-     * 创建下拉菜单
-     *
-     * @return Dropdown
-     */
-    protected function buildDropdown()
-    {
-        $map = $this->colorMap;
-
-        return Dropdown::make($this->options)
-            ->click()
-            ->buttonClass('btn btn-sm btn-light shadow-0')
-            ->map(function ($label) use ($map) {
-                if ($label === 'Transparent') {
-                    return "<a data-background='rgba(255,255,255,.4)' data-color='var(--primary)' class='start_loading' href='javascript:void(0)'>$label</a>";
-                }
-
-                $color = isset($map[$label]) ? "data-color='{$map[$label]}'" : '';
-
-                return "<a {$color} class='start_loading' href='javascript:void(0)'>$label</a>";
-            });
-    }
 }

@@ -27,6 +27,7 @@ enum RouteSneat : string implements DcatEnum
     case COMPONENTS_MARKDOWN = 'components.markdown';
     case COMPONENTS_CHARTS = 'components.charts';
     case COMPONENTS_TABLE = 'components.table';
+    case COMPONENTS_LOADING = 'components.loading';
 
     case GRIDS_CUSTOM = 'grids.custom';
     case GRIDS_GRID = 'grids.grid';

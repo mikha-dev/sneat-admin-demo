@@ -5,6 +5,7 @@ namespace App\Admin\Controllers;
 use Dcat\Admin\Form;
 use Dcat\Admin\Grid;
 use Dcat\Admin\Show;
+use Dcat\Admin\Admin;
 use Dcat\Admin\Models\Tag;
 use Dcat\Admin\Layout\Content;
 use App\Http\Controllers\Controller;
@@ -23,8 +24,8 @@ class BasicStructureController extends Controller
     public function index(Content $content)
     {
         return $content
-            ->header('Index')
-            ->description('description')
+            ->header('Tag')
+            ->description('Tags')
             ->body($this->grid());
     }
 
@@ -54,7 +55,7 @@ class BasicStructureController extends Controller
     {
         return $content
             ->header('Edit')
-            ->description('description')
+            ->description('Edit Tag')
             ->body($this->form()->edit($id));
     }
 
@@ -68,7 +69,7 @@ class BasicStructureController extends Controller
     {
         return $content
             ->header('Create')
-            ->description('description')
+            ->description('Create tag')
             ->body($this->form());
     }
 
@@ -79,11 +80,14 @@ class BasicStructureController extends Controller
      */
     protected function grid()
     {
-        $grid = new Grid(new Tag());
+        $grid = new Grid(Tag::ownDomainOnly());
 
-        $grid->id('ID')->sortable();
-        $grid->created_at('Created at');
-        $grid->updated_at('Updated at');
+        $grid->column('id')->sortable();
+        $grid->column('title')->sortable();
+        $grid->column('enabled')->switch();
+
+        $grid->column('created_at');
+        $grid->column('updated_at');
 
         return $grid;
     }
@@ -96,11 +100,13 @@ class BasicStructureController extends Controller
      */
     protected function detail($id)
     {
-        $show = new Show(Tag::findOrFail($id));
+        $show = new Show(Tag::ownDomainOnly()->findOrFail($id));
 
-        $show->id('ID');
-        $show->created_at('Created at');
-        $show->updated_at('Updated at');
+        $show->field('id');
+        $show->field('title');
+        $show->field('color');
+        $show->field('created_at');
+        $show->field('updated_at');
 
         return $show;
     }
@@ -113,10 +119,14 @@ class BasicStructureController extends Controller
     protected function form()
     {
         $form = new Form(new Tag());
+        $form->hidden('domain_id')->value(Admin::domain()->id);
 
-        $form->display('id', 'ID');
-        $form->display('created_at', 'Created At');
-        $form->display('updated_at', 'Updated At');
+        $form->display('id');
+        $form->text('title');
+//        $form->color('color');
+        $form->switch('enabled');
+        $form->display('created_at');
+        $form->display('updated_at');
 
         return $form;
     }

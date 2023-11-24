@@ -17,6 +17,7 @@ use Symfony\Component\VarDumper\VarDumper;
 use Symfony\Component\VarDumper\Cloner\VarCloner;
 use Symfony\Component\VarDumper\Dumper\HtmlDumper;
 
+//todo::add tab addLink
 class FormController extends Controller
 {
     //use PreviewCode;
@@ -32,6 +33,9 @@ class FormController extends Controller
         //$content->row('<div style="margin:5px 0 15px;">'.$this->buildPreviewButton().'</div>');
 
         $content->row(function (Row $row) {
+            $tabs = new Tab();
+            $tabs->add('Form-1', $this->form1(), true);
+            $tabs->add('Form-2', $this->form2());
             // $type = request('_t', 1);
 
             // $tab = new Tab();
@@ -45,12 +49,12 @@ class FormController extends Controller
             // }
 
             //$row->column(12, $tab->withCard());
-            $row->column(12, new Card('Form1', $this->form1()));
+            $row->column(12, $tabs);
         });
 
-        $content->row(function (Row $row) {
-            $row->column(12, new Card('Form2', $this->form2()));
-        });
+        // $content->row(function (Row $row) {
+        //     $row->column(12, new Card('Form2', $this->form2()));
+        // });
 
         return $content
             ->header('Form');
