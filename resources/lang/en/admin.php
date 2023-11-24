@@ -53,6 +53,7 @@ return [
     ],
     'online'                => 'Online',
     'login'                 => 'Login',
+    'register'              => 'Register',
     'logout'                => 'Logout',
     'setting'               => 'Setting',
     'name'                  => 'Name',
