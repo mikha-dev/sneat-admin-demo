@@ -33,7 +33,6 @@ return [
 
     'layout' => [
         'has_menu_collapser' => false,
-
         'auth_type' => AuthLayoutType::BASIC,
 
         'type' => LayoutType::VERTICAL,

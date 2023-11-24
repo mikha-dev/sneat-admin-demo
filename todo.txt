@@ -41,19 +41,7 @@
     added domain settings and admin settings feature
     lang db loadining
 
-14. fix fonts in
-    app.scss
-    _variables.scss
-15. 
-    use inside main layout
-    <!-- Fonts -->
-    <link rel="dns-prefetch" href="//fonts.bunny.net">
-    <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
-
 16. add integrated recaptcha for both register and login
-
-17. boxicons and fontawesome icon packs. remove feather
-    check bootstrap icons
 
 18. think about making live chat as extension
 
@@ -65,4 +53,7 @@
 21. add user settings based on spatie data
 
 22.  add basic rest api endoints for auth/register/forgot passowrd
+    use l5-swagger
+23. make user settings/profile page based on upvay figma
 
+24. advanced assets manager in whole project. load js/css based on mode/view/elements
