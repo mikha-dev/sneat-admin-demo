@@ -1,9 +1,10 @@
 <?php
 
 use Dcat\Admin\Admin;
+use Dcat\Admin\Enums\AuthLayoutType;
 use Dcat\Admin\Enums\LayoutType;
 use Dcat\Admin\Enums\DarkModeType;
-use Dcat\Admin\Enums\AuthLayoutType;
+use Dcat\Admin\Enums\RegisterLayoutType;
 use Dcat\Admin\Enums\LayoutContentType;
 use Dcat\Admin\Enums\LayoutDirectionType;
 
@@ -34,6 +35,8 @@ return [
     'layout' => [
         'has_menu_collapser' => false,
         'auth_type' => AuthLayoutType::BASIC,
+
+        'register_type' => RegisterLayoutType::BASIC,
 
         'type' => LayoutType::VERTICAL,
 
