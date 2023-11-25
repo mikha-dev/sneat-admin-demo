@@ -37,8 +37,8 @@ class AccordionController extends Controller
                 $accordion2->add($faker->name(), $faker->text(200));
 
                 $row->column(5, $accordion2);
-            })
-            ->row(new Card('Accordion', new Code(__FILE__, 15, 44)));
+            });
+            //->row(new Card('Accordion', new Code(__FILE__, 15, 44)));
 
     }
 }
